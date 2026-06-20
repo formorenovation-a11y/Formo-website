@@ -199,9 +199,7 @@ footer{background:var(--dark);padding:60px 48px 24px}
 .house-path{fill:none;stroke:var(--gold);stroke-width:2.8;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:320;stroke-dashoffset:320;animation:drawHouse 1.5s cubic-bezier(.4,0,.2,1) forwards}
 .door-path{fill:none;stroke:var(--gold);stroke-width:2.8;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:80;stroke-dashoffset:80;animation:drawHouse .7s cubic-bezier(.4,0,.2,1) .95s forwards}
 @keyframes drawHouse{to{stroke-dashoffset:0}}
-.loader-wordmark{display:flex;flex-direction:column;align-items:center;gap:3px}
-.loader-wordmark strong{font-family:var(--fh);font-size:1.55rem;font-weight:600;color:var(--white);letter-spacing:.18em;text-transform:uppercase;opacity:0;transform:translateY(8px);animation:fadeUp .5s ease .55s forwards}
-.loader-wordmark span{font-family:var(--fb);font-size:.54rem;color:var(--gold);letter-spacing:.34em;text-transform:uppercase;font-weight:400;opacity:0;animation:fadeUp .5s ease .8s forwards}
+/* loader wordmark removed — house only */
 @keyframes fadeUp{to{opacity:1;transform:none}}
 #syncBadge{display:none!important}
 
@@ -251,19 +249,23 @@ footer{background:var(--dark);padding:60px 48px 24px}
 .r-edit{border-color:var(--gold);color:var(--gold);background:transparent}.r-edit:hover{background:var(--gold);color:#fff}
 .r-del{border-color:#e55;color:#e55;background:transparent}.r-del:hover{background:#e55;color:#fff}
 .photo-inputs{display:flex;flex-direction:column;gap:8px}
-.photo-row{display:flex;flex-direction:column;gap:6px;margin-bottom:8px;background:var(--cream);border:1px solid var(--cream2);padding:10px;position:relative}
-.photo-row input{flex:1;display:none}/* hide URL input - not needed */
-.photo-pick-btn{display:flex;align-items:center;justify-content:center;gap:10px;padding:14px;background:var(--white);border:2px dashed var(--cream2);cursor:pointer;transition:border-color .2s;width:100%;font-family:var(--fb);font-size:.8rem;color:var(--muted);font-weight:500}
-.photo-pick-btn:hover{border-color:var(--gold);color:var(--gold)}
-.photo-pick-btn.has-photo{border-style:solid;border-color:var(--gold);padding:6px}
-.photo-pick-btn input[type=file]{display:none}
-.photo-row-thumb{width:100%;height:140px;object-fit:cover;display:none;border-radius:2px}
-.photo-row-thumb.loaded{display:block}
-.photo-row-top{display:flex;align-items:center;justify-content:space-between}
-.photo-row-label{font-size:.68rem;color:var(--muted);letter-spacing:.08em;text-transform:uppercase}
-.photo-row-del{background:none;border:none;color:#e55;cursor:pointer;font-size:.82rem;padding:2px 6px}
-.photo-row-del:hover{background:#fff1f2}
-.photo-uploading{font-size:.75rem;color:var(--gold);text-align:center;padding:4px;display:none}
+.photo-row{margin-bottom:10px}
+.photo-pick{display:flex;align-items:center;gap:10px;padding:12px;background:var(--white);border:2px dashed var(--cream2);cursor:pointer;transition:border-color .2s;position:relative;overflow:hidden}
+.photo-pick:hover{border-color:var(--gold)}
+.photo-pick.has-img{border-style:solid;border-color:var(--gold);padding:0}
+.photo-pick input[type=file]{display:none}
+.photo-pick-empty{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:.82rem;width:100%}
+.photo-pick-empty span.icon{font-size:1.6rem}
+.photo-pick img{width:100%;height:130px;object-fit:cover;display:block}
+.photo-pick .change-badge{position:absolute;bottom:6px;right:6px;background:var(--gold);color:#fff;font-size:.58rem;padding:3px 8px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;pointer-events:none}
+.photo-row-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:5px}
+.photo-row-label{font-size:.66rem;color:var(--muted);letter-spacing:.08em;text-transform:uppercase}
+.photo-row-del{background:none;border:none;color:#d44;cursor:pointer;font-size:.76rem;padding:1px 5px}.photo-row-del:hover{background:#fef2f2}
+.upload-status{font-size:.72rem;color:var(--gold);padding:4px 0;display:none;text-align:center}
+.upload-status.show{display:block}
+.upload-status.err{color:#d44}
+.upload-btn{padding:9px 13px;background:var(--gold);color:#fff;cursor:pointer;font-size:.7rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;display:inline-flex;align-items:center;gap:4px;white-space:nowrap;border:none}.upload-btn:hover{background:var(--gold-lt)}
+.imgbb-notice{font-size:.78rem;color:var(--text);background:var(--cream);padding:14px 16px;border-left:3px solid var(--gold);margin-bottom:16px;line-height:1.7}
 .ph-thumb{width:46px;height:34px;object-fit:cover;border:1px solid var(--cream2);flex-shrink:0;display:none}.ph-thumb.loaded{display:block}
 
 /* ── Firebase Setup Wizard ── */
@@ -361,7 +363,6 @@ footer{background:var(--dark);padding:60px 48px 24px}
 </svg>
 </div>
 
-<div id="syncBadge"><span id="syncText"></span></div>
 
 <!-- NAV -->
 <nav id="navbar">
@@ -584,19 +585,19 @@ footer{background:var(--dark);padding:60px 48px 24px}
                   <select id="pf-cat"><option value="bathroom">Bathroom</option><option value="kitchen">Kitchen</option><option value="flooring">Flooring & Tile</option><option value="painting">Painting</option><option value="carpentry">Carpentry</option><option value="exterior">Exterior</option></select>
                 </div>
                 <div class="afield"><label>Location *</label><input id="pf-loc" placeholder="Naples, FL"/></div>
-                <div class="afield full"><label>Short description (card)</label><input id="pf-short" placeholder="Breve descripción para la grilla"/></div>
-                <div class="afield full"><label>Full description (modal)</label><textarea id="pf-desc" rows="4" placeholder="Describe el trabajo realizado, materiales, resultado..."></textarea></div>
+                <div class="afield full"><label>Short description (card)</label><input id="pf-short" placeholder="Brief description for the project card"/></div>
+                <div class="afield full"><label>Full description (modal)</label><textarea id="pf-desc" rows="4" placeholder="Describe the work done, materials used, results..."></textarea></div>
                 <div class="afield"><label>Area worked</label><input id="pf-area" placeholder="95 sq ft"/></div>
                 <div class="afield"><label>Year</label><input id="pf-year" placeholder="2024"/></div>
                 <div class="afield full"><label>Tags / Materials (comma separated)</label><input id="pf-tags" placeholder="Porcelain Tile, Custom Cabinetry, LED Lighting"/></div>
                 <div class="afield full">
                   <label>Photos (URLs, up to 15) — upload free at <a href="https://imgbb.com" target="_blank" style="color:var(--gold)">imgbb.com</a></label>
                   <div class="photo-inputs" id="photoInputs"></div>
-                  <button type="button" class="btn btn-outline btn-sm" style="margin-top:8px" onclick="addPhotoRow()">+ Add Another Photo</button>
+                  <button type="button" class="btn btn-outline btn-sm" style="margin-top:8px" onclick="addPhotoRow()">+ Add Photo</button>
                 </div>
               </div>
               <div class="aform-btns">
-                <button class="btn btn-gold btn-sm" onclick="saveProject()">💾 Save Proyecto</button>
+                <button class="btn btn-gold btn-sm" onclick="saveProject()">💾 Save Project</button>
                 <button class="btn btn-outline btn-sm" onclick="cancelProjForm()">Cancel</button>
                 <span class="save-indicator" id="ind-proj">✅ Saved</span>
               </div>
@@ -693,7 +694,12 @@ footer{background:var(--dark);padding:60px 48px 24px}
               <div class="section-card-header" onclick="toggleCard(this)"><h4>🏠 Logo Image</h4><span class="arrow">▼</span></div>
               <div class="section-card-body">
                 <div class="aform-grid">
-                  <div class="afield full"><label>Logo URL (upload at imgbb.com, paste Direct Link)</label><input id="s-logo-url" placeholder="https://i.ibb.co/... your logo"/></div>
+                  <div class="afield full"><label>Logo Image</label>
+<div style="display:flex;gap:8px;align-items:center">
+  <input id="s-logo-url" placeholder="URL or upload" style="flex:1"/>
+  <label style="padding:9px 12px;background:var(--gold);color:#fff;border:none;cursor:pointer;font-size:.7rem;font-weight:600;white-space:nowrap;display:inline-flex;align-items:center;gap:4px">📷 Upload<input type="file" accept="image/*" style="display:none" onchange="handleHeroBgUpload(this,'s-logo-url')"/></label>
+</div>
+<div class="upload-status"></div></div>
                   <div class="afield full"><label>Logo Height in pixels (default: 38)</label><input id="s-logo-size" type="number" min="20" max="80" placeholder="38"/></div>
                   <div class="afield full" id="logo-preview-wrap" style="display:none"><img loading="lazy" id="logo-preview" style="max-height:56px;width:auto;border:1px solid var(--cream2);padding:6px;background:#191816"/></div>
                 </div>
@@ -738,7 +744,12 @@ footer{background:var(--dark);padding:60px 48px 24px}
             <!-- ABOUT -->
             <div class="section-card"><div class="section-card-header" onclick="toggleCard(this)"><h4>About Us — Hero</h4><span class="arrow">▼</span></div><div class="section-card-body">
               <div class="aform-grid">
-                <div class="afield full"><label>Background Photo URL</label><input id="ph-about-bg" placeholder="https://..."/></div>
+                <div class="afield full"><label>Background Photo</label>
+<div style="display:flex;gap:8px;align-items:center">
+  <input id="ph-about-bg" placeholder="https://... or upload below" style="flex:1"/>
+  <label class="upload-btn" style="padding:9px 12px;background:var(--gold);color:#fff;border:none;cursor:pointer;font-size:.7rem;font-weight:600;white-space:nowrap;display:inline-flex;align-items:center;gap:4px">📷 Upload<input type="file" accept="image/*" style="display:none" onchange="handleHeroBgUpload(this,'ph-about-bg')"/></label>
+</div>
+<div class="upload-status"></div placeholder="https://..."/></div>
                 <div class="afield"><label>Title Line 1</label><input id="ph-about-h1a" placeholder="Built on Quality."/></div>
                 <div class="afield"><label>Title Line 2</label><input id="ph-about-h1b" placeholder="Driven by Integrity."/></div>
                 <div class="afield full"><label>Title Line 3</label><input id="ph-about-h1c" placeholder="Focused on You."/></div>
@@ -750,7 +761,12 @@ footer{background:var(--dark);padding:60px 48px 24px}
             <!-- SERVICES -->
             <div class="section-card"><div class="section-card-header" onclick="toggleCard(this)"><h4>Services — Hero</h4><span class="arrow">▼</span></div><div class="section-card-body">
               <div class="aform-grid">
-                <div class="afield full"><label>Background Photo URL</label><input id="ph-services-bg" placeholder="https://..."/></div>
+                <div class="afield full"><label>Background Photo</label>
+<div style="display:flex;gap:8px;align-items:center">
+  <input id="ph-services-bg" placeholder="https://... or upload below" style="flex:1"/>
+  <label class="upload-btn" style="padding:9px 12px;background:var(--gold);color:#fff;border:none;cursor:pointer;font-size:.7rem;font-weight:600;white-space:nowrap;display:inline-flex;align-items:center;gap:4px">📷 Upload<input type="file" accept="image/*" style="display:none" onchange="handleHeroBgUpload(this,'ph-services-bg')"/></label>
+</div>
+<div class="upload-status"></div placeholder="https://..."/></div>
                 <div class="afield full"><label>Title</label><input id="ph-services-h1" placeholder="Craftsmanship Designed for Elevated Living"/></div>
                 <div class="afield full"><label>Paragraph</label><textarea id="ph-services-p" rows="2"></textarea></div>
               </div>
@@ -760,7 +776,12 @@ footer{background:var(--dark);padding:60px 48px 24px}
             <!-- PROJECTS -->
             <div class="section-card"><div class="section-card-header" onclick="toggleCard(this)"><h4>Projects — Hero</h4><span class="arrow">▼</span></div><div class="section-card-body">
               <div class="aform-grid">
-                <div class="afield full"><label>Background Photo URL</label><input id="ph-projects-bg" placeholder="https://..."/></div>
+                <div class="afield full"><label>Background Photo</label>
+<div style="display:flex;gap:8px;align-items:center">
+  <input id="ph-projects-bg" placeholder="https://... or upload below" style="flex:1"/>
+  <label class="upload-btn" style="padding:9px 12px;background:var(--gold);color:#fff;border:none;cursor:pointer;font-size:.7rem;font-weight:600;white-space:nowrap;display:inline-flex;align-items:center;gap:4px">📷 Upload<input type="file" accept="image/*" style="display:none" onchange="handleHeroBgUpload(this,'ph-projects-bg')"/></label>
+</div>
+<div class="upload-status"></div placeholder="https://..."/></div>
                 <div class="afield"><label>Title Line 1</label><input id="ph-projects-h1a" placeholder="Transforming Spaces."/></div>
                 <div class="afield"><label>Title Line 2</label><input id="ph-projects-h1b" placeholder="Elevating Lives."/></div>
                 <div class="afield full"><label>Paragraph</label><textarea id="ph-projects-p" rows="2"></textarea></div>
@@ -771,7 +792,12 @@ footer{background:var(--dark);padding:60px 48px 24px}
             <!-- PROCESS -->
             <div class="section-card"><div class="section-card-header" onclick="toggleCard(this)"><h4>Process — Hero</h4><span class="arrow">▼</span></div><div class="section-card-body">
               <div class="aform-grid">
-                <div class="afield full"><label>Background Photo URL</label><input id="ph-process-bg" placeholder="https://images.pexels.com/photos/8112164/pexels-photo-8112164.jpeg"/></div>
+                <div class="afield full"><label>Background Photo</label>
+<div style="display:flex;gap:8px;align-items:center">
+  <input id="ph-process-bg" placeholder="https://... or upload below" style="flex:1"/>
+  <label class="upload-btn" style="padding:9px 12px;background:var(--gold);color:#fff;border:none;cursor:pointer;font-size:.7rem;font-weight:600;white-space:nowrap;display:inline-flex;align-items:center;gap:4px">📷 Upload<input type="file" accept="image/*" style="display:none" onchange="handleHeroBgUpload(this,'ph-process-bg')"/></label>
+</div>
+<div class="upload-status"></div placeholder="https://images.pexels.com/photos/8112164/pexels-photo-8112164.jpeg"/></div>
                 <div class="afield"><label>Title Line 1</label><input id="ph-process-h1a" placeholder="A Seamless Process."/></div>
                 <div class="afield"><label>Title Line 2</label><input id="ph-process-h1b" placeholder="Exceptional Results."/></div>
                 <div class="afield full"><label>Paragraph</label><textarea id="ph-process-p" rows="2"></textarea></div>
@@ -782,7 +808,12 @@ footer{background:var(--dark);padding:60px 48px 24px}
             <!-- TESTIMONIALS -->
             <div class="section-card"><div class="section-card-header" onclick="toggleCard(this)"><h4>Testimonials — Hero</h4><span class="arrow">▼</span></div><div class="section-card-body">
               <div class="aform-grid">
-                <div class="afield full"><label>Background Photo URL</label><input id="ph-testi-bg" placeholder="https://..."/></div>
+                <div class="afield full"><label>Background Photo</label>
+<div style="display:flex;gap:8px;align-items:center">
+  <input id="ph-testi-bg" placeholder="https://... or upload below" style="flex:1"/>
+  <label class="upload-btn" style="padding:9px 12px;background:var(--gold);color:#fff;border:none;cursor:pointer;font-size:.7rem;font-weight:600;white-space:nowrap;display:inline-flex;align-items:center;gap:4px">📷 Upload<input type="file" accept="image/*" style="display:none" onchange="handleHeroBgUpload(this,'ph-testi-bg')"/></label>
+</div>
+<div class="upload-status"></div placeholder="https://..."/></div>
                 <div class="afield"><label>Title Line 1</label><input id="ph-testi-h1a" placeholder="Real Clients."/></div>
                 <div class="afield"><label>Title Line 2</label><input id="ph-testi-h1b" placeholder="Real Results."/></div>
                 <div class="afield full"><label>Paragraph</label><textarea id="ph-testi-p" rows="2"></textarea></div>
@@ -793,7 +824,12 @@ footer{background:var(--dark);padding:60px 48px 24px}
             <!-- CONTACT -->
             <div class="section-card"><div class="section-card-header" onclick="toggleCard(this)"><h4>Contact — Hero</h4><span class="arrow">▼</span></div><div class="section-card-body">
               <div class="aform-grid">
-                <div class="afield full"><label>Background Photo URL</label><input id="ph-contact-bg" placeholder="https://..."/></div>
+                <div class="afield full"><label>Background Photo</label>
+<div style="display:flex;gap:8px;align-items:center">
+  <input id="ph-contact-bg" placeholder="https://... or upload below" style="flex:1"/>
+  <label class="upload-btn" style="padding:9px 12px;background:var(--gold);color:#fff;border:none;cursor:pointer;font-size:.7rem;font-weight:600;white-space:nowrap;display:inline-flex;align-items:center;gap:4px">📷 Upload<input type="file" accept="image/*" style="display:none" onchange="handleHeroBgUpload(this,'ph-contact-bg')"/></label>
+</div>
+<div class="upload-status"></div placeholder="https://..."/></div>
                 <div class="afield full"><label>Title</label><input id="ph-contact-h1" placeholder="Let's Build Something Exceptional."/></div>
                 <div class="afield full"><label>Paragraph</label><textarea id="ph-contact-p" rows="2"></textarea></div>
               </div>
@@ -842,7 +878,23 @@ footer{background:var(--dark);padding:60px 48px 24px}
               </div>
             </div>
             <div class="section-card">
-              <div class="section-card-header" onclick="toggleCard(this)"><h4>🔒 Reglas de Seguridad (después de 30 días)</h4><span class="arrow">▼</span></div>
+              <div class="section-card-header" onclick="toggleCard(this)"><h4>📷 Firebase Storage (Photo Uploads)</h4><span class="arrow">▼</span></div>
+              <div class="section-card-body">
+                <div class="imgbb-notice" style="border-left-color:var(--gold)">
+                  <strong>Enable photo uploads from your device (1 minute):</strong><br><br>
+                  1. Go to <a href="https://console.firebase.google.com" target="_blank" style="color:var(--gold)">Firebase Console</a> → your project<br>
+                  2. Click <strong>"Storage"</strong> in the left menu (under Build)<br>
+                  3. Click <strong>"Get started"</strong> → <strong>"Start in test mode"</strong> → <strong>"Done"</strong><br>
+                  4. That's it! Photos will upload directly from your device.
+                </div>
+                <div id="storage-test-result" style="padding:10px;font-size:.8rem;margin-top:12px;display:none"></div>
+                <div class="aform-btns" style="margin-top:14px">
+                  <button class="btn btn-gold btn-sm" onclick="testStorageConnection()">🔍 Test Storage Connection</button>
+                </div>
+              </div>
+            </div>
+            <div class="section-card">
+              <div class="section-card-header" onclick="toggleCard(this)"><h4>🔒 Security Rules (after 30 days)</h4><span class="arrow">▼</span></div>
               <div class="section-card-body">
                 <p style="font-size:.82rem;margin-bottom:14px">Cuando expire el modo de prueba, ve a Firebase Console → Realtime Database → Reglas y pega esto:</p>
                 <pre style="background:var(--dark);color:#4ade80;padding:16px;font-size:.78rem;overflow-x:auto;line-height:1.6">{
@@ -1535,19 +1587,11 @@ function loadWhyUsForm(){
 function loadCtaForm(){const c=getData('cta');['title','p','btn','img'].forEach(k=>{const e=document.getElementById('cta-'+k);if(e)e.value=c[k]||'';});}
 function loadServicesForm(){
   const svs=getData('services');const c=document.getElementById('services-admin');if(!c)return;
-  c.innerHTML=svs.map((s,i)=>`<div class="section-card"><div class="section-card-header" onclick="toggleCard(this)"><h4>Servicio ${s.num} – ${s.title}</h4><span class="arrow">▼</span></div><div class="section-card-body"><div class="aform-grid"><div class="afield"><label>Number</label><input id="sv-num-${i}" value="${s.num}"/></div><div class="afield"><label>Icon</label><select id="sv-icon-${i}">${iconOpts(s.icon)}</select></div><div class="afield full"><label>Title</label><input id="sv-title-${i}" value="${s.title}"/></div><div class="afield full"><label>Description</label><textarea id="sv-desc-${i}" rows="2">${s.desc}</textarea></div><div class="afield full"><label>Service Photo</label>
-  <div class="photo-row" style="margin:0">
-    <input type="url" id="sv-photo-${i}" value="${s.photo||''}" style="display:none"/>
-    <label class="photo-pick-btn${s.photo?' has-photo':''}" style="position:relative;${s.photo?'':''}">
-      ${s.photo?`<img loading="lazy" src="${s.photo}" style="width:100%;height:100px;object-fit:cover"/><span style="position:absolute;bottom:4px;right:6px;background:var(--gold);color:#fff;font-size:.6rem;padding:2px 6px;font-weight:600">TAP TO CHANGE</span>`:'<span style="font-size:1.2rem">📷</span><span>Tap to pick photo</span>'}
-      <input type="file" accept="image/*" style="display:none" onchange="handleSvcPhotoChange(this,${i})"/>
-    </label>
-  </div>
-</div></div></div></div>`).join('');
+  c.innerHTML=svs.map((s,i)=>`<div class="section-card"><div class="section-card-header" onclick="toggleCard(this)"><h4>Servicio ${s.num} – ${s.title}</h4><span class="arrow">▼</span></div><div class="section-card-body"><div class="aform-grid"><div class="afield"><label>Number</label><input id="sv-num-${i}" value="${s.num}"/></div><div class="afield"><label>Icon</label><select id="sv-icon-${i}">${iconOpts(s.icon)}</select></div><div class="afield full"><label>Title</label><input id="sv-title-${i}" value="${s.title}"/></div><div class="afield full"><label>Description</label><textarea id="sv-desc-${i}" rows="2">${s.desc}</textarea></div><div class="afield full"><label>Photo</label><input id="sv-photo-${i}" value="${s.photo||''}"/></div></div></div></div>`).join('');
 }
 function loadTeamForm(){
   const team=getData('team');const c=document.getElementById('team-admin');if(!c)return;
-  c.innerHTML=team.map((m,i)=>`<div class="repeat-item"><div class="aform-grid"><div class="afield"><label>Name</label><input id="tm-name-${i}" value="${m.name}"/></div><div class="afield"><label>Role</label><input id="tm-role-${i}" value="${m.role}"/></div><div class="afield full"><label>Bio</label><textarea id="tm-bio-${i}" rows="2">${m.bio}</textarea></div><div class="afield full"><label>Photo URL</label><input id="tm-photo-${i}" value="${m.photo||''}"/></div></div></div>`).join('');
+  c.innerHTML=team.map((m,i)=>`<div class="repeat-item"><div class="aform-grid"><div class="afield"><label>Name</label><input id="tm-name-${i}" value="${m.name}"/></div><div class="afield"><label>Role</label><input id="tm-role-${i}" value="${m.role}"/></div><div class="afield full"><label>Bio</label><textarea id="tm-bio-${i}" rows="2">${m.bio}</textarea></div><div class="afield full"><label>Photo</label><div style="display:flex;gap:8px;align-items:center"><input id="tm-photo-${i}" value="${m.photo||''}"/></div></div></div>`).join('');
 }
 function loadStatsForm(){
   const stats=getData('stats');const c=document.getElementById('stats-admin');if(!c)return;
@@ -1583,19 +1627,31 @@ function editProject(id){
 function clearProjForm(){['pf-title','pf-loc','pf-short','pf-desc','pf-area','pf-year','pf-tags'].forEach(id=>{const e=document.getElementById(id);if(e)e.value='';});document.getElementById('pf-cat').value='bathroom';document.getElementById('photoInputs').innerHTML='';addPhotoRow();}
 function cancelProjForm(){document.getElementById('projectFormArea').style.display='none';clearProjForm();editProjId=null;}
 
-/* ══ Photo Picker & Compress ════════════════════════════════ */
-async function compressImage(file, maxW=1400, quality=0.82){
-  return new Promise(resolve=>{
+/* ══════════════════════════════════════════
+   FIREBASE STORAGE UPLOAD (REST API)
+   ══════════════════════════════════════════ */
+function getStorageBucket(){
+  // Derive from RTDB URL: https://PROJECT-ID-default-rtdb.firebaseio.com
+  const url=getFbUrl();
+  const m=url.match(/https:\/\/(.+?)-default-rtdb/);
+  if(!m)return '';
+  const pid=m[1];
+  // Try saved bucket first, then default format
+  return localStorage.getItem('frm_storage_bucket')||pid+'.firebasestorage.app';
+}
+
+async function compressPhoto(file, maxW=1200, q=0.78){
+  return new Promise(res=>{
     const reader=new FileReader();
     reader.onload=e=>{
       const img=new Image();
       img.onload=()=>{
         let w=img.width,h=img.height;
         if(w>maxW){h=Math.round(h*maxW/w);w=maxW;}
-        const canvas=document.createElement('canvas');
-        canvas.width=w;canvas.height=h;
-        canvas.getContext('2d').drawImage(img,0,0,w,h);
-        resolve(canvas.toDataURL('image/jpeg',quality));
+        const cv=document.createElement('canvas');
+        cv.width=w;cv.height=h;
+        cv.getContext('2d').drawImage(img,0,0,w,h);
+        cv.toBlob(blob=>res(blob),'image/jpeg',q);
       };
       img.src=e.target.result;
     };
@@ -1603,36 +1659,125 @@ async function compressImage(file, maxW=1400, quality=0.82){
   });
 }
 
-async function handleSvcPhotoChange(fileInput,i){
+
+
+async function handleHeroBgUpload(fileInput, inputId){
   const file=fileInput.files[0];if(!file)return;
-  const compressed=await compressImage(file);
-  const inp=document.getElementById('sv-photo-'+i);
-  if(inp)inp.value=compressed;
-  const btn=fileInput.closest('.photo-pick-btn');
-  if(btn)btn.innerHTML=`<img loading="lazy" src="${compressed}" style="width:100%;height:100px;object-fit:cover"/><span style="position:absolute;bottom:4px;right:6px;background:var(--gold);color:#fff;font-size:.6rem;padding:2px 6px;font-weight:600">TAP TO CHANGE</span>`;
-  btn.classList.add('has-photo');
+  const inp=document.getElementById(inputId);
+  const status=fileInput.closest('.afield').querySelector('.upload-status');
+  if(!inp)return;
+  // Preview
+  const preview=await previewFile(file);
+  inp.value='uploading...';
+  if(status){status.textContent='⏳ Uploading...';status.className='upload-status show';}
+  // Upload
+  const url=await uploadPhotoToStorage(file);
+  if(url){
+    inp.value=url;
+    if(status){status.textContent='✅ Uploaded';setTimeout(()=>status.classList.remove('show'),2000);}
+  }else{
+    inp.value=preview;
+    if(status){status.textContent='⚠️ Local only';status.className='upload-status show err';}
+  }
 }
 
-async function handlePhotoPickChange(fileInput, rowEl){
+async function handleSvcPhoto(fileInput,i){
   const file=fileInput.files[0];if(!file)return;
-  const btn=rowEl.querySelector('.photo-pick-btn');
-  const thumb=rowEl.querySelector('.photo-row-thumb');
-  const uploading=rowEl.querySelector('.photo-uploading');
-  const urlInput=rowEl.querySelector('input[type=url]');
+  const inp=document.getElementById('sv-photo-'+i);
+  const btn=fileInput.closest('.photo-pick');
+  const status=document.getElementById('sv-photo-status-'+i);
+  // Preview immediately
+  const preview=await previewFile(file);
+  if(btn){btn.classList.add('has-img');btn.innerHTML='<img loading="lazy" src="'+preview+'" alt=""/><span class="change-badge">Tap to change</span>';}
+  if(status){status.textContent='⏳ Uploading...';status.className='upload-status show';}
+  // Upload
+  const url=await uploadPhotoToStorage(file);
+  if(url){
+    if(inp)inp.value=url;
+    if(btn){const img=btn.querySelector('img');if(img)img.src=url;}
+    if(status){status.textContent='✅ Uploaded';setTimeout(()=>status.classList.remove('show'),2000);}
+  }else{
+    if(inp)inp.value=preview;
+    if(status){status.textContent='⚠️ Saved locally only';status.className='upload-status show err';}
+  }
+}
 
-  if(uploading)uploading.style.display='block';
-  if(btn)btn.style.opacity='.5';
+async function uploadPhotoToStorage(file){
+  const bucket=getStorageBucket();
+  if(!bucket){toast('⚠️ Firebase Storage not configured. Enable it in Firebase Console → Storage.','err');return null;}
+  const name='photos/'+Date.now()+'_'+Math.random().toString(36).slice(2,6)+'.jpg';
+  const blob=await compressPhoto(file);
 
+  // Try upload
   try{
-    const compressed=await compressImage(file);
-    if(urlInput)urlInput.value=compressed;
-    if(thumb){thumb.src=compressed;thumb.classList.add('loaded');}
-    if(btn){btn.classList.add('has-photo');btn.innerHTML='<img loading="lazy" src="'+compressed+'" style="width:100%;height:120px;object-fit:cover"/><span style="position:absolute;bottom:6px;right:8px;background:var(--gold);color:#fff;font-size:.65rem;padding:3px 8px;font-weight:600">TAP TO CHANGE</span>';}
-  }catch(err){
-    toast('Error processing photo','err');
-  }finally{
-    if(uploading)uploading.style.display='none';
-    if(btn)btn.style.opacity='1';
+    let res=await fetch(
+      'https://firebasestorage.googleapis.com/v0/b/'+bucket+'/o?uploadType=media&name='+encodeURIComponent(name),
+      {method:'POST',headers:{'Content-Type':'image/jpeg'},body:blob}
+    );
+    
+    // If bucket format fails, try alternate format
+    if(!res.ok&&bucket.endsWith('.firebasestorage.app')){
+      const altBucket=bucket.replace('.firebasestorage.app','.appspot.com');
+      res=await fetch(
+        'https://firebasestorage.googleapis.com/v0/b/'+altBucket+'/o?uploadType=media&name='+encodeURIComponent(name),
+        {method:'POST',headers:{'Content-Type':'image/jpeg'},body:blob}
+      );
+      if(res.ok){
+        localStorage.setItem('frm_storage_bucket',altBucket);
+      }
+    }
+    
+    if(!res.ok){
+      const err=await res.text();
+      console.error('Storage upload failed:',err);
+      toast('⚠️ Upload failed. Enable Firebase Storage first (see Firebase section in admin).','err');
+      return null;
+    }
+    
+    const data=await res.json();
+    const finalBucket=localStorage.getItem('frm_storage_bucket')||bucket;
+    return 'https://firebasestorage.googleapis.com/v0/b/'+finalBucket+'/o/'+encodeURIComponent(name)+'?alt=media'+(data.downloadTokens?'&token='+data.downloadTokens:'');
+  }catch(e){
+    console.error('Upload error:',e);
+    toast('⚠️ Upload failed. Check internet connection.','err');
+    return null;
+  }
+}
+
+/* Quick preview from file (shows instantly while uploading) */
+function previewFile(file){
+  return new Promise(res=>{
+    const r=new FileReader();r.onload=e=>res(e.target.result);r.readAsDataURL(file);
+  });
+}
+
+async function handlePhotoPick(fileInput, rowEl){
+  const file=fileInput.files[0];if(!file)return;
+  const pickBtn=rowEl.querySelector('.photo-pick');
+  const urlInput=rowEl.querySelector('input[type=url]');
+  const status=rowEl.querySelector('.upload-status');
+
+  // 1. Instant preview
+  const preview=await previewFile(file);
+  if(pickBtn){
+    pickBtn.classList.add('has-img');
+    pickBtn.innerHTML='<img loading="lazy" src="'+preview+'" alt=""/><span class="change-badge">Tap to change</span>';
+  }
+  if(status){status.textContent='⏳ Uploading...';status.className='upload-status show';}
+
+  // 2. Upload to Firebase Storage
+  const url=await uploadPhotoToStorage(file);
+
+  if(url){
+    if(urlInput)urlInput.value=url;
+    if(status){status.textContent='✅ Uploaded';setTimeout(()=>status.classList.remove('show'),2000);}
+    // Update preview to final URL
+    const img=pickBtn?pickBtn.querySelector('img'):null;
+    if(img)img.src=url;
+  }else{
+    // Fallback: keep base64 preview (works locally, won't persist online)
+    if(urlInput)urlInput.value=preview;
+    if(status){status.textContent='⚠️ Upload failed — saved locally only';status.className='upload-status show err';}
   }
 }
 
@@ -1640,41 +1785,37 @@ function addPhotoRow(val=''){
   const container=document.getElementById('photoInputs');
   if(!container||container.children.length>=15)return;
   const n=container.children.length+1;
+  const hasImg=val&&val.length>5;
   const row=document.createElement('div');
   row.className='photo-row';
-
-  const isBase64=val&&val.startsWith('data:');
-  const hasVal=val&&val.length>0;
-  const thumbSrc=hasVal?val:'';
-  const btnContent=hasVal
-    ?`<img loading="lazy" src="${thumbSrc}" style="width:100%;height:120px;object-fit:cover"/><span style="position:absolute;bottom:6px;right:8px;background:var(--gold);color:#fff;font-size:.65rem;padding:3px 8px;font-weight:600">TAP TO CHANGE</span>`
-    :`<span style="font-size:1.4rem">📷</span><span>Tap to pick from Gallery or Camera</span>`;
-
   row.innerHTML=`
-    <div class="photo-row-top">
+    <div class="photo-row-head">
       <span class="photo-row-label">Photo ${n}</span>
-      <button type="button" class="photo-row-del" onclick="this.closest('.photo-row').remove()" title="Remove">✕ Remove</button>
+      <button type="button" class="photo-row-del" onclick="this.closest('.photo-row').remove()">✕ Remove</button>
     </div>
     <input type="url" value="${val}" style="display:none"/>
-    <label class="photo-pick-btn${hasVal?' has-photo':''}" style="position:relative">
-      ${btnContent}
-      <input type="file" accept="image/*" style="display:none" onchange="handlePhotoPickChange(this,this.closest('.photo-row'))"/>
+    <label class="photo-pick${hasImg?' has-img':''}">
+      ${hasImg
+        ?`<img loading="lazy" src="${val}" alt=""/><span class="change-badge">Tap to change</span>`
+        :`<div class="photo-pick-empty"><span class="icon">📷</span><span>Tap to pick from gallery or camera</span></div>`
+      }
+      <input type="file" accept="image/*" style="display:none" onchange="handlePhotoPick(this,this.closest('.photo-row'))"/>
     </label>
-    <div class="photo-uploading">⏳ Processing photo...</div>`;
+    <div class="upload-status"></div>`;
   container.appendChild(row);
 }
-function prevThumb(input){const t=input.nextElementSibling;if(input.value){t.src=input.value;t.classList.add('loaded');}else t.classList.remove('loaded');}
+function prevThumb(){}/* deprecated */
 async function saveProject(){
-  const title=document.getElementById('pf-title').value.trim();if(!title){toast('⚠️ El título es obligatorio','err');return;}
+  const title=document.getElementById('pf-title').value.trim();if(!title){toast('⚠️ Title is required','err');return;}
   const photos=Array.from(document.querySelectorAll('#photoInputs input[type=url]')).map(i=>i.value.trim()).filter(v=>v&&v.length>10);
   const data={id:editProjId||Date.now(),title,cat:document.getElementById('pf-cat').value,location:document.getElementById('pf-loc').value,short:document.getElementById('pf-short').value,desc:document.getElementById('pf-desc').value,area:document.getElementById('pf-area').value,year:document.getElementById('pf-year').value,tags:document.getElementById('pf-tags').value,photos};
   let ps=getData('projects');
   if(editProjId){const idx=ps.findIndex(p=>p.id===editProjId);if(idx>-1)ps[idx]=data;}else ps.push(data);
-  await setData('projects',ps);loadProjectsList();cancelProjForm();renderProjects('all');renderHomeStrip();showInd('proj');toast('✅ Proyecto guardado'+(getFbUrl()?' en la nube':''),'ok');
+  await setData('projects',ps);loadProjectsList();cancelProjForm();renderProjects('all');renderHomeStrip();showInd('proj');toast('✅ Project saved'+(getFbUrl()?' en la nube':''),'ok');
 }
 async function deleteProject(id){
-  if(!confirm('¿Seguro que quieres borrar este proyecto?'))return;
-  await setData('projects',getData('projects').filter(p=>p.id!==id));loadProjectsList();renderProjects('all');renderHomeStrip();toast('🗑 Proyecto eliminado');
+  if(!confirm('Are you sure you want to delete this project?'))return;
+  await setData('projects',getData('projects').filter(p=>p.id!==id));loadProjectsList();renderProjects('all');renderHomeStrip();toast('🗑 Project deleted');
 }
 
 /* ── TESTIMONIALS ── */
@@ -1700,8 +1841,8 @@ async function saveTestimonio(){
   await setData('testimonials',ts);loadTestiList();cancelTestiForm();renderTestimonials();showInd('testi');toast('✅ Testimonio guardado'+(getFbUrl()?' en la nube':''),'ok');
 }
 async function deleteTestimonio(id){
-  if(!confirm('¿Eliminar este testimonio?'))return;
-  await setData('testimonials',getData('testimonials').filter(t=>t.id!==id));loadTestiList();renderTestimonials();toast('🗑 Testimonio eliminado');
+  if(!confirm('Delete this testimonial?'))return;
+  await setData('testimonials',getData('testimonials').filter(t=>t.id!==id));loadTestiList();renderTestimonials();toast('🗑 Testimonial deleted');
 }
 
 async function savePromoVideo(){
@@ -1763,7 +1904,7 @@ async function saveCommitment(){
 }
 
 async function savePw(){
-  const np=document.getElementById('s-pw').value.trim();if(!np){toast('⚠️ Escribe una nueva contraseña','err');return;}
+  const np=document.getElementById('s-pw').value.trim();if(!np){toast('⚠️ Enter a new password','err');return;}
   const cur=getData('settings');await setData('settings',{...cur,pw:np});document.getElementById('s-pw').value='';toast('✅ Password actualizada','ok');
 }
 
