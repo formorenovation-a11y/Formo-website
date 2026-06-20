@@ -28,6 +28,8 @@ nav.scrolled{padding:11px 48px}
 .nav-logo{display:flex;align-items:center;gap:11px;cursor:pointer;flex-shrink:0}
 .nav-logo-icon{width:38px;height:38px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .nav-logo-icon svg{width:38px;height:38px}
+#site-logo-img{opacity:0;transition:opacity .5s ease}
+#site-logo-img.loaded{opacity:1}
 .nl-text strong{font-family:var(--fh);font-size:.93rem;font-weight:600;color:var(--white);letter-spacing:.06em;display:block}
 .nl-text span{font-size:.58rem;color:var(--muted);letter-spacing:.18em;text-transform:uppercase}
 .nav-links{display:flex;gap:26px;align-items:center}
@@ -193,8 +195,9 @@ footer{background:var(--dark);padding:60px 48px 24px}
 /* ══════════════════════
    LOADING OVERLAY
    ══════════════════════ */
-#loadingOverlay{position:fixed;inset:0;background:var(--dark);z-index:9998;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;transition:opacity .7s ease}
-#loadingOverlay.hidden{opacity:0;pointer-events:none}
+#loadingOverlay{position:fixed;inset:0;background:var(--dark);z-index:9998;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;opacity:0;animation:loaderFadeIn .4s ease forwards;transition:opacity .7s ease}
+#loadingOverlay.hidden{animation:none;opacity:0;pointer-events:none}
+@keyframes loaderFadeIn{from{opacity:0}to{opacity:1}}
 .loader-house{width:74px;height:74px}
 .house-path{fill:none;stroke:var(--gold);stroke-width:2.8;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:320;stroke-dashoffset:320;animation:drawHouse 1.5s cubic-bezier(.4,0,.2,1) forwards}
 .door-path{fill:none;stroke:var(--gold);stroke-width:2.8;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:80;stroke-dashoffset:80;animation:drawHouse .7s cubic-bezier(.4,0,.2,1) .95s forwards}
@@ -505,7 +508,12 @@ footer{background:var(--dark);padding:60px 48px 24px}
                   <div class="afield full"><label>Párrafo</label><textarea id="h-p" rows="2"></textarea></div>
                   <div class="afield"><label>Primary button text</label><input id="h-btn1"/></div>
                   <div class="afield"><label>Secondary button text</label><input id="h-btn2"/></div>
-                  <div class="afield full"><label>Background photo URL</label><input id="h-bg" placeholder="https://... o sube a imgbb.com"/></div>
+                  <div class="afield full"><label>Hero Background Photo</label>
+<div style="display:flex;gap:8px;align-items:center">
+  <input id="h-bg" placeholder="Paste URL or upload" style="flex:1"/>
+  <label style="padding:9px 12px;background:var(--gold);color:#fff;cursor:pointer;font-size:.7rem;font-weight:600;white-space:nowrap;display:inline-flex;align-items:center;gap:4px;border:none">📷 Upload<input type="file" accept="image/*" style="display:none" onchange="handleHeroBgUpload(this,'h-bg')"/></label>
+</div>
+<div class="upload-status"></div></div>
                 </div>
                 <div class="aform-btns"><button class="btn btn-gold btn-sm" onclick="saveSection('hero')">💾 Save Hero</button><span class="save-indicator" id="ind-hero">✅ Saved</span></div>
               </div>
@@ -554,7 +562,12 @@ footer{background:var(--dark);padding:60px 48px 24px}
                   <div class="afield full"><label>Title</label><input id="cta-title"/></div>
                   <div class="afield full"><label>Párrafo</label><textarea id="cta-p" rows="2"></textarea></div>
                   <div class="afield"><label>Button text</label><input id="cta-btn"/></div>
-                  <div class="afield"><label>Side image URL</label><input id="cta-img"/></div>
+                  <div class="afield"><label>Side Image</label>
+<div style="display:flex;gap:8px;align-items:center">
+  <input id="cta-img" placeholder="URL or upload" style="flex:1"/>
+  <label style="padding:9px 12px;background:var(--gold);color:#fff;cursor:pointer;font-size:.7rem;font-weight:600;white-space:nowrap;display:inline-flex;align-items:center;gap:4px;border:none">📷 Upload<input type="file" accept="image/*" style="display:none" onchange="handleHeroBgUpload(this,'cta-img')"/></label>
+</div>
+<div class="upload-status"></div></div>
                 </div>
                 <div class="aform-btns"><button class="btn btn-gold btn-sm" onclick="saveSection('cta')">💾 Save</button><span class="save-indicator" id="ind-cta">✅ Saved</span></div>
               </div>
@@ -618,7 +631,12 @@ footer{background:var(--dark);padding:60px 48px 24px}
                 <div class="afield"><label>City / Location</label><input id="tf-loc" placeholder="Naples, FL"/></div>
                 <div class="afield full"><label>Review / Text *</label><textarea id="tf-quote" rows="3" placeholder="El trabajo fue increíble..."></textarea></div>
                 <div class="afield"><label>Estrellas</label><select id="tf-stars"><option value="5">★★★★★ (5)</option><option value="4">★★★★ (4)</option><option value="3">★★★ (3)</option></select></div>
-                <div class="afield"><label>Profile photo URL (optional)</label><input id="tf-avatar" placeholder="https://... o deja vacío"/></div>
+                <div class="afield"><label>Profile Photo (optional)</label>
+<div style="display:flex;gap:8px;align-items:center">
+  <input id="tf-avatar" placeholder="URL or upload" style="flex:1"/>
+  <label style="padding:9px 12px;background:var(--gold);color:#fff;cursor:pointer;font-size:.7rem;font-weight:600;white-space:nowrap;display:inline-flex;align-items:center;gap:4px;border:none">📷 Upload<input type="file" accept="image/*" style="display:none" onchange="handleHeroBgUpload(this,'tf-avatar')"/></label>
+</div>
+<div class="upload-status"></div></div>
               </div>
               <div class="aform-btns">
                 <button class="btn btn-gold btn-sm" onclick="saveTestimonio()">💾 Save</button>
@@ -749,7 +767,7 @@ footer{background:var(--dark);padding:60px 48px 24px}
   <input id="ph-about-bg" placeholder="https://... or upload below" style="flex:1"/>
   <label class="upload-btn" style="padding:9px 12px;background:var(--gold);color:#fff;border:none;cursor:pointer;font-size:.7rem;font-weight:600;white-space:nowrap;display:inline-flex;align-items:center;gap:4px">📷 Upload<input type="file" accept="image/*" style="display:none" onchange="handleHeroBgUpload(this,'ph-about-bg')"/></label>
 </div>
-<div class="upload-status"></div placeholder="https://..."/></div>
+<div class="upload-status"></div></div>
                 <div class="afield"><label>Title Line 1</label><input id="ph-about-h1a" placeholder="Built on Quality."/></div>
                 <div class="afield"><label>Title Line 2</label><input id="ph-about-h1b" placeholder="Driven by Integrity."/></div>
                 <div class="afield full"><label>Title Line 3</label><input id="ph-about-h1c" placeholder="Focused on You."/></div>
@@ -766,7 +784,7 @@ footer{background:var(--dark);padding:60px 48px 24px}
   <input id="ph-services-bg" placeholder="https://... or upload below" style="flex:1"/>
   <label class="upload-btn" style="padding:9px 12px;background:var(--gold);color:#fff;border:none;cursor:pointer;font-size:.7rem;font-weight:600;white-space:nowrap;display:inline-flex;align-items:center;gap:4px">📷 Upload<input type="file" accept="image/*" style="display:none" onchange="handleHeroBgUpload(this,'ph-services-bg')"/></label>
 </div>
-<div class="upload-status"></div placeholder="https://..."/></div>
+<div class="upload-status"></div></div>
                 <div class="afield full"><label>Title</label><input id="ph-services-h1" placeholder="Craftsmanship Designed for Elevated Living"/></div>
                 <div class="afield full"><label>Paragraph</label><textarea id="ph-services-p" rows="2"></textarea></div>
               </div>
@@ -781,7 +799,7 @@ footer{background:var(--dark);padding:60px 48px 24px}
   <input id="ph-projects-bg" placeholder="https://... or upload below" style="flex:1"/>
   <label class="upload-btn" style="padding:9px 12px;background:var(--gold);color:#fff;border:none;cursor:pointer;font-size:.7rem;font-weight:600;white-space:nowrap;display:inline-flex;align-items:center;gap:4px">📷 Upload<input type="file" accept="image/*" style="display:none" onchange="handleHeroBgUpload(this,'ph-projects-bg')"/></label>
 </div>
-<div class="upload-status"></div placeholder="https://..."/></div>
+<div class="upload-status"></div></div>
                 <div class="afield"><label>Title Line 1</label><input id="ph-projects-h1a" placeholder="Transforming Spaces."/></div>
                 <div class="afield"><label>Title Line 2</label><input id="ph-projects-h1b" placeholder="Elevating Lives."/></div>
                 <div class="afield full"><label>Paragraph</label><textarea id="ph-projects-p" rows="2"></textarea></div>
@@ -797,7 +815,7 @@ footer{background:var(--dark);padding:60px 48px 24px}
   <input id="ph-process-bg" placeholder="https://... or upload below" style="flex:1"/>
   <label class="upload-btn" style="padding:9px 12px;background:var(--gold);color:#fff;border:none;cursor:pointer;font-size:.7rem;font-weight:600;white-space:nowrap;display:inline-flex;align-items:center;gap:4px">📷 Upload<input type="file" accept="image/*" style="display:none" onchange="handleHeroBgUpload(this,'ph-process-bg')"/></label>
 </div>
-<div class="upload-status"></div placeholder="https://images.pexels.com/photos/8112164/pexels-photo-8112164.jpeg"/></div>
+<div class="upload-status"></div></div>
                 <div class="afield"><label>Title Line 1</label><input id="ph-process-h1a" placeholder="A Seamless Process."/></div>
                 <div class="afield"><label>Title Line 2</label><input id="ph-process-h1b" placeholder="Exceptional Results."/></div>
                 <div class="afield full"><label>Paragraph</label><textarea id="ph-process-p" rows="2"></textarea></div>
@@ -813,7 +831,7 @@ footer{background:var(--dark);padding:60px 48px 24px}
   <input id="ph-testi-bg" placeholder="https://... or upload below" style="flex:1"/>
   <label class="upload-btn" style="padding:9px 12px;background:var(--gold);color:#fff;border:none;cursor:pointer;font-size:.7rem;font-weight:600;white-space:nowrap;display:inline-flex;align-items:center;gap:4px">📷 Upload<input type="file" accept="image/*" style="display:none" onchange="handleHeroBgUpload(this,'ph-testi-bg')"/></label>
 </div>
-<div class="upload-status"></div placeholder="https://..."/></div>
+<div class="upload-status"></div></div>
                 <div class="afield"><label>Title Line 1</label><input id="ph-testi-h1a" placeholder="Real Clients."/></div>
                 <div class="afield"><label>Title Line 2</label><input id="ph-testi-h1b" placeholder="Real Results."/></div>
                 <div class="afield full"><label>Paragraph</label><textarea id="ph-testi-p" rows="2"></textarea></div>
@@ -829,7 +847,7 @@ footer{background:var(--dark);padding:60px 48px 24px}
   <input id="ph-contact-bg" placeholder="https://... or upload below" style="flex:1"/>
   <label class="upload-btn" style="padding:9px 12px;background:var(--gold);color:#fff;border:none;cursor:pointer;font-size:.7rem;font-weight:600;white-space:nowrap;display:inline-flex;align-items:center;gap:4px">📷 Upload<input type="file" accept="image/*" style="display:none" onchange="handleHeroBgUpload(this,'ph-contact-bg')"/></label>
 </div>
-<div class="upload-status"></div placeholder="https://..."/></div>
+<div class="upload-status"></div></div>
                 <div class="afield full"><label>Title</label><input id="ph-contact-h1" placeholder="Let's Build Something Exceptional."/></div>
                 <div class="afield full"><label>Paragraph</label><textarea id="ph-contact-p" rows="2"></textarea></div>
               </div>
@@ -839,8 +857,18 @@ footer{background:var(--dark);padding:60px 48px 24px}
             <!-- BEFORE/AFTER -->
             <div class="section-card"><div class="section-card-header" onclick="toggleCard(this)"><h4>Projects — Before / After Images</h4><span class="arrow">▼</span></div><div class="section-card-body">
               <div class="aform-grid">
-                <div class="afield full"><label>BEFORE photo URL</label><input id="ba-before" placeholder="https://... before photo"/></div>
-                <div class="afield full"><label>AFTER photo URL</label><input id="ba-after" placeholder="https://... after photo"/></div>
+                <div class="afield full"><label>BEFORE Photo</label>
+<div style="display:flex;gap:8px;align-items:center">
+  <input id="ba-before" placeholder="URL or upload" style="flex:1"/>
+  <label style="padding:9px 12px;background:var(--gold);color:#fff;cursor:pointer;font-size:.7rem;font-weight:600;white-space:nowrap;display:inline-flex;align-items:center;gap:4px;border:none">📷 Upload<input type="file" accept="image/*" style="display:none" onchange="handleHeroBgUpload(this,'ba-before')"/></label>
+</div>
+<div class="upload-status"></div></div>
+                <div class="afield full"><label>AFTER Photo</label>
+<div style="display:flex;gap:8px;align-items:center">
+  <input id="ba-after" placeholder="URL or upload" style="flex:1"/>
+  <label style="padding:9px 12px;background:var(--gold);color:#fff;cursor:pointer;font-size:.7rem;font-weight:600;white-space:nowrap;display:inline-flex;align-items:center;gap:4px;border:none">📷 Upload<input type="file" accept="image/*" style="display:none" onchange="handleHeroBgUpload(this,'ba-after')"/></label>
+</div>
+<div class="upload-status"></div></div>
               </div>
               <div class="aform-btns"><button class="btn btn-gold btn-sm" onclick="saveBeforeAfter()">💾 Save</button><span class="save-indicator" id="ind-ba">✅ Saved</span></div>
             </div></div>
@@ -853,7 +881,12 @@ footer{background:var(--dark);padding:60px 48px 24px}
                 <div class="afield full"><label>Bullet 1</label><input id="cm-b1" placeholder="Dedicated Project Manager..."/></div>
                 <div class="afield full"><label>Bullet 2</label><input id="cm-b2" placeholder="Regular updates..."/></div>
                 <div class="afield full"><label>Bullet 3</label><input id="cm-b3" placeholder="Top-tier craftsmanship..."/></div>
-                <div class="afield full"><label>Right Side Photo URL</label><input id="cm-img" placeholder="https://..."/></div>
+                <div class="afield full"><label>Right Side Photo</label>
+<div style="display:flex;gap:8px;align-items:center">
+  <input id="cm-img" placeholder="URL or upload" style="flex:1"/>
+  <label style="padding:9px 12px;background:var(--gold);color:#fff;cursor:pointer;font-size:.7rem;font-weight:600;white-space:nowrap;display:inline-flex;align-items:center;gap:4px;border:none">📷 Upload<input type="file" accept="image/*" style="display:none" onchange="handleHeroBgUpload(this,'cm-img')"/></label>
+</div>
+<div class="upload-status"></div></div>
               </div>
               <div class="aform-btns"><button class="btn btn-gold btn-sm" onclick="saveCommitment()">💾 Save</button><span class="save-indicator" id="ind-cm">✅ Saved</span></div>
             </div></div>
