@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<link rel="icon" href="/favicon.ico" sizes="any"/>
+<link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
+<title>Professional House Painters in Middle Tennessee | Free Estimate — Formo Renovation</title>
+<meta name="description" content="Interior & exterior painting in Nashville, Franklin, Brentwood & Middle Tennessee. Fully insured, 1-year warranty, free estimates. Get your quote in 24 hours."/>
+<meta name="robots" content="index, follow"/>
+
+<!-- ============================================================= -->
+<!-- GOOGLE ADS CONVERSION TRACKING — replace AW-XXXXX & label      -->
+<!-- Instructions in the setup guide. Uncomment when you have IDs.  -->
+<!-- ============================================================= -->
+<!--
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-XXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'AW-XXXXXXXXX');
+  // Fire on phone click, form submit, whatsapp click (see functions below)
+  function trackConversion(label){ gtag('event','conversion',{'send_to':'AW-XXXXXXXXX/'+label}); }
+</script>
+-->
+<script>
+  // Fallback so the page works before you add real IDs
+  function trackConversion(label){ try{ if(window.gtag){/* handled above */} }catch(e){} console.log('conversion:',label); }
+</script>
+
+<style>
+  :root{
+    --ink:#16130f;        /* near-black warm */
+    --paper:#faf7f2;      /* warm off-white */
+    --gold:#c9a96e;       /* Formo gold */
+    --gold-d:#a8823f;
+    --moss:#3f4a3c;       /* deep painterly green — the risk accent */
+    --line:#e6ded2;
+    --muted:#7c7364;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Jost',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:var(--ink);background:var(--paper);line-height:1.6;-webkit-font-smoothing:antialiased}
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Jost:wght@300;400;500;600&display=swap');
+  h1,h2,h3{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;line-height:1.14;letter-spacing:-.01em}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 22px}
+
+  /* ── Sticky trust bar ── */
+  .topbar{background:var(--ink);color:#fff;font-size:.76rem;letter-spacing:.04em;padding:8px 0;text-align:center}
+  .topbar strong{color:var(--gold)}
+
+  /* ── Header ── */
+  header{background:var(--ink);position:sticky;top:0;z-index:50;padding:14px 0;box-shadow:0 1px 0 rgba(255,255,255,.06)}
+  .head-in{display:flex;align-items:center;justify-content:space-between}
+  .logo{display:flex;align-items:center;gap:11px;color:#fff;text-decoration:none}
+  .logo svg{width:34px;height:34px}
+  .logo-txt strong{font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-weight:700;letter-spacing:.14em;display:block;line-height:1}
+  .logo-txt span{font-size:.5rem;letter-spacing:.34em;color:var(--gold);text-transform:uppercase}
+  .head-call{display:inline-flex;align-items:center;gap:8px;background:var(--gold);color:var(--ink);font-weight:600;font-size:.82rem;letter-spacing:.03em;padding:10px 18px;border-radius:2px;text-decoration:none;transition:background .2s}
+  .head-call:hover{background:#fff}
+  .head-call svg{width:15px;height:15px}
+
+  /* ── Hero ── */
+  .hero{position:relative;min-height:calc(100vh - 96px);display:grid;grid-template-columns:1.05fr .95fr;gap:0;align-items:stretch}
+  .hero-left{padding:56px 48px 56px 0;display:flex;flex-direction:column;justify-content:center}
+  .eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:.68rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--moss);margin-bottom:20px}
+  .eyebrow::before{content:'';width:26px;height:2px;background:var(--gold)}
+  .hero h1{font-size:clamp(2.5rem,5vw,4.1rem);margin-bottom:18px}
+  .hero h1 em{font-style:normal;color:var(--gold-d);position:relative;white-space:nowrap}
+  .hero-sub{font-size:1.05rem;color:var(--muted);max-width:30ch;margin-bottom:28px}
+  .hero-points{list-style:none;margin-bottom:34px}
+  .hero-points li{display:flex;align-items:center;gap:11px;font-size:.92rem;margin-bottom:11px;color:var(--ink)}
+  .hero-points svg{width:19px;height:19px;stroke:var(--moss);fill:none;stroke-width:2.2;flex-shrink:0}
+  .hero-cta-row{display:flex;gap:12px;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;font-family:inherit;font-weight:600;font-size:.86rem;letter-spacing:.04em;padding:15px 26px;border-radius:2px;cursor:pointer;text-decoration:none;border:none;transition:transform .15s,background .2s,box-shadow .2s}
+  .btn-primary{background:var(--gold);color:var(--ink);box-shadow:0 6px 22px rgba(201,169,110,.34)}
+  .btn-primary:hover{transform:translateY(-2px);background:var(--gold-d);color:#fff}
+  .btn-ghost{background:transparent;color:var(--ink);border:1.5px solid var(--ink)}
+  .btn-ghost:hover{background:var(--ink);color:#fff}
+  .btn svg{width:16px;height:16px}
+
+  .hero-right{position:relative;overflow:hidden;background:var(--ink)}
+  .hero-right img{width:100%;height:100%;object-fit:cover;opacity:.94}
+  .hero-badge{position:absolute;left:32px;bottom:32px;right:32px;background:rgba(22,19,15,.82);backdrop-filter:blur(8px);border:1px solid rgba(201,169,110,.3);padding:18px 22px;color:#fff}
+  .hero-badge .stars{color:var(--gold);letter-spacing:2px;font-size:.9rem;margin-bottom:5px}
+  .hero-badge p{font-size:.82rem;color:rgba(255,255,255,.82);font-style:italic;line-height:1.5}
+  .hero-badge span{display:block;margin-top:7px;font-size:.72rem;color:var(--gold);letter-spacing:.06em}
+
+  /* ── Form section ── */
+  .quote{background:var(--ink);color:#fff;padding:64px 0}
+  .quote-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+  .quote h2{font-size:clamp(2rem,3.5vw,2.9rem);color:#fff;margin-bottom:14px}
+  .quote h2 em{font-style:normal;color:var(--gold)}
+  .quote-lead{color:rgba(255,255,255,.6);font-size:.96rem;margin-bottom:26px;max-width:38ch}
+  .quote-trust{display:flex;flex-direction:column;gap:14px}
+  .quote-trust li{display:flex;gap:13px;align-items:flex-start;list-style:none}
+  .quote-trust svg{width:22px;height:22px;stroke:var(--gold);fill:none;stroke-width:2;flex-shrink:0;margin-top:1px}
+  .quote-trust strong{display:block;font-size:.92rem;font-weight:500}
+  .quote-trust small{color:rgba(255,255,255,.5);font-size:.8rem}
+
+  .form-card{background:var(--paper);color:var(--ink);padding:34px 30px;border-radius:4px;box-shadow:0 24px 70px rgba(0,0,0,.4)}
+  .form-card h3{font-size:1.5rem;margin-bottom:5px}
+  .form-card .sub{font-size:.82rem;color:var(--muted);margin-bottom:22px}
+  .field{margin-bottom:14px}
+  .field label{display:block;font-size:.72rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+  .field input,.field select,.field textarea{width:100%;padding:12px 13px;border:1.5px solid var(--line);background:#fff;font-family:inherit;font-size:.9rem;border-radius:2px;outline:none;transition:border-color .18s;color:var(--ink)}
+  .field input:focus,.field select:focus,.field textarea:focus{border-color:var(--gold)}
+  .field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .form-submit{width:100%;margin-top:6px;font-size:.95rem;padding:16px}
+  .form-fine{font-size:.7rem;color:var(--muted);text-align:center;margin-top:12px;line-height:1.5}
+  .form-success{display:none;background:#eef6ec;border:1px solid #b6d8ac;color:#2f5424;padding:16px;border-radius:3px;font-size:.88rem;text-align:center;margin-top:10px}
+  .form-error{display:none;background:#fbeeee;border:1px solid #e2b4b4;color:#8a2b2b;padding:14px;border-radius:3px;font-size:.84rem;text-align:center;margin-top:10px}
+
+  /* ── Proof band ── */
+  .proof{padding:56px 0;text-align:center}
+  .proof .k{font-family:'Cormorant Garamond',serif;font-size:2.6rem;color:var(--gold-d);font-weight:700;line-height:1}
+  .proof-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:8px}
+  .proof-grid .lbl{font-size:.76rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:6px}
+
+  /* ── Steps ── */
+  .steps{background:#fff;padding:66px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .section-head{text-align:center;margin-bottom:44px}
+  .section-head .eyebrow{justify-content:center}
+  .section-head h2{font-size:clamp(1.9rem,3.4vw,2.7rem)}
+  .steps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px}
+  .step{text-align:center;padding:0 10px}
+  .step-n{width:52px;height:52px;margin:0 auto 16px;border:2px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:700;color:var(--gold-d)}
+  .step h3{font-size:1.3rem;margin-bottom:8px}
+  .step p{font-size:.86rem;color:var(--muted)}
+
+  /* ── Gallery ── */
+  .gallery{padding:66px 0}
+  .gal-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:8px}
+  .gal-grid img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:2px}
+
+  /* ── Testimonials ── */
+  .testi{background:var(--moss);color:#fff;padding:66px 0}
+  .testi .section-head h2{color:#fff}
+  .testi .eyebrow{color:var(--gold)}
+  .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .tcard{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);padding:26px 22px;border-radius:3px}
+  .tcard .stars{color:var(--gold);letter-spacing:2px;margin-bottom:12px}
+  .tcard blockquote{font-size:.9rem;line-height:1.7;color:rgba(255,255,255,.9);font-style:italic;margin-bottom:16px}
+  .tcard cite{font-style:normal;font-size:.84rem;font-weight:600}
+  .tcard cite span{display:block;font-weight:400;color:rgba(255,255,255,.55);font-size:.76rem}
+
+  /* ── Final CTA ── */
+  .final{padding:72px 0;text-align:center}
+  .final h2{font-size:clamp(2.1rem,4vw,3.2rem);margin-bottom:14px}
+  .final h2 em{font-style:normal;color:var(--gold-d)}
+  .final p{color:var(--muted);font-size:1rem;margin-bottom:28px}
+  .final-cta{display:flex;gap:13px;justify-content:center;flex-wrap:wrap}
+
+  footer{background:var(--ink);color:rgba(255,255,255,.5);padding:26px 0;font-size:.78rem;text-align:center}
+  footer a{color:var(--gold);text-decoration:none}
+
+  /* ── Sticky mobile call bar ── */
+  .mobile-bar{display:none;position:fixed;bottom:0;left:0;right:0;z-index:60;background:var(--ink);border-top:1px solid rgba(201,169,110,.3);padding:9px 12px;gap:9px}
+  .mobile-bar a{flex:1;display:flex;align-items:center;justify-content:center;gap:7px;padding:13px;border-radius:2px;font-weight:600;font-size:.82rem;text-decoration:none}
+  .mobile-bar .mb-call{background:var(--gold);color:var(--ink)}
+  .mobile-bar .mb-quote{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.4)}
+  .mobile-bar svg{width:16px;height:16px}
+
+  @media(max-width:900px){
+    .hero{grid-template-columns:1fr;min-height:auto}
+    .hero-left{padding:44px 0 34px}
+    .hero-right{height:280px;order:-1}
+    .quote-grid,.proof-grid,.steps-grid,.gal-grid,.testi-grid{grid-template-columns:1fr}
+    .quote-grid{gap:34px}
+    .proof-grid{grid-template-columns:1fr 1fr;gap:28px}
+    .steps-grid{gap:36px}
+    .gal-grid{grid-template-columns:1fr 1fr}
+    .testi-grid{gap:16px}
+    .head-call{display:none}
+    body{padding-bottom:66px}
+    .mobile-bar{display:flex}
+  }
+  @media(max-width:520px){ .field-row{grid-template-columns:1fr} .proof-grid{grid-template-columns:1fr 1fr} }
+  @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto}}
+
+  /* Estimator */
+  .est-card{background:var(--paper);color:var(--ink);padding:0;border-radius:4px;box-shadow:0 24px 70px rgba(0,0,0,.4);overflow:hidden}
+  .est-head{background:var(--ink);color:#fff;padding:20px 26px}
+  .est-head h3{font-size:1.5rem;color:#fff;margin-bottom:3px}
+  .est-head p{font-size:.8rem;color:rgba(255,255,255,.6)}
+  .est-progress{height:4px;background:rgba(255,255,255,.12);margin-top:14px;border-radius:3px;overflow:hidden}
+  .est-progress-bar{height:100%;background:var(--gold);width:25%;transition:width .35s ease}
+  .est-body{padding:28px 26px}
+  .est-step{display:none;animation:estfade .35s ease}
+  .est-step.active{display:block}
+  @keyframes estfade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  .est-q{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:600;margin-bottom:5px;line-height:1.2}
+  .est-hint{font-size:.8rem;color:var(--muted);margin-bottom:20px}
+  .est-opts{display:grid;gap:10px}
+  .est-opt{display:flex;align-items:center;gap:13px;padding:15px 16px;border:1.5px solid var(--line);background:#fff;border-radius:3px;cursor:pointer;transition:all .18s;font-size:.92rem;text-align:left;width:100%;font-family:inherit;color:var(--ink)}
+  .est-opt:hover{border-color:var(--gold);background:#fffdf8}
+  .est-opt.sel{border-color:var(--gold);background:#fdf8ee;box-shadow:inset 0 0 0 1px var(--gold)}
+  .est-opt .ico{width:38px;height:38px;flex-shrink:0;background:var(--paper);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.15rem}
+  .est-opt .txt strong{display:block;font-weight:500}
+  .est-opt .txt small{color:var(--muted);font-size:.76rem}
+  .est-opt.sel .ico{background:var(--gold)}
+  .est-counter{display:flex;align-items:center;justify-content:space-between;border:1.5px solid var(--line);border-radius:3px;padding:10px 14px;background:#fff}
+  .est-counter label{font-size:.9rem;font-weight:500}
+  .est-counter small{display:block;color:var(--muted);font-size:.74rem;font-weight:400}
+  .est-count-ctrl{display:flex;align-items:center;gap:14px}
+  .est-count-ctrl button{width:34px;height:34px;border:1.5px solid var(--gold);background:#fff;color:var(--gold-d);border-radius:50%;font-size:1.2rem;cursor:pointer;line-height:1;display:flex;align-items:center;justify-content:center;transition:all .15s}
+  .est-count-ctrl button:hover{background:var(--gold);color:#fff}
+  .est-count-ctrl span{font-size:1.1rem;font-weight:600;min-width:22px;text-align:center}
+  .est-nav{display:flex;gap:10px;margin-top:22px}
+  .est-back{background:none;border:none;color:var(--muted);font-family:inherit;font-size:.84rem;cursor:pointer;padding:10px}
+  .est-back:hover{color:var(--ink)}
+  .est-next{flex:1}
+  .est-field input,.est-field-row input{width:100%;padding:12px 13px;border:1.5px solid var(--line);background:#fff;font-family:inherit;font-size:.9rem;border-radius:2px;outline:none;margin-bottom:12px}
+  .est-field input:focus,.est-field-row input:focus{border-color:var(--gold)}
+  .est-field-row{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+  .est-result{text-align:center;padding:6px 0}
+  .est-result .rlabel{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+  .est-range{font-family:'Cormorant Garamond',serif;font-size:2.7rem;font-weight:700;color:var(--gold-d);line-height:1;margin-bottom:6px}
+  .est-range small{font-size:1.1rem;color:var(--muted);font-weight:500}
+  .est-result-note{font-size:.82rem;color:var(--muted);max-width:34ch;margin:0 auto 22px;line-height:1.55}
+  .est-breakdown{background:#fff;border:1px solid var(--line);border-radius:3px;padding:14px 16px;margin-bottom:20px;text-align:left}
+  .est-breakdown div{display:flex;justify-content:space-between;font-size:.82rem;padding:5px 0}
+  .est-breakdown div span:last-child{color:var(--muted)}
+  .est-cta-final{background:var(--ink);color:#fff;border-radius:3px;padding:20px}
+  .est-cta-final p{font-size:.86rem;color:rgba(255,255,255,.75);margin-bottom:14px}
+  .est-trust-row{display:flex;justify-content:center;gap:18px;margin-top:14px;flex-wrap:wrap}
+  .est-trust-row span{font-size:.72rem;color:var(--muted);display:flex;align-items:center;gap:5px}
+  .est-trust-row svg{width:13px;height:13px;stroke:var(--moss);fill:none;stroke-width:2.4}
+
+</style>
+</head>
+<body>
+
+<div class="topbar">Serving Nashville · Franklin · Brentwood · Spring Hill — <strong>Free Estimates in 24 Hours</strong></div>
+
+<header>
+  <div class="wrap head-in">
+    <a class="logo" href="#top">
+      <svg viewBox="0 0 100 100" fill="none"><path d="M50 9 L13 40 L13 88" stroke="#c9a96e" stroke-width="6" stroke-linecap="round"/><path d="M50 9 L87 40 L87 88" stroke="#c9a96e" stroke-width="6" stroke-linecap="round"/><path d="M50 20 L24 42 M50 20 L76 42" stroke="#c9a96e" stroke-width="6" stroke-linecap="round"/><path d="M63 54 L34 54 L34 87 L63 87" stroke="#c9a96e" stroke-width="6" stroke-linecap="square"/></svg>
+      <span class="logo-txt"><strong>FORMO</strong><span>Renovation</span></span>
+    </a>
+    <a class="head-call" href="tel:+16156081220" onclick="trackConversion('call_label')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 013.93 2h3a2 2 0 012 1.72c.13.96.36 1.9.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0122 16.92z"/></svg>
+      (615) 608-1220
+    </a>
+  </div>
+</header>
+
+<a id="top"></a>
+<section class="wrap hero">
+  <div class="hero-left">
+    <span class="eyebrow">Interior &amp; Exterior Painting</span>
+    <h1>A Paint Job Done <em>Right</em> — the First Time.</h1>
+    <p class="hero-sub">Professional painters serving Middle Tennessee homeowners who want clean lines, lasting finishes, and zero headaches.</p>
+    <ul class="hero-points">
+      <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Fully insured &amp; W9 ready — no risk to you</li>
+      <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Premium Sherwin-Williams &amp; Benjamin Moore</li>
+      <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> 1-year workmanship warranty in writing</li>
+      <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Free, detailed estimate within 24 hours</li>
+    </ul>
+    <div class="hero-cta-row">
+      <a class="btn btn-primary" href="#quote">Get My Instant Estimate</a>
+      <a class="btn btn-ghost" href="tel:+16156081220" onclick="trackConversion('call_label')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 013.93 2h3a2 2 0 012 1.72c.13.96.36 1.9.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0122 16.92z"/></svg>
+        Call Now
+      </a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <img src="https://images.unsplash.com/photo-1562259929-b4e1fd3aef09?w=1000&q=80" alt="Freshly painted living room interior"/>
+    <div class="hero-badge">
+      <div class="stars">★★★★★</div>
+      <p>"Professional, clean, and detail-oriented from start to finish. Transformed our whole downstairs."</p>
+      <span>— Jessica R., Brentwood TN</span>
+    </div>
+  </div>
+</section>
+
+<section class="quote" id="quote">
+  <div class="wrap quote-grid">
+    <div>
+      <h2>Get Your <em>Instant</em> Price Range</h2>
+      <p class="quote-lead">Answer 3 quick questions and see your estimated price range instantly — then get an exact quote within 24 hours.</p>
+      <ul class="quote-trust">
+        <li><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><div><strong>Fully insured &amp; guaranteed</strong><small>1-year workmanship warranty on every job</small></div></li>
+        <li><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><div><strong>24-hour response</strong><small>Fast, detailed estimate — no waiting around</small></div></li>
+        <li><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><div><strong>Local Middle TN team</strong><small>Real people, real references, real results</small></div></li>
+      </ul>
+    </div>
+
+    <div class="est-card" id="estimator">
+      <div class="est-head">
+        <h3>Instant Painting Estimate</h3>
+        <p>Answer a few quick questions — get your price range in 30 seconds.</p>
+        <div class="est-progress"><div class="est-progress-bar" id="est-bar"></div></div>
+      </div>
+      <div class="est-body">
+        <div class="est-step active" data-step="1">
+          <div class="est-q">What do you want painted?</div>
+          <div class="est-hint">Pick the option that fits your project.</div>
+          <div class="est-opts">
+            <button type="button" class="est-opt" onclick="estPick('scope','interior',this)"><div class="ico">🏠</div><div class="txt"><strong>Interior</strong><small>Walls, ceilings, trim inside your home</small></div></button>
+            <button type="button" class="est-opt" onclick="estPick('scope','exterior',this)"><div class="ico">🏡</div><div class="txt"><strong>Exterior</strong><small>Siding, trim, doors outside</small></div></button>
+            <button type="button" class="est-opt" onclick="estPick('scope','both',this)"><div class="ico">✨</div><div class="txt"><strong>Interior + Exterior</strong><small>Full home refresh</small></div></button>
+            <button type="button" class="est-opt" onclick="estPick('scope','cabinets',this)"><div class="ico">🔨</div><div class="txt"><strong>Cabinets Only</strong><small>Kitchen or bath cabinet refinishing</small></div></button>
+          </div>
+        </div>
+        <div class="est-step" data-step="2">
+          <div class="est-q" id="size-q">How many rooms?</div>
+          <div class="est-hint" id="size-hint">Count rooms getting painted — we refine on-site.</div>
+          <div id="size-rooms" class="est-opts">
+            <div class="est-counter"><div><label>Rooms</label><small>Bedrooms, living areas, etc.</small></div><div class="est-count-ctrl"><button type="button" onclick="estCount('rooms',-1)">−</button><span id="c-rooms">3</span><button type="button" onclick="estCount('rooms',1)">+</button></div></div>
+            <div class="est-counter"><div><label>Bathrooms</label><small>Small rooms count less</small></div><div class="est-count-ctrl"><button type="button" onclick="estCount('baths',-1)">−</button><span id="c-baths">1</span><button type="button" onclick="estCount('baths',1)">+</button></div></div>
+            <div class="est-counter"><div><label>Hallways / Stairs</label><small>Optional</small></div><div class="est-count-ctrl"><button type="button" onclick="estCount('halls',-1)">−</button><span id="c-halls">0</span><button type="button" onclick="estCount('halls',1)">+</button></div></div>
+          </div>
+          <div id="size-ext" class="est-opts" style="display:none">
+            <div class="est-field" style="margin-bottom:4px"><label style="font-size:.72rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:6px">Approx. wall area to cover (sq ft)</label><input type="number" id="ext-sqft" value="2000" min="100" step="50" oninput="est.extsqft=+this.value"/></div>
+            <p style="font-size:.75rem;color:var(--muted);margin:2px 0 10px">Not sure? A 2-story home is usually 2,000–3,500 sq ft of wall.</p>
+            <div style="font-size:.8rem;font-weight:600;margin:6px 0 4px">What do you need?</div>
+            <button type="button" class="est-opt" onclick="estPick('exttype','full',this)"><div class="ico">🏡</div><div class="txt"><strong>Full exterior (siding + trim)</strong><small>Complete repaint, 2 coats</small></div></button>
+            <button type="button" class="est-opt" onclick="estPick('exttype','siding',this)"><div class="ico">🧱</div><div class="txt"><strong>Siding only</strong><small>Body of the house</small></div></button>
+            <button type="button" class="est-opt" onclick="estPick('exttype','trim',this)"><div class="ico">🪟</div><div class="txt"><strong>Trim only</strong><small>Fascia, corners, window trim</small></div></button>
+          </div>
+          <div id="size-cab" class="est-opts" style="display:none">
+            <div class="est-counter"><div><label>Cabinet doors + drawers</label><small>Count all doors &amp; drawer fronts</small></div><div class="est-count-ctrl"><button type="button" onclick="estCount('cabs',-1)">−</button><span id="c-cabs">20</span><button type="button" onclick="estCount('cabs',1)">+</button></div></div>
+          </div>
+          <div class="est-nav"><button type="button" class="est-back" onclick="estGo(1)">← Back</button><button type="button" class="btn btn-primary est-next" onclick="estGo(3)">Continue</button></div>
+        </div>
+        <div class="est-step" data-step="3">
+          <div class="est-q">A couple details</div>
+          <div class="est-hint">These affect the price — be honest for the best estimate.</div>
+          <div class="est-opts" id="detail-interior">
+            <button type="button" class="est-opt" onclick="estToggle('ceilings',this)"><div class="ico">⬜</div><div class="txt"><strong>Include ceilings</strong><small>Adds coverage &amp; labor</small></div></button>
+            <button type="button" class="est-opt" onclick="estToggle('dark',this)"><div class="ico">🎨</div><div class="txt"><strong>Big color change</strong><small>Dark-to-light or bold (extra coat)</small></div></button>
+            <button type="button" class="est-opt" onclick="estToggle('repair',this)"><div class="ico">🔧</div><div class="txt"><strong>Needs prep/repair</strong><small>Patching, cracks, water damage</small></div></button>
+          </div>
+          <div class="est-opts" id="detail-exterior" style="display:none">
+            <div class="est-field" style="margin-bottom:6px"><label style="font-size:.72rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:6px">Tallest wall height</label>
+              <select id="ext-height" onchange="est.extheight=this.value" style="width:100%;padding:12px 13px;border:1.5px solid var(--line);background:#fff;font-family:inherit;font-size:.9rem;border-radius:2px">
+                <option value="std">Standard — under 16 ft</option>
+                <option value="h16">16–30 ft (+15%)</option>
+                <option value="h30">30–40 ft (+25%)</option>
+                <option value="h40">Over 40 ft (+35%)</option>
+              </select>
+            </div>
+            <button type="button" class="est-opt" onclick="estToggle('extdark',this)"><div class="ico">🎨</div><div class="txt"><strong>Color change</strong><small>Different color than current (+10%)</small></div></button>
+            <button type="button" class="est-opt" onclick="estToggle('caulk',this)"><div class="ico">📐</div><div class="txt"><strong>Add vertical seam caulking</strong><small>Caulk Hardie board vertical joints (trim caulk already included)</small></div></button>
+            <div class="est-counter" style="margin-top:4px"><div><label>Replace siding boards</label><small>Hung + material, per board ($110 ea)</small></div><div class="est-count-ctrl"><button type="button" onclick="estCount('sheets',-1)">−</button><span id="c-sheets">0</span><button type="button" onclick="estCount('sheets',1)">+</button></div></div>
+            <button type="button" class="est-opt" onclick="estDoor(this)"><div class="ico">🚪</div><div class="txt"><strong>Restain front door</strong><small>Full refinish package — tap to choose type</small></div></button>
+            <div id="door-opts" style="display:none;margin-top:4px;padding-left:8px">
+              <button type="button" class="est-opt" onclick="estPick('door','single',this)"><div class="ico">🚪</div><div class="txt"><strong>Single door</strong><small>Standard front door</small></div></button>
+              <button type="button" class="est-opt" onclick="estPick('door','singleDesign',this)"><div class="ico">🚪</div><div class="txt"><strong>Single, detailed design</strong><small>Glass inserts, panels, ironwork</small></div></button>
+              <button type="button" class="est-opt" onclick="estPick('door','double',this)"><div class="ico">🚪</div><div class="txt"><strong>Double door</strong><small>Full package, both doors</small></div></button>
+            </div>
+          </div>
+          <div class="est-nav"><button type="button" class="est-back" onclick="estGo(2)">← Back</button><button type="button" class="btn btn-primary est-next" onclick="estCalc()">See My Estimate →</button></div>
+        </div>
+        <div class="est-step" data-step="4">
+          <div class="est-result">
+            <div class="rlabel">Your Estimated Range</div>
+            <div class="est-range" id="est-range-val">$0 <small>– $0</small></div>
+            <p class="est-result-note">Based on your answers. Your exact price depends on a free on-site walkthrough — always no-pressure.</p>
+          </div>
+          <div class="est-breakdown" id="est-breakdown"></div>
+          <div class="est-qualify" id="est-qualify">
+            <p style="font-size:.9rem;color:var(--ink);text-align:center;margin-bottom:14px;font-weight:500">Does this fit your budget?</p>
+            <div class="est-opts" style="margin-bottom:6px">
+              <button type="button" class="est-opt" onclick="estQualify('ready',this)"><div class="ico">✅</div><div class="txt"><strong>Yes — I'd like an exact quote</strong><small>Ready to move forward with the right price</small></div></button>
+              <button type="button" class="est-opt" onclick="estQualify('exploring',this)"><div class="ico">🔎</div><div class="txt"><strong>Just exploring for now</strong><small>Planning ahead — send me info</small></div></button>
+              <button type="button" class="est-opt" onclick="estQualify('timing',this)"><div class="ico">📅</div><div class="txt"><strong>Yes, but not right away</strong><small>I have a project coming up soon</small></div></button>
+            </div>
+          </div>
+          <div class="est-cta-final" id="est-cta-final" style="display:none">
+            <p id="est-cta-copy"><strong style="color:var(--gold)">Great — let's get your exact quote.</strong> Enter your info and we'll send a detailed estimate within 24 hours.</p>
+            <form id="leadForm" onsubmit="submitLead(event)">
+              <div class="est-field"><input type="text" id="lf-name" required placeholder="Full name"/></div>
+              <div class="est-field-row"><input type="tel" id="lf-phone" required placeholder="Phone"/><input type="email" id="lf-email" required placeholder="Email"/></div>
+              <div class="est-field"><input type="text" id="lf-city" placeholder="City (e.g. Franklin, TN)"/></div>
+              <input type="hidden" id="lf-type"/><input type="hidden" id="lf-msg"/>
+              <button type="submit" class="btn btn-primary form-submit" id="lf-btn" style="width:100%">Send My Detailed Quote →</button>
+              <div class="form-success" id="lf-success">✅ Sent! We'll reach out within 24 hours. For faster service call <strong>(615) 608-1220</strong>.</div>
+              <div class="form-error" id="lf-error">Something went wrong — please call (615) 608-1220.</div>
+            </form>
+            <div class="est-trust-row">
+              <span><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> No obligation</span>
+              <span><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Fully insured</span>
+              <span><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> 1-yr warranty</span>
+            </div>
+          </div>
+          <div class="est-nav"><button type="button" class="est-back" onclick="estGo(3)">← Adjust answers</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="wrap proof">
+  <div class="proof-grid">
+    <div><div class="k">24hr</div><div class="lbl">Estimate Turnaround</div></div>
+    <div><div class="k">1-Year</div><div class="lbl">Workmanship Warranty</div></div>
+    <div><div class="k">100%</div><div class="lbl">Insured &amp; W9 Ready</div></div>
+    <div><div class="k">5.0★</div><div class="lbl">Homeowner Rated</div></div>
+  </div>
+</section>
+
+<section class="steps">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Simple &amp; Transparent</span>
+      <h2>How It Works</h2>
+    </div>
+    <div class="steps-grid">
+      <div class="step"><div class="step-n">1</div><h3>Request Your Estimate</h3><p>Fill out the form or call us. Tell us what you're planning — rooms, colors, timeline.</p></div>
+      <div class="step"><div class="step-n">2</div><h3>Get a Detailed Quote</h3><p>Within 24 hours we send a clear, itemized estimate — no surprises, no pressure.</p></div>
+      <div class="step"><div class="step-n">3</div><h3>We Make It Beautiful</h3><p>Our insured team preps, protects, and paints with premium products — cleanup included.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="wrap gallery">
+  <div class="section-head">
+    <span class="eyebrow">Recent Work</span>
+    <h2>Painting That Speaks for Itself</h2>
+  </div>
+  <div class="gal-grid">
+    <img src="https://images.unsplash.com/photo-1595428774223-ef52624120d2?w=600&q=80" alt="Freshly painted modern interior"/>
+    <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=600&q=80" alt="Painted living room with accent wall"/>
+    <img src="https://images.unsplash.com/photo-1633505650321-6f2b7d3f9a5f?w=600&q=80" alt="Exterior house painting"/>
+  </div>
+</section>
+
+<section class="testi">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Trusted by Homeowners</span>
+      <h2>What Our Clients Say</h2>
+    </div>
+    <div class="testi-grid">
+      <div class="tcard"><div class="stars">★★★★★</div><blockquote>"Professional, clean, and detail-oriented from start to finish. Our home has never looked better."</blockquote><cite>Jessica R.<span>Brentwood, TN</span></cite></div>
+      <div class="tcard"><div class="stars">★★★★★</div><blockquote>"The craftsmanship and attention to detail were beyond our expectations. Highly recommend!"</blockquote><cite>Michael T.<span>Thompson's Station, TN</span></cite></div>
+      <div class="tcard"><div class="stars">★★★★★</div><blockquote>"Smooth and easy from concept to completion. Communicated every step and delivered on time."</blockquote><cite>Amanda L.<span>Nashville, TN</span></cite></div>
+    </div>
+  </div>
+</section>
+
+<section class="wrap final">
+  <span class="eyebrow" style="justify-content:center">Ready When You Are</span>
+  <h2>Let's Paint Something <em>Beautiful</em>.</h2>
+  <p>Free estimate within 24 hours. Fully insured. Guaranteed in writing.</p>
+  <div class="final-cta">
+    <a class="btn btn-primary" href="#quote">Get My Instant Estimate</a>
+    <a class="btn btn-ghost" href="https://wa.me/16156081220" target="_blank" onclick="trackConversion('whatsapp_label')">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.25-.46-2.39-1.47-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.44-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.6-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.87 1.21 3.07c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2-1.41.25-.7.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35M12.05 21.79h-.01a9.87 9.87 0 01-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 01-1.51-5.26c0-5.45 4.44-9.88 9.9-9.88 2.64 0 5.12 1.03 6.99 2.9a9.82 9.82 0 012.89 6.99c0 5.45-4.44 9.88-9.89 9.88M20.52 3.45A11.82 11.82 0 0012.05 0C5.5 0 .16 5.33.16 11.89c0 2.1.55 4.14 1.6 5.95L.06 24l6.3-1.65a11.88 11.88 0 005.68 1.45h.01c6.55 0 11.89-5.34 11.89-11.9 0-3.18-1.24-6.17-3.48-8.42"/></svg>
+      WhatsApp Us
+    </a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    Formo Renovation · Fully Insured Painting Contractor · Middle Tennessee<br>
+    <a href="tel:+16156081220">(615) 608-1220</a> · <a href="mailto:dan@formorenovation.com">dan@formorenovation.com</a> · <a href="https://formorenovation.com">formorenovation.com</a>
+  </div>
+</footer>
+
+<div class="mobile-bar">
+  <a class="mb-call" href="tel:+16156081220" onclick="trackConversion('call_label')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 013.93 2h3a2 2 0 012 1.72c.13.96.36 1.9.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0122 16.92z"/></svg> Call
+  </a>
+  <a class="mb-quote" href="#quote">Instant Estimate</a>
+</div>
+
+<script>
+
+// ═══ Instant Estimate Engine (calibrated to Formo 2026 pricing) ═══
+var est={scope:null,rooms:3,baths:1,halls:0,cabs:20,extsqft:2000,exttype:'full',extheight:'std',
+  sheets:0,ceilings:false,dark:false,repair:false,extdark:false,caulk:false,door:null,step:1};
+
+function estBar(){var b=document.getElementById('est-bar');if(b)b.style.width=(est.step*25)+'%';}
+function estShowStep(n){est.step=n;document.querySelectorAll('.est-step').forEach(function(s){s.classList.toggle('active',+s.dataset.step===n);});estBar();var card=document.getElementById('estimator');if(card&&window.innerWidth<900)card.scrollIntoView({behavior:'smooth',block:'start'});}
+
+function estPick(key,val,el){
+  est[key]=val;
+  var group=el.parentElement;
+  group.querySelectorAll('.est-opt').forEach(function(o){o.classList.remove('sel');});
+  el.classList.add('sel');
+  if(key==='scope'){
+    var q=document.getElementById('size-q'),hint=document.getElementById('size-hint');
+    document.getElementById('size-rooms').style.display='none';
+    document.getElementById('size-ext').style.display='none';
+    document.getElementById('size-cab').style.display='none';
+    // toggle detail panels
+    var di=document.getElementById('detail-interior'),de=document.getElementById('detail-exterior');
+    if(di)di.style.display=(val==='interior'||val==='both')?'grid':'none';
+    if(de)de.style.display=(val==='exterior'||val==='both')?'grid':'none';
+    if(val==='interior'||val==='both'){document.getElementById('size-rooms').style.display='grid';q.textContent='How many rooms?';hint.textContent='Count rooms getting painted — we refine on-site.';}
+    if(val==='exterior'){document.getElementById('size-ext').style.display='grid';q.textContent='Tell us about the exterior';hint.textContent='Approximate wall area is fine.';}
+    if(val==='cabinets'){document.getElementById('size-cab').style.display='grid';q.textContent='How many cabinets?';hint.textContent='Count doors and drawer fronts.';}
+    setTimeout(function(){estGo(2);},200);
+  }
+}
+
+function estCount(key,delta){est[key]=Math.max(0,est[key]+delta);var el=document.getElementById('c-'+key);if(el)el.textContent=est[key];}
+function estToggle(key,el){est[key]=!est[key];el.classList.toggle('sel',est[key]);}
+function estGo(n){estShowStep(n);}
+function estDoor(el){el.classList.toggle('sel');var d=document.getElementById('door-opts');if(d)d.style.display=el.classList.contains('sel')?'block':'none';if(!el.classList.contains('sel'))est.door=null;}
+function fmt(n){return '$'+(Math.round(n/50)*50).toLocaleString();}
+
+function estCalc(){
+  var low=0, high=0, lines=[];
+
+  // ── INTERIOR ($3/sqft base w/ materials; 10% off if >$2500) ──
+  if(est.scope==='interior'||est.scope==='both'){
+    var sqft=est.rooms*350 + est.baths*150 + est.halls*120;
+    var base=sqft*3; // $3/sqft with materials
+    var lo=base*0.9, hi=base*1.15; // range around base
+    // modifiers
+    var mult=1;
+    if(est.ceilings)mult+=0.22;
+    if(est.dark)mult+=0.10;
+    if(est.repair)mult+=0.20;
+    lo*=mult; hi*=mult;
+    // volume discount: 10% off if over $2500
+    if(lo>2500)lo*=0.9; if(hi>2500)hi*=0.9;
+    low+=lo; high+=hi;
+    lines.push(['Interior ('+est.rooms+' rooms, '+est.baths+' bath)', fmt(lo)+'–'+fmt(hi)]);
+  }
+
+  // ── EXTERIOR ($3.2/sqft base; height surcharges; trim 2.3 / siding 1.8) ──
+  if(est.scope==='exterior'||est.scope==='both'){
+    var sf=est.extsqft||2000;
+    var rate=3.2; // full siding+trim base
+    if(est.exttype==='trim')rate=2.3;
+    if(est.exttype==='siding')rate=1.8;
+    var eBase=sf*rate;
+    // height surcharge
+    var hmap={std:1,h16:1.15,h30:1.25,h40:1.35};
+    var hm=hmap[est.extheight||'std'];
+    eBase*=hm;
+    if(est.extdark)eBase*=1.10; // color change +10%
+    var elo=eBase*0.92, ehi=eBase*1.12;
+    low+=elo; high+=ehi;
+    var htxt={std:'',h16:' +16ft',h30:' +30ft',h40:' +40ft'}[est.extheight||'std'];
+    lines.push(['Exterior '+est.exttype+htxt+' ('+sf+' sqft)', fmt(elo)+'–'+fmt(ehi)]);
+
+    // Siding board replacement: $110 per board hung w/ material
+    if(est.sheets>0){
+      var sCost=est.sheets*110;
+      low+=sCost; high+=sCost*1.1;
+      lines.push(['Replace '+est.sheets+' siding boards', fmt(sCost)+'–'+fmt(sCost*1.1)]);
+    }
+    // Vertical seam caulking (Hardie vertical joints)
+    if(est.caulk){
+      var cLo=sf*0.35, cHi=sf*0.55;
+      low+=cLo; high+=cHi;
+      lines.push(['Vertical seam caulking', fmt(cLo)+'–'+fmt(cHi)]);
+    }
+    // Front door restain
+    if(est.door){
+      var dmap={single:[1000,1600],singleDesign:[1500,2400],double:[2000,3000]};
+      var d=dmap[est.door];
+      low+=d[0]; high+=d[1];
+      var dname={single:'single door',singleDesign:'single door (detailed)',double:'double door'}[est.door];
+      lines.push(['Restain '+dname, fmt(d[0])+'–'+fmt(d[1])]);
+    }
+  }
+
+  // ── CABINETS (Nashville 2026 premium spray: $150–200 per piece) ──
+  if(est.scope==='cabinets'){
+    var cl=est.cabs*150, ch=est.cabs*200;
+    low+=cl; high+=ch;
+    lines.push(['Cabinet refinishing ('+est.cabs+' pieces)', fmt(cl)+'–'+fmt(ch)]);
+  }
+
+  if(low<600)low=600; if(high<900)high=900;
+
+  document.getElementById('est-range-val').innerHTML=fmt(low)+' <small>– '+fmt(high)+'</small>';
+  var bd=document.getElementById('est-breakdown');
+  bd.innerHTML=lines.map(function(x){return '<div><span>'+x[0]+'</span><span>'+x[1]+'</span></div>';}).join('');
+
+  // Build summary for lead email
+  var s=est.scope+' | ';
+  if(est.scope==='cabinets')s+=est.cabs+' cabinet pieces';
+  else if(est.scope==='exterior'||est.scope==='both'){
+    s+=(est.scope==='both'?('int:'+est.rooms+'rm + '):'')+'ext '+est.exttype+' '+(est.extsqft)+'sqft height:'+est.extheight;
+    if(est.sheets)s+=' | '+est.sheets+' boards';
+    if(est.caulk)s+=' | vseam caulk';
+    if(est.door)s+=' | door:'+est.door;
+    if(est.extdark)s+=' | color change';
+  } else {
+    s+=est.rooms+' rooms, '+est.baths+' bath, '+est.halls+' halls';
+    var mods=[];if(est.ceilings)mods.push('ceilings');if(est.dark)mods.push('color');if(est.repair)mods.push('repair');
+    if(mods.length)s+=' | '+mods.join(', ');
+  }
+  s+=' | Est: '+fmt(low)+'–'+fmt(high);
+  var t=document.getElementById('lf-type'),m=document.getElementById('lf-msg');
+  if(t)t.value=est.scope; if(m)m.value=s;
+
+  estGo(4);
+  trackConversion('estimate_complete_label');
+}
+
+function estQualify(val,el){
+  el.parentElement.querySelectorAll('.est-opt').forEach(function(o){o.classList.remove('sel');});
+  el.classList.add('sel');
+  est.qualify=val;
+  var copy=document.getElementById('est-cta-copy');
+  var msgs={
+    ready:'<strong style="color:var(--gold)">Perfect — let\'s lock in your price.</strong> Enter your info and we\'ll send your exact quote within 24 hours.',
+    exploring:'<strong style="color:var(--gold)">Happy to help you plan.</strong> Leave your info and we\'ll send details — no pressure, no rush.',
+    timing:'<strong style="color:var(--gold)">Let\'s get you ready.</strong> Share your info and we\'ll send an exact quote so you\'re set when you are.'
+  };
+  if(copy)copy.innerHTML=msgs[val]||msgs.ready;
+  // reveal the form
+  setTimeout(function(){
+    document.getElementById('est-cta-final').style.display='block';
+    var m=document.getElementById('lf-msg');
+    if(m)m.value=(m.value||'')+' | Intent: '+val;
+    document.getElementById('est-cta-final').scrollIntoView({behavior:'smooth',block:'center'});
+  },200);
+  trackConversion('qualify_'+val+'_label');
+}
+
+async function submitLead(e){
+  e.preventDefault();
+  var btn=document.getElementById('lf-btn');
+  var ok=document.getElementById('lf-success');
+  var err=document.getElementById('lf-error');
+  ok.style.display='none'; err.style.display='none';
+  var name=document.getElementById('lf-name').value.trim();
+  var phone=document.getElementById('lf-phone').value.trim();
+  var email=document.getElementById('lf-email').value.trim();
+  if(!name||!phone||!email){ err.textContent='Please fill in your name, phone, and email.'; err.style.display='block'; return; }
+  btn.textContent='Sending...'; btn.disabled=true;
+  try{
+    var res=await fetch('https://formsubmit.co/ajax/dan@formorenovation.com',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body:JSON.stringify({
+        name:name, phone:phone, email:email,
+        city:document.getElementById('lf-city').value.trim()||'Not provided',
+        project_type:document.getElementById('lf-type').value,
+        details:document.getElementById('lf-msg').value.trim()||'None',
+        _subject:'NEW PAINTING LEAD (with estimate) - '+name,
+        _template:'table'
+      })
+    });
+    var data=await res.json();
+    if(res.ok && (data.success==='true'||data.success===true)){
+      ok.style.display='block';
+      document.getElementById('leadForm').reset();
+      trackConversion('lead_form_label');   // Google Ads conversion
+    } else { throw new Error('fail'); }
+  }catch(_){ err.style.display='block'; }
+  finally{ btn.textContent='Get My Free Estimate →'; btn.disabled=false; }
+}
+</script>
+</body>
+</html>
