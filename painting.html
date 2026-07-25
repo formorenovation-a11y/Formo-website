@@ -283,7 +283,7 @@
     </div>
   </div>
   <div class="hero-right">
-    <img src="https://images.unsplash.com/photo-1562259929-b4e1fd3aef09?w=1000&q=80" alt="Freshly painted living room interior"/>
+    <img id="hero-cover" src="https://images.unsplash.com/photo-1562259929-b4e1fd3aef09?w=1000&q=80" alt="Professional painting work by Formo Renovation"/>
     <div class="hero-badge">
       <div class="stars">★★★★★</div>
       <p>"Professional, clean, and detail-oriented from start to finish. Transformed our whole downstairs."</p>
@@ -725,6 +725,27 @@ async function submitLead(e){
       +'<img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=600&q=80" alt="Accent wall"/>'
       +'<img src="https://images.unsplash.com/photo-1600585152220-90363fe7e115?w=600&q=80" alt="Exterior painting"/>';
   }
+})();
+</script>
+
+<script>
+// Independent cover-photo loader (does not depend on the gallery)
+(function(){
+  var RTDB='https://realtime-database-c6a10-default-rtdb.firebaseio.com';
+  function loadCover(){
+    // cache-bust so a freshly-saved photo shows without hard refresh
+    fetch(RTDB+'/site/paintingLanding.json?t='+Date.now(),{cache:'no-store'})
+      .then(function(r){return r.json();})
+      .then(function(pl){
+        if(pl&&pl.hero){
+          var hc=document.getElementById('hero-cover');
+          if(hc&&pl.hero.trim()){ hc.src=pl.hero; }
+        }
+      })
+      .catch(function(){});
+  }
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',loadCover);}
+  else{loadCover();}
 })();
 </script>
 </body>
