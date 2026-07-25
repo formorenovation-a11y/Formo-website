@@ -186,6 +186,124 @@
     .mobile-bar{display:flex}
   }
   @media(max-width:520px){ .field-row{grid-template-columns:1fr} .proof-grid{grid-template-columns:1fr 1fr} }
+
+  /* ═══════════ MOBILE, PURPOSE-BUILT (≤600px) ═══════════ */
+  @media(max-width:600px){
+    /* Topbar: tighter, single line */
+    .topbar{font-size:.64rem;padding:7px 12px;letter-spacing:.02em}
+    /* Header */
+    header{padding:12px 0}
+    .logo img,.logo svg{height:34px}
+    /* HERO: stacked, image as a clean banner, copy below */
+    .hero{grid-template-columns:1fr;min-height:auto;gap:0}
+    .hero-right{order:-1;height:210px;border-radius:0 0 14px 14px;overflow:hidden}
+    .hero-right img{opacity:1}
+    .hero-badge{left:16px;right:16px;bottom:14px;padding:12px 15px;border-radius:8px}
+    .hero-badge .stars{font-size:.82rem}
+    .hero-badge p{font-size:.75rem;line-height:1.45}
+    .hero-badge span{font-size:.68rem;margin-top:5px}
+    .hero-left{padding:26px 0 32px}
+    .eyebrow{font-size:.62rem;margin-bottom:14px}
+    .hero h1{font-size:clamp(2rem,9vw,2.7rem);margin-bottom:14px;line-height:1.1}
+    .hero h1 em{white-space:normal}
+    .hero-sub{font-size:.96rem;max-width:100%;margin-bottom:22px}
+    .hero-points{margin-bottom:26px}
+    .hero-points li{font-size:.9rem;margin-bottom:13px;align-items:flex-start}
+    .hero-points svg{margin-top:3px}
+    /* Hero CTAs: full-width stacked, thumb-friendly */
+    .hero-cta-row{flex-direction:column;gap:10px}
+    .hero-cta-row .btn{width:100%;padding:16px;font-size:.92rem}
+
+    /* ESTIMATOR: full-bleed card, big tap targets */
+    .quote{padding:34px 0}
+    .quote-grid{grid-template-columns:1fr;gap:24px}
+    /* Hide the left marketing column on mobile — form is the focus */
+    .quote-grid > div:first-child{display:none}
+    .est-card{border-radius:14px;margin:0 2px;box-shadow:0 12px 40px rgba(0,0,0,.28)}
+    .est-head{padding:18px 20px}
+    .est-head h3{font-size:1.3rem}
+    .est-head p{font-size:.76rem}
+    .est-body{padding:20px 18px 24px}
+    .est-q{font-size:1.25rem}
+    .est-hint{font-size:.8rem;margin-bottom:16px}
+    /* Option buttons: taller, easy to tap */
+    .est-opt{padding:15px 14px;border-radius:12px;gap:12px}
+    .est-opt .ico svg{width:20px;height:20px}
+  .est-opt .ico{width:42px;height:42px;font-size:1.25rem}
+    .est-opt .txt strong{font-size:.95rem}
+    .est-opt .txt small{font-size:.76rem;line-height:1.35}
+    /* Counters: bigger +/- for thumbs */
+    .est-counter{padding:13px 15px;border-radius:12px}
+    .est-count-ctrl button{width:40px;height:40px;font-size:1.4rem}
+    .est-count-ctrl span{font-size:1.2rem;min-width:26px}
+    /* Fields */
+    .est-field input,.est-field-row input,.est-field select,#ext-sqft,#ext-height{padding:14px 14px;font-size:16px;border-radius:10px}
+    .est-field-row{grid-template-columns:1fr;gap:0}
+    /* Nav buttons */
+    .est-nav{margin-top:18px}
+    .est-next,.est-nav .btn{padding:15px;font-size:.92rem;border-radius:10px}
+    .est-back{padding:12px 8px;font-size:.86rem}
+    /* Result */
+    .est-range{font-size:2.3rem}
+    .est-breakdown{border-radius:10px}
+    .est-breakdown div{font-size:.8rem}
+    .est-cta-final{border-radius:12px;padding:18px}
+
+    /* PROOF band: 2x2 grid, tighter */
+    .proof{padding:38px 0}
+    .proof-grid{grid-template-columns:1fr 1fr;gap:22px 18px}
+    .proof .k{font-size:2.1rem}
+    .proof-grid .lbl{font-size:.68rem}
+
+    /* STEPS: vertical flow with connecting rhythm */
+    .steps{padding:44px 0}
+    .section-head{margin-bottom:30px}
+    .section-head h2{font-size:clamp(1.7rem,7vw,2.1rem)}
+    .steps-grid{grid-template-columns:1fr;gap:26px}
+    .step{display:grid;grid-template-columns:52px 1fr;gap:16px;text-align:left;align-items:start;padding:0}
+    .step-n{margin:0}
+    .step h3{font-size:1.2rem;margin-bottom:5px}
+    .step p{font-size:.86rem}
+
+    /* GALLERY: 2-up with nice rounding */
+    .gallery{padding:44px 0}
+    .gal-grid{grid-template-columns:1fr 1fr;gap:10px}
+    .gal-grid img,.gal-grid a.gal-item{border-radius:10px}
+    .gal-cap{opacity:1;padding:18px 10px 9px}
+    .gal-cap strong{font-size:.82rem}
+    .gal-cap span{font-size:.66rem}
+
+    /* TESTIMONIALS: swipe carousel */
+    .testi{padding:44px 0}
+    .testi-grid{display:flex;grid-template-columns:none;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;gap:12px;padding:2px 2px 12px;scrollbar-width:none}
+    .testi-grid::-webkit-scrollbar{display:none}
+    .tcard{min-width:80%;scroll-snap-align:center;flex-shrink:0;border-radius:12px}
+    .tcard blockquote{font-size:.86rem}
+
+    /* FINAL CTA */
+    .final{padding:48px 0}
+    .final h2{font-size:clamp(1.9rem,8vw,2.5rem)}
+    .final p{font-size:.94rem}
+    .final-cta{flex-direction:column;gap:10px}
+    .final-cta .btn{width:100%;padding:16px}
+
+    /* Footer */
+    footer{padding:22px 0 78px;font-size:.74rem;line-height:1.7}
+
+    /* Sticky bottom bar polish */
+    .mobile-bar{padding:8px 10px calc(8px + env(safe-area-inset-bottom));gap:8px}
+    .mobile-bar a{padding:14px;border-radius:10px;font-size:.85rem}
+
+    /* Section headers everywhere */
+    .wrap{padding:0 18px}
+  }
+  /* Very small phones */
+  @media(max-width:360px){
+    .hero h1{font-size:1.85rem}
+    .proof .k{font-size:1.85rem}
+    .est-opt .txt small{font-size:.72rem}
+  }
+
   @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto}}
 
   /* Estimator */
@@ -205,6 +323,7 @@
   .est-opt{display:flex;align-items:center;gap:13px;padding:15px 16px;border:1.5px solid var(--line);background:#fff;border-radius:3px;cursor:pointer;transition:all .18s;font-size:.92rem;text-align:left;width:100%;font-family:inherit;color:var(--ink)}
   .est-opt:hover{border-color:var(--gold);background:#fffdf8}
   .est-opt.sel{border-color:var(--gold);background:#fdf8ee;box-shadow:inset 0 0 0 1px var(--gold)}
+  .est-opt .ico svg{width:20px;height:20px}
   .est-opt .ico{width:38px;height:38px;flex-shrink:0;background:var(--paper);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.15rem}
   .est-opt .txt strong{display:block;font-weight:500}
   .est-opt .txt small{color:var(--muted);font-size:.76rem}
@@ -331,10 +450,10 @@
           <div class="est-q">What do you want painted?</div>
           <div class="est-hint">Pick the option that fits your project.</div>
           <div class="est-opts">
-            <button type="button" class="est-opt" onclick="estPick('scope','interior',this)"><div class="ico">🏠</div><div class="txt"><strong>Interior</strong><small>Walls, ceilings, trim inside your home</small></div></button>
-            <button type="button" class="est-opt" onclick="estPick('scope','exterior',this)"><div class="ico">🏡</div><div class="txt"><strong>Exterior</strong><small>Siding, trim, doors outside</small></div></button>
-            <button type="button" class="est-opt" onclick="estPick('scope','both',this)"><div class="ico">✨</div><div class="txt"><strong>Interior + Exterior</strong><small>Full home refresh</small></div></button>
-            <button type="button" class="est-opt" onclick="estPick('scope','cabinets',this)"><div class="ico">🔨</div><div class="txt"><strong>Cabinets Only</strong><small>Kitchen or bath cabinet refinishing</small></div></button>
+            <button type="button" class="est-opt" onclick="estPick('scope','interior',this)"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#a8823f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg></div><div class="txt"><strong>Interior</strong><small>Walls, ceilings, trim inside your home</small></div></button>
+            <button type="button" class="est-opt" onclick="estPick('scope','exterior',this)"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#a8823f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></svg></div><div class="txt"><strong>Exterior</strong><small>Siding, trim, doors outside</small></div></button>
+            <button type="button" class="est-opt" onclick="estPick('scope','both',this)"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#a8823f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M3 12h18M6 6l12 12M18 6L6 18"/></svg></div><div class="txt"><strong>Interior + Exterior</strong><small>Full home refresh</small></div></button>
+            <button type="button" class="est-opt" onclick="estPick('scope','cabinets',this)"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#a8823f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 15l-3 6M14 3l7 7-4 4-7-7z"/><path d="M10 8l6 6"/></svg></div><div class="txt"><strong>Cabinets Only</strong><small>Kitchen or bath cabinet refinishing</small></div></button>
           </div>
         </div>
         <div class="est-step" data-step="2">
@@ -349,9 +468,9 @@
             <div class="est-field" style="margin-bottom:4px"><label style="font-size:.72rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:6px">Your home's square footage</label><input type="number" id="ext-sqft" value="2000" min="500" step="100" oninput="est.extsqft=+this.value"/></div>
             <p style="font-size:.75rem;color:var(--muted);margin:2px 0 10px">Not sure? A 2-story home is usually 2,000–3,500 sq ft of wall.</p>
             <div style="font-size:.8rem;font-weight:600;margin:6px 0 4px">What do you need?</div>
-            <button type="button" class="est-opt" onclick="estPick('exttype','full',this)"><div class="ico">🏡</div><div class="txt"><strong>Full exterior (siding + trim)</strong><small>Complete repaint, 2 coats</small></div></button>
-            <button type="button" class="est-opt" onclick="estPick('exttype','siding',this)"><div class="ico">🧱</div><div class="txt"><strong>Siding only</strong><small>Body of the house</small></div></button>
-            <button type="button" class="est-opt" onclick="estPick('exttype','trim',this)"><div class="ico">🪟</div><div class="txt"><strong>Trim only</strong><small>Soffit, fascia, flashing, gutters, downspouts, window trim &amp; corners</small></div></button>
+            <button type="button" class="est-opt" onclick="estPick('exttype','full',this)"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#a8823f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></svg></div><div class="txt"><strong>Full exterior (siding + trim)</strong><small>Complete repaint, 2 coats</small></div></button>
+            <button type="button" class="est-opt" onclick="estPick('exttype','siding',this)"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#a8823f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="1"/><path d="M3 12h18M8 5v3.5M14 12v3.5M8 15.5V19M14 5v3.5"/></svg></div><div class="txt"><strong>Siding only</strong><small>Body of the house</small></div></button>
+            <button type="button" class="est-opt" onclick="estPick('exttype','trim',this)"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#a8823f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="1"/><path d="M12 3v18M4 12h16"/></svg></div><div class="txt"><strong>Trim only</strong><small>Soffit, fascia, flashing, gutters, downspouts, window trim &amp; corners</small></div></button>
           </div>
           <div id="size-cab" class="est-opts" style="display:none">
             <div class="est-counter"><div><label>Cabinet doors + drawers</label><small>Count all doors &amp; drawer fronts</small></div><div class="est-count-ctrl"><button type="button" onclick="estCount('cabs',-1)">−</button><span id="c-cabs">20</span><button type="button" onclick="estCount('cabs',1)">+</button></div></div>
@@ -362,9 +481,9 @@
           <div class="est-q">A couple details</div>
           <div class="est-hint">These affect the price, so be honest for the best estimate.</div>
           <div class="est-opts" id="detail-interior">
-            <button type="button" class="est-opt" onclick="estToggle('ceilings',this)"><div class="ico">⬜</div><div class="txt"><strong>Include ceilings</strong><small>Adds coverage &amp; labor</small></div></button>
-            <button type="button" class="est-opt" onclick="estToggle('dark',this)"><div class="ico">🎨</div><div class="txt"><strong>Going dark to light?</strong><small>Covering a dark wall with a lighter color. Light-to-dark or similar tones are already included.</small></div></button>
-            <button type="button" class="est-opt" onclick="estToggle('repair',this)"><div class="ico">🔧</div><div class="txt"><strong>Needs prep/repair</strong><small>Patching, cracks, water damage</small></div></button>
+            <button type="button" class="est-opt" onclick="estToggle('ceilings',this)"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#a8823f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="4"/><path d="M6 8v10M10 8v10M14 8v10M18 8v10"/></svg></div><div class="txt"><strong>Include ceilings</strong><small>Adds coverage &amp; labor</small></div></button>
+            <button type="button" class="est-opt" onclick="estToggle('dark',this)"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#a8823f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="8" cy="9" r="1.2"/><circle cx="12" cy="7.5" r="1.2"/><circle cx="16" cy="9" r="1.2"/><circle cx="16" cy="13" r="1.2"/></svg></div><div class="txt"><strong>Going dark to light?</strong><small>Covering a dark wall with a lighter color. Light-to-dark or similar tones are already included.</small></div></button>
+            <button type="button" class="est-opt" onclick="estToggle('repair',this)"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#a8823f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 7a4 4 0 00-5 5l-6 6 2 2 6-6a4 4 0 005-5l-2.5 2.5L12 12l-1-1 1.5-2.5z"/></svg></div><div class="txt"><strong>Needs prep/repair</strong><small>Patching, cracks, water damage</small></div></button>
           </div>
           <div class="est-opts" id="detail-exterior" style="display:none">
             <div class="est-field" style="margin-bottom:6px"><label style="font-size:.72rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:6px">Tallest wall height</label>
@@ -375,15 +494,15 @@
                 <option value="h40">Over 40 ft (+35%)</option>
               </select>
             </div>
-            <button type="button" class="est-opt" onclick="estToggle('extdark',this)"><div class="ico">🎨</div><div class="txt"><strong>Going dark to light?</strong><small>Covering a dark color with a lighter one. Light-to-dark or similar tones are already included.</small></div></button>
-            <button type="button" class="est-opt" onclick="estToggle('brick',this)"><div class="ico">🧱</div><div class="txt"><strong>Brick surface</strong><small>Painting over brick (more prep &amp; coverage, +5%)</small></div></button>
-            <button type="button" class="est-opt" onclick="estToggle('caulk',this)"><div class="ico">📐</div><div class="txt"><strong>Add vertical seam caulking</strong><small>Caulk Hardie board vertical joints (trim caulk already included)</small></div></button>
+            <button type="button" class="est-opt" onclick="estToggle('extdark',this)"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#a8823f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="8" cy="9" r="1.2"/><circle cx="12" cy="7.5" r="1.2"/><circle cx="16" cy="9" r="1.2"/><circle cx="16" cy="13" r="1.2"/></svg></div><div class="txt"><strong>Going dark to light?</strong><small>Covering a dark color with a lighter one. Light-to-dark or similar tones are already included.</small></div></button>
+            <button type="button" class="est-opt" onclick="estToggle('brick',this)"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#a8823f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="1"/><path d="M3 12h18M8 5v3.5M14 12v3.5M8 15.5V19M14 5v3.5"/></svg></div><div class="txt"><strong>Brick surface</strong><small>Painting over brick (more prep &amp; coverage, +5%)</small></div></button>
+            <button type="button" class="est-opt" onclick="estToggle('caulk',this)"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#a8823f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18"/><path d="M8 6l4-3 4 3M8 18l4 3 4-3"/></svg></div><div class="txt"><strong>Add vertical seam caulking</strong><small>Caulk Hardie board vertical joints (trim caulk already included)</small></div></button>
             <div class="est-counter" style="margin-top:4px"><div><label>Replace siding boards</label><small>Hung and material, per board ($110 each)</small></div><div class="est-count-ctrl"><button type="button" onclick="estCount('sheets',-1)">−</button><span id="c-sheets">0</span><button type="button" onclick="estCount('sheets',1)">+</button></div></div>
-            <button type="button" class="est-opt" onclick="estDoor(this)"><div class="ico">🚪</div><div class="txt"><strong>Restain front door</strong><small>Full refinish package. Tap to choose type</small></div></button>
+            <button type="button" class="est-opt" onclick="estDoor(this)"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#a8823f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="3" width="12" height="18" rx="1"/><circle cx="14.5" cy="12" r="1"/></svg></div><div class="txt"><strong>Restain front door</strong><small>Full refinish package. Tap to choose type</small></div></button>
             <div id="door-opts" style="display:none;margin-top:4px;padding-left:8px">
-              <button type="button" class="est-opt" onclick="estPick('door','single',this)"><div class="ico">🚪</div><div class="txt"><strong>Single door</strong><small>Standard front door</small></div></button>
-              <button type="button" class="est-opt" onclick="estPick('door','singleDesign',this)"><div class="ico">🚪</div><div class="txt"><strong>Single, detailed design</strong><small>Glass inserts, panels, ironwork</small></div></button>
-              <button type="button" class="est-opt" onclick="estPick('door','double',this)"><div class="ico">🚪</div><div class="txt"><strong>Double door</strong><small>Full package, both doors</small></div></button>
+              <button type="button" class="est-opt" onclick="estPick('door','single',this)"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#a8823f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="3" width="12" height="18" rx="1"/><circle cx="14.5" cy="12" r="1"/></svg></div><div class="txt"><strong>Single door</strong><small>Standard front door</small></div></button>
+              <button type="button" class="est-opt" onclick="estPick('door','singleDesign',this)"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#a8823f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="3" width="12" height="18" rx="1"/><circle cx="14.5" cy="12" r="1"/></svg></div><div class="txt"><strong>Single, detailed design</strong><small>Glass inserts, panels, ironwork</small></div></button>
+              <button type="button" class="est-opt" onclick="estPick('door','double',this)"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#a8823f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="3" width="12" height="18" rx="1"/><circle cx="14.5" cy="12" r="1"/></svg></div><div class="txt"><strong>Double door</strong><small>Full package, both doors</small></div></button>
             </div>
           </div>
           <div class="est-nav"><button type="button" class="est-back" onclick="estGo(2)">← Back</button><button type="button" class="btn btn-primary est-next" onclick="estToContact()">See My Estimate →</button></div>
@@ -417,10 +536,10 @@
           <div class="est-qualify" id="est-qualify">
             <p style="font-size:.9rem;color:var(--ink);text-align:center;margin-bottom:14px;font-weight:500">Does this fit your budget?</p>
             <div class="est-opts" style="margin-bottom:6px">
-              <button type="button" class="est-opt" onclick="estQualify('ready',this)"><div class="ico">✅</div><div class="txt"><strong>Yes, I'd like an exact quote</strong><small>Ready to move forward with the right price</small></div></button>
-              <button type="button" class="est-opt" onclick="estQualify('exploring',this)"><div class="ico">🔎</div><div class="txt"><strong>Just exploring for now</strong><small>Planning ahead, send me info</small></div></button>
-              <button type="button" class="est-opt" onclick="estQualify('timing',this)"><div class="ico">📅</div><div class="txt"><strong>Yes, but not right away</strong><small>I have a project coming up soon</small></div></button>
-              <button type="button" class="est-opt" onclick="estQualify('budget',this)"><div class="ico">💬</div><div class="txt"><strong>I'd like to review it more closely</strong><small>Let's find a number that works for both of us</small></div></button>
+              <button type="button" class="est-opt" onclick="estQualify('ready',this)"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#a8823f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div><div class="txt"><strong>Yes, I'd like an exact quote</strong><small>Ready to move forward with the right price</small></div></button>
+              <button type="button" class="est-opt" onclick="estQualify('exploring',this)"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#a8823f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg></div><div class="txt"><strong>Just exploring for now</strong><small>Planning ahead, send me info</small></div></button>
+              <button type="button" class="est-opt" onclick="estQualify('timing',this)"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#a8823f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="1"/><path d="M3 9h18M8 3v4M16 3v4"/></svg></div><div class="txt"><strong>Yes, but not right away</strong><small>I have a project coming up soon</small></div></button>
+              <button type="button" class="est-opt" onclick="estQualify('budget',this)"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#a8823f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H9l-4 4V5z"/></svg></div><div class="txt"><strong>I'd like to review it more closely</strong><small>Let's find a number that works for both of us</small></div></button>
             </div>
             <div id="q-timing" style="display:none;margin-top:6px">
               <div class="est-field"><label style="display:block;font-size:.72rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:6px">When are you hoping to start?</label><input type="date" id="q-timing-date" onchange="estTimingDate(this.value)"/></div>
@@ -433,7 +552,7 @@
           <div class="est-cta-final" id="est-cta-final" style="display:none">
             <p id="est-cta-copy"><strong style="color:var(--gold)">Great, we've got your details.</strong> Confirm below and we'll send your exact quote within 24 hours.</p>
             <button type="button" class="btn btn-primary form-submit" id="lf-btn" style="width:100%" onclick="submitLead(event)">Send My Detailed Quote →</button>
-            <div class="form-success" id="lf-success">✅ Sent! We'll reach out within 24 hours. For faster service call <strong>(615) 608-1220</strong>.</div>
+            <div class="form-success" id="lf-success">Sent! We'll reach out within 24 hours. For faster service call <strong>(615) 608-1220</strong>.</div>
             <div class="form-error" id="lf-error">Something went wrong, please call (615) 608-1220.</div>
             <div class="est-trust-row" style="margin-top:14px">
               <span><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> No obligation</span>
