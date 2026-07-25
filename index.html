@@ -885,7 +885,7 @@ footer{background:var(--dark);padding:60px 48px 24px}
                 <div class="afield full"><label>Full description (modal)</label><textarea id="pf-desc" rows="4" placeholder="Describe el trabajo realizado, materiales, resultado..."></textarea></div>
                 <div class="afield"><label>Area worked</label><input id="pf-area" placeholder="95 sq ft"/></div>
                 <div class="afield"><label>Year</label><input id="pf-year" placeholder="2024"/></div>
-                <div class="afield full"><label style="display:flex;align-items:center;gap:9px;cursor:pointer;padding:10px 12px;background:var(--cream);border:1px solid var(--cream2);border-radius:3px"><input type="checkbox" id="pf-featured" style="width:18px;height:18px;accent-color:var(--gold);flex-shrink:0"/><span><strong style="font-size:.84rem">⭐ Feature on Painting landing page</strong><br><span style="font-size:.72rem;color:var(--muted)">Show this project in the ads landing gallery (painting.html)</span></span></label></div>
+                <div class="afield full"><div id="pf-featured-btn" onclick="toggleFeatured()" style="display:flex;align-items:center;gap:11px;cursor:pointer;padding:12px 14px;background:var(--cream);border:2px solid var(--cream2);border-radius:4px;transition:all .18s;-webkit-tap-highlight-color:transparent"><span id="pf-featured-box" style="width:24px;height:24px;flex-shrink:0;border:2px solid var(--gold);border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:15px;color:#fff;background:#fff;transition:all .15s"></span><span><strong style="font-size:.86rem">⭐ Feature on Painting landing page</strong><br><span style="font-size:.73rem;color:var(--muted)">Show this project in the ads landing gallery (painting.html)</span></span></div><input type="hidden" id="pf-featured" value="false"/></div>
                 <div class="afield full"><label>Tags / Materials (comma separated)</label><input id="pf-tags" placeholder="Porcelain Tile, Custom Cabinetry, LED Lighting"/></div>
                 <div class="afield full">
                   <label>Photos (URLs, up to 15) — upload free at <a href="https://imgbb.com" target="_blank" style="color:var(--gold)">imgbb.com</a></label>
@@ -2811,11 +2811,11 @@ function editProject(id){
   editProjId=id;document.getElementById('projFormTitle').textContent='Edit Project';
   ['title','loc','short','desc','area','year','tags'].forEach(k=>{const e=document.getElementById('pf-'+k);if(e)e.value=p[k==='loc'?'location':k]||'';});
   document.getElementById('pf-cat').value=p.cat||'bathroom';
-  const pf=document.getElementById('pf-featured');if(pf)pf.checked=!!p.featured;
+  setFeaturedState(!!p.featured);
   const pi=document.getElementById('photoInputs');pi.innerHTML='';(p.photos&&p.photos.length?p.photos:[''] ).forEach(ph=>addPhotoRow(ph));
   document.getElementById('projectFormArea').style.display='block';document.getElementById('projectFormArea').scrollIntoView({behavior:'smooth'});
 }
-function clearProjForm(){['pf-title','pf-loc','pf-short','pf-desc','pf-area','pf-year','pf-tags'].forEach(id=>{const e=document.getElementById(id);if(e)e.value='';});document.getElementById('pf-cat').value='bathroom';const pf=document.getElementById('pf-featured');if(pf)pf.checked=false;document.getElementById('photoInputs').innerHTML='';addPhotoRow();}
+function clearProjForm(){['pf-title','pf-loc','pf-short','pf-desc','pf-area','pf-year','pf-tags'].forEach(id=>{const e=document.getElementById(id);if(e)e.value='';});document.getElementById('pf-cat').value='bathroom';setFeaturedState(false);document.getElementById('photoInputs').innerHTML='';addPhotoRow();}
 function cancelProjForm(){document.getElementById('projectFormArea').style.display='none';clearProjForm();editProjId=null;}
 
 /* ══ Firebase Storage Upload — formo-renovation-aa189 ══════════════ */
@@ -3127,10 +3127,24 @@ function clearManualBucket(){
 }
 
 function prevThumb(){}
+
+function setFeaturedState(on){
+  var inp=document.getElementById('pf-featured');
+  var box=document.getElementById('pf-featured-box');
+  var btn=document.getElementById('pf-featured-btn');
+  if(inp)inp.value=on?'true':'false';
+  if(box){box.style.background=on?'var(--gold)':'#fff';box.textContent=on?'✓':'';}
+  if(btn){btn.style.borderColor=on?'var(--gold)':'var(--cream2)';btn.style.background=on?'#fdf8ee':'var(--cream)';}
+}
+function toggleFeatured(){
+  var inp=document.getElementById('pf-featured');
+  setFeaturedState(!(inp&&inp.value==='true'));
+}
+
 async function saveProject(){
   const title=document.getElementById('pf-title').value.trim();if(!title){toast('⚠️ El título es obligatorio','err');return;}
   const photos=Array.from(document.querySelectorAll('#photoInputs input[type=url]')).map(i=>i.value.trim()).filter(v=>v&&v.length>10);
-  const data={id:editProjId||Date.now(),title,cat:document.getElementById('pf-cat').value,location:document.getElementById('pf-loc').value,short:document.getElementById('pf-short').value,desc:document.getElementById('pf-desc').value,area:document.getElementById('pf-area').value,year:document.getElementById('pf-year').value,tags:document.getElementById('pf-tags').value,featured:document.getElementById('pf-featured').checked,photos};
+  const data={id:editProjId||Date.now(),title,cat:document.getElementById('pf-cat').value,location:document.getElementById('pf-loc').value,short:document.getElementById('pf-short').value,desc:document.getElementById('pf-desc').value,area:document.getElementById('pf-area').value,year:document.getElementById('pf-year').value,tags:document.getElementById('pf-tags').value,featured:(document.getElementById('pf-featured')||{}).value==='true',photos};
   let ps=getData('projects');
   if(editProjId){const idx=ps.findIndex(p=>p.id===editProjId);if(idx>-1)ps[idx]=data;}else ps.push(data);
   await setData('projects',ps);loadProjectsList();cancelProjForm();renderProjects('all');renderHomeStrip();showInd('proj');toast('✅ Proyecto guardado'+(getFbUrl()?' en la nube':''),'ok');
