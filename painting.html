@@ -198,25 +198,31 @@
     /* Header */
     header{padding:12px 0}
     .logo img,.logo svg{height:34px}
-    /* HERO: stacked, image as a clean banner, copy below */
-    .hero{grid-template-columns:1fr;min-height:auto;gap:0}
-    .hero-right{order:-1;height:210px;border-radius:0 0 14px 14px;overflow:hidden}
-    .hero-right img{opacity:1}
-    .hero-badge{left:16px;right:16px;bottom:14px;padding:12px 15px;border-radius:8px}
-    .hero-badge .stars{font-size:.82rem}
-    .hero-badge p{font-size:.75rem;line-height:1.45}
-    .hero-badge span{font-size:.68rem;margin-top:5px}
-    .hero-left{padding:26px 0 32px}
-    .eyebrow{font-size:.62rem;margin-bottom:14px}
-    .hero h1{font-size:clamp(2rem,9vw,2.7rem);margin-bottom:14px;line-height:1.1}
-    .hero h1 em{white-space:normal}
-    .hero-sub{font-size:.96rem;max-width:100%;margin-bottom:22px}
+    /* ══ HERO MÓVIL INMERSIVO — imagen de fondo + texto encima ══ */
+    .hero{display:block;position:relative;min-height:auto;gap:0;margin-top:0}
+    /* Image becomes a full-bleed background layer */
+    .hero-right{position:absolute;inset:0;order:0;height:100%;width:100%;border-radius:0;overflow:hidden;z-index:0}
+    .hero-right img{width:100%;height:100%;object-fit:cover;opacity:1}
+    /* Dark gradient so text is always readable over the photo */
+    .hero-right::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(22,19,15,.55) 0%,rgba(22,19,15,.35) 32%,rgba(22,19,15,.82) 72%,var(--ink) 100%);z-index:1}
+    .hero-badge{display:none}
+    /* Text content sits ON TOP of the image */
+    .hero-left{position:relative;z-index:2;padding:220px 20px 30px;color:#fff}
+    .hero-left .eyebrow{color:var(--gold-lt);font-size:.64rem;letter-spacing:.22em;margin-bottom:14px}
+    .hero-left .eyebrow::before{background:var(--gold)}
+    .hero h1{font-size:clamp(2.3rem,10vw,3rem);margin-bottom:14px;line-height:1.08;color:#fff;text-shadow:0 2px 20px rgba(0,0,0,.4)}
+    .hero h1 em{white-space:normal;color:var(--gold-lt)}
+    .hero-sub{font-size:1rem;max-width:100%;margin-bottom:22px;color:rgba(255,255,255,.9)}
     .hero-points{margin-bottom:26px}
-    .hero-points li{font-size:.9rem;margin-bottom:13px;align-items:flex-start}
-    .hero-points svg{margin-top:3px}
+    .hero-points li{font-size:.92rem;margin-bottom:12px;align-items:flex-start;color:#fff}
+    .hero-points svg{margin-top:3px;stroke:var(--gold-lt)}
     /* Hero CTAs: full-width stacked, thumb-friendly */
     .hero-cta-row{flex-direction:column;gap:10px}
-    .hero-cta-row .btn{width:100%;padding:16px;font-size:.92rem}
+    .hero-cta-row .btn{width:100%;padding:16px;font-size:.94rem;border-radius:10px}
+    .hero-cta-row .btn-ghost{color:#fff;border-color:rgba(255,255,255,.5)}
+    .hero-cta-row .btn-ghost:hover{background:#fff;color:var(--ink)}
+    /* Floating review chip over the hero */
+    .hero-left::before{content:'★★★★★  Rated 5.0 by Middle TN homeowners';display:block;font-family:var(--fb);font-size:.72rem;letter-spacing:.02em;color:var(--gold-lt);background:rgba(22,19,15,.45);border:1px solid rgba(201,169,110,.3);backdrop-filter:blur(6px);padding:8px 14px;border-radius:100px;margin-bottom:18px;width:fit-content}
 
     /* ESTIMATOR: full-bleed card, big tap targets */
     .quote{padding:34px 0}
@@ -625,9 +631,9 @@
   <p>Free estimate within 24 hours. Fully insured. Guaranteed in writing.</p>
   <div class="final-cta">
     <a class="btn btn-primary" href="#quote">Get My Instant Estimate</a>
-    <a class="btn btn-ghost" href="https://wa.me/16156081220" target="_blank" onclick="trackConversion('whatsapp_label')">
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.25-.46-2.39-1.47-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.44-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.6-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.87 1.21 3.07c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2-1.41.25-.7.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35M12.05 21.79h-.01a9.87 9.87 0 01-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 01-1.51-5.26c0-5.45 4.44-9.88 9.9-9.88 2.64 0 5.12 1.03 6.99 2.9a9.82 9.82 0 012.89 6.99c0 5.45-4.44 9.88-9.89 9.88M20.52 3.45A11.82 11.82 0 0012.05 0C5.5 0 .16 5.33.16 11.89c0 2.1.55 4.14 1.6 5.95L.06 24l6.3-1.65a11.88 11.88 0 005.68 1.45h.01c6.55 0 11.89-5.34 11.89-11.9 0-3.18-1.24-6.17-3.48-8.42"/></svg>
-      WhatsApp Us
+    <a class="btn btn-ghost" href="mailto:dan@formorenovation.com?subject=Painting%20Estimate%20Request&body=Hi%20Dan%2C%20I%27d%20like%20a%20painting%20estimate%20for%20my%20project." onclick="trackConversion('email_label')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+      Email Us
     </a>
   </div>
 </section>
