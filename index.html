@@ -2477,6 +2477,20 @@ body{font-family:"Inter",-apple-system,BlinkMacSystemFont,sans-serif;background:
 .inv-cat-hd-lbl{font-family:var(--ff-bc);font-size:14px;font-weight:800;text-transform:uppercase;letter-spacing:.8px;color:var(--tx2)}
 .inv-cat-hd-cnt{font-size:11px;color:var(--tx3);margin-left:auto}
 
+/* ===== Icon system ===== */
+.ui-ico{display:inline-flex;align-items:center;justify-content:center;line-height:0;vertical-align:middle}
+.ui-ico svg{stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.t-item{gap:7px}
+.t-ico{width:17px;height:17px;flex-shrink:0}
+.t-ico svg{width:17px;height:17px}
+.mbn-ico{display:inline-flex;align-items:center;justify-content:center}
+.mbn-ico svg{width:23px;height:23px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.more-ico{display:inline-flex;align-items:center;justify-content:center}
+.more-ico svg{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.cp-section-title{display:flex;align-items:center}
+.sec-ico{width:17px;height:17px;flex-shrink:0;margin-right:8px;color:var(--gold)}
+.sec-ico svg{width:17px;height:17px}
+
 /* ===== Emil polish pass (microinteractions, motion, a11y) ===== */
 :root{--ease-o:cubic-bezier(.32,.72,0,1)}
 @keyframes ovFade{from{opacity:0}to{opacity:1}}
@@ -8045,7 +8059,7 @@ async function cpInit(projId){
     // live updates (wrapped so a stream error can't crash the page)
     try{
       onSnapshot(doc(db,'projects',projId),function(s){
-        if(s.exists()){_cpProject=s.data();try{cpRenderFeedbackHistory();}catch(e){}try{cpRenderExtras();}catch(e){}}
+        if(s.exists()){_cpProject=s.data();try{cpRenderFeedbackHistory();}catch(e){}try{cpRenderExtras();}catch(e){}try{cpSectionIcons();}catch(e){}}
       },function(serr){ cpLogError(projId,'onSnapshot',serr); });
     }catch(e){ cpLogError(projId,'onSnapshot-setup',e); }
   }catch(err){
@@ -8112,7 +8126,7 @@ function cpRender(){
   }).join('');
 
   cpRenderFeedbackHistory();
-  try{cpRenderExtras();}catch(e){}
+  try{cpRenderExtras();}catch(e){}try{cpSectionIcons();}catch(e){}
 }
 
 function cpRenderFeedbackHistory(){
@@ -11200,6 +11214,82 @@ try{document.addEventListener('keydown',function(e){
   if(pcf&&pcf.style.display==='flex'){if(typeof cancelPhotoUpload==='function')cancelPhotoUpload();return;}
   ['cpLightbox','camPickOv','surveyPickOv','photoCapOv'].forEach(function(id){var el=document.getElementById(id);if(el&&el.style.display==='flex')el.style.display='none';});
 });}catch(e){}
+
+
+/* ══════════════════════════════════════════════════════════════════
+   ICON SYSTEM  (professional line icons, replace stripped emojis)
+   - One consistent Feather/Lucide-style set, monochrome (currentColor)
+   - Injected into: project tabs, mobile bottom nav, "More" sheet,
+     and the client portal section titles
+   ══════════════════════════════════════════════════════════════════ */
+var _SVG={
+  grid:'<svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.3"/><rect x="14" y="3" width="7" height="7" rx="1.3"/><rect x="14" y="14" width="7" height="7" rx="1.3"/><rect x="3" y="14" width="7" height="7" rx="1.3"/></svg>',
+  zap:'<svg viewBox="0 0 24 24"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/></svg>',
+  check:'<svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3.5"/><path d="M8 12.5l2.7 2.7L16 9"/></svg>',
+  package:'<svg viewBox="0 0 24 24"><path d="M12 2.5l8.5 4.7v9.6L12 21.5l-8.5-4.7V7.2L12 2.5z"/><path d="M3.7 7.2L12 12l8.3-4.8"/><path d="M12 12v9.5"/></svg>',
+  calendar:'<svg viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="17" rx="2.5"/><path d="M3 9.5h18M8 2.5v4M16 2.5v4"/></svg>',
+  users:'<svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.4"/><path d="M2.7 20a6.3 6.3 0 0 1 12.6 0"/><path d="M16.5 5.2a3.3 3.3 0 0 1 0 6.1"/><path d="M21.3 20a6 6 0 0 0-3.6-5.5"/></svg>',
+  wallet:'<svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="14" rx="2.5"/><path d="M3 10.5h18"/><circle cx="16.5" cy="14.5" r="1.3" fill="currentColor" stroke="none"/></svg>',
+  card:'<svg viewBox="0 0 24 24"><rect x="2.5" y="5" width="19" height="14" rx="2.5"/><path d="M2.5 10h19"/><path d="M6 15h4"/></svg>',
+  dollar:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 6.5v11M14.5 9.2c-.4-1-1.4-1.6-2.6-1.6-1.5 0-2.6.9-2.6 2.1 0 2.7 5.2 1.4 5.2 4.2 0 1.3-1.2 2.2-2.7 2.2-1.3 0-2.4-.7-2.7-1.7"/></svg>',
+  chart:'<svg viewBox="0 0 24 24"><path d="M3.5 20.5h17"/><rect x="5" y="11" width="3.4" height="7" rx="1"/><rect x="10.3" y="7" width="3.4" height="11" rx="1"/><rect x="15.6" y="4" width="3.4" height="14" rx="1"/></svg>',
+  folder:'<svg viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h3.5l2 2H19a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"/></svg>',
+  camera:'<svg viewBox="0 0 24 24"><path d="M3 8.5a2 2 0 0 1 2-2h1.8L8.3 4h7.4l1.5 2.5H19a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-9z"/><circle cx="12" cy="13" r="3.4"/></svg>',
+  globe:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.6 2.7 2.6 15.3 0 18M12 3c-2.6 2.7-2.6 15.3 0 18"/></svg>',
+  settings:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.1 5.1l2.1 2.1M16.8 16.8l2.1 2.1M18.9 5.1l-2.1 2.1M7.2 16.8l-2.1 2.1"/></svg>',
+  dots:'<svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.7" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.7" fill="currentColor" stroke="none"/><circle cx="19" cy="12" r="1.7" fill="currentColor" stroke="none"/></svg>',
+  banknote:'<svg viewBox="0 0 24 24"><rect x="2.5" y="6" width="19" height="12" rx="2"/><circle cx="12" cy="12" r="2.6"/><path d="M6 9v6M18 9v6"/></svg>',
+  route:'<svg viewBox="0 0 24 24"><circle cx="6" cy="19" r="2.2"/><circle cx="18" cy="5" r="2.2"/><path d="M8.2 19H14a4 4 0 0 0 0-8h-4a4 4 0 0 1 0-8h5.8"/></svg>',
+  activity:'<svg viewBox="0 0 24 24"><path d="M3 12h4l2.5 7 4-15 2.5 8H21"/></svg>',
+  bulb:'<svg viewBox="0 0 24 24"><path d="M9.5 18h5M10 21h4"/><path d="M12 3a6 6 0 0 0-3.8 10.7c.6.5 1 1.1 1.1 2.3h5.4c.1-1.2.5-1.8 1.1-2.3A6 6 0 0 0 12 3z"/></svg>',
+  message:'<svg viewBox="0 0 24 24"><path d="M20.5 15a2 2 0 0 1-2 2H8l-4 4V5.5a2 2 0 0 1 2-2h12.5a2 2 0 0 1 2 2V15z"/></svg>',
+  image:'<svg viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="15" rx="2.5"/><circle cx="8.5" cy="9.5" r="1.8"/><path d="M21 15.5l-4.5-4.5L7 20"/></svg>',
+  filetext:'<svg viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-5z"/><path d="M14 3v5h5M8.5 13h7M8.5 17h7"/></svg>',
+  receipt:'<svg viewBox="0 0 24 24"><path d="M5 3v18l2-1.3 2 1.3 2-1.3 2 1.3 2-1.3 2 1.3V3l-2 1.3L15 3l-2 1.3L11 3 9 4.3 7 3H5z"/><path d="M8.5 8.5h7M8.5 12.5h7"/></svg>',
+  download:'<svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M5 20.5h14"/></svg>'
+};
+function _svg(name,cls){return '<span class="ui-ico'+(cls?' '+cls:'')+'">'+(_SVG[name]||'')+'</span>';}
+
+function applyUIIcons(){
+  var tabMap={dash:'grid',gen:'zap',tasks:'check',mats:'package',sched:'calendar',crew:'users',payroll:'wallet',expenses:'card',finance:'dollar',reports:'chart',files:'folder',photos:'camera',portal:'globe',proj:'settings'};
+  document.querySelectorAll('.t-item[data-tab]').forEach(function(el){
+    if(el.querySelector('.t-ico'))return;
+    var n=tabMap[el.dataset.tab];if(!n)return;
+    el.insertAdjacentHTML('afterbegin',_svg(n,'t-ico'));
+  });
+  var mbMap={dash:'grid',tasks:'check',expenses:'card',more:'dots'};
+  document.querySelectorAll('.mbn-item[data-mbtab]').forEach(function(el){
+    var ic=el.querySelector('.mbn-ico');if(!ic)return;
+    var n=mbMap[el.dataset.mbtab];if(n&&!ic.querySelector('svg'))ic.innerHTML=_SVG[n]||'';
+  });
+  var moreMap={crew:'users',finance:'dollar',gen:'zap',mats:'package',sched:'calendar',payroll:'wallet',reports:'chart',proj:'settings'};
+  document.querySelectorAll('.more-item').forEach(function(el){
+    var ic=el.querySelector('.more-ico');if(!ic||ic.querySelector('svg'))return;
+    var oc=el.getAttribute('onclick')||'';
+    var m=oc.match(/mbNav\('([a-z]+)'\)/);var n=m?moreMap[m[1]]:null;
+    if(/goWeeklyPayment/.test(oc))n='banknote';
+    ic.innerHTML=_SVG[n]||_SVG.dots;
+  });
+}
+
+/* Client portal section titles → icons (matches on the visible text) */
+function cpSectionIcons(){
+  var map={
+    "Your Project Journey":"route","What's Happening Now":"activity",
+    "What to Expect & How to Prepare":"bulb","Questions, Notes & Updates":"message",
+    "Project Photos":"image","Shared Documents":"folder","Change Orders":"filetext","Invoices":"receipt"
+  };
+  document.querySelectorAll('.cp-section-title').forEach(function(el){
+    if(el.querySelector('.sec-ico'))return;
+    var t=(el.textContent||'').trim();
+    var n=map[t];if(!n)return;
+    el.insertAdjacentHTML('afterbegin',_svg(n,'sec-ico'));
+  });
+}
+
+window.applyUIIcons=applyUIIcons;window.cpSectionIcons=cpSectionIcons;
+if(document.readyState!=='loading')applyUIIcons();else document.addEventListener('DOMContentLoaded',applyUIIcons);
+
 </script>
 <div class="ov" id="workerOv">
   <div class="modal">
