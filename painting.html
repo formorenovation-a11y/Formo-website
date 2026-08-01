@@ -854,7 +854,7 @@ function estCalc(){
     }
     // Vertical seam caulking (Hardie vertical joints)
     if(est.caulk){
-      var cLo=sf*0.35, cHi=sf*0.55;
+      var cLo=wallSf*0.35, cHi=wallSf*0.55;
       low+=cLo; high+=cHi;
       lines.push(['Vertical seam caulking', fmt(cLo)+'–'+fmt(cHi)]);
     }
