@@ -802,6 +802,12 @@ function estUnlock(){
   try{ estCalc(); }catch(ex){ console.error('estCalc error',ex); }
   estGo(5);           // reveal the estimate no matter what
   try{ trackConversion('lead_form_label'); }catch(ex){}
+  // Immediate lead capture: send the moment they enter contact + see the price,
+  // so a lead is never lost even if they don't finish the qualify step.
+  if(!est._sent){
+    est._sent=true;
+    try{ sendLead('instant').catch(function(){ est._sent=false; }); }catch(e){ est._sent=false; }
+  }
 }
 
 function estCalc(){
@@ -862,9 +868,11 @@ function estCalc(){
     if(est.door){
       var dmap={single:[900,1100],singleDesign:[1400,1600],double:[1800,2100],doubleDesign:[2700,3000]};
       var d=dmap[est.door];
-      low+=d[0]; high+=d[1];
-      var dname={single:'single door, simple',singleDesign:'single door, detailed',double:'double door, simple',doubleDesign:'double door, detailed'}[est.door];
-      lines.push(['Restain front door ('+dname+')', fmt(d[0])+'–'+fmt(d[1])]);
+      if(d){
+        low+=d[0]; high+=d[1];
+        var dname={single:'single door, simple',singleDesign:'single door, detailed',double:'double door, simple',doubleDesign:'double door, detailed'}[est.door];
+        lines.push(['Restain front door ('+dname+')', fmt(d[0])+'–'+fmt(d[1])]);
+      }
     }
   }
 
@@ -937,6 +945,27 @@ function updateLeadMsg(){
   m.value=base+extra;
 }
 
+// Sends the lead to FormSubmit. stage: 'instant' (captured the moment they see
+// the price) or 'completed' (they finished the qualify step). Returns the fetch promise.
+function sendLead(stage){
+  var g=function(id){var el=document.getElementById(id);return el?(el.value||''):'';};
+  var name=g('lf-name').trim(), phone=g('lf-phone').trim(), email=g('lf-email').trim();
+  return fetch('https://formsubmit.co/ajax/dan@formorenovation.com',{
+    method:'POST',
+    headers:{'Content-Type':'application/json','Accept':'application/json'},
+    body:JSON.stringify({
+      name:name, phone:phone, email:email,
+      city:g('lf-city').trim()||'Not provided',
+      project_type:g('lf-type'),
+      details:g('lf-msg').trim()||'None',
+      _subject:(stage==='completed'
+                 ? 'PAINTING LEAD - completed (intent added) - '
+                 : 'NEW PAINTING LEAD (instant capture) - ')+name,
+      _template:'table'
+    })
+  });
+}
+
 async function submitLead(e){
   if(e&&e.preventDefault)e.preventDefault();
   var btn=document.getElementById('lf-btn');
@@ -949,26 +978,15 @@ async function submitLead(e){
   if(!name||!phone||!email){ err.textContent='Please fill in your name, phone, and email.'; err.style.display='block'; return; }
   btn.textContent='Sending...'; btn.disabled=true;
   try{
-    var res=await fetch('https://formsubmit.co/ajax/dan@formorenovation.com',{
-      method:'POST',
-      headers:{'Content-Type':'application/json','Accept':'application/json'},
-      body:JSON.stringify({
-        name:name, phone:phone, email:email,
-        city:document.getElementById('lf-city').value.trim()||'Not provided',
-        project_type:document.getElementById('lf-type').value,
-        details:document.getElementById('lf-msg').value.trim()||'None',
-        _subject:'NEW PAINTING LEAD (with estimate) - '+name,
-        _template:'table'
-      })
-    });
+    var res=await sendLead('completed');
     var data=await res.json();
     if(res.ok && (data.success==='true'||data.success===true)){
+      try{ trackConversion('lead_form_label'); }catch(ex){}   // fire tracking first, always
       ok.style.display='block';
-      document.getElementById('leadForm').reset();
-      trackConversion('lead_form_label');   // Google Ads conversion
+      var gf=document.getElementById('gateForm'); if(gf&&gf.reset)gf.reset();
     } else { throw new Error('fail'); }
   }catch(_){ err.style.display='block'; }
-  finally{ btn.textContent='Get My Free Estimate →'; btn.disabled=false; }
+  finally{ btn.textContent='Send My Detailed Quote →'; btn.disabled=false; }
 }
 </script>
 
