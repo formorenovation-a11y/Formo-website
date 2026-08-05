@@ -456,7 +456,45 @@
   .qc-fine a{color:var(--gold-d);text-decoration:none;font-weight:600}
   @media(max-width:760px){ .qc-card{grid-template-columns:1fr;gap:18px;padding:22px 18px} .qc-row{grid-template-columns:1fr} }
 </style>
+<style id="design-polish">
+/* ===== Design polish — interaction feedback, focus, motion (Emil Kowalski principles) ===== */
+:root{ --ease-out:cubic-bezier(.23,1,.32,1); --ease-in-out:cubic-bezier(.77,0,.175,1); }
+/* Specific, custom-eased transitions + tactile press feedback on all pressables */
+.btn{ transition:transform .16s var(--ease-out),background-color .2s ease,box-shadow .22s var(--ease-out),border-color .18s ease,color .18s ease; }
+.btn:active{ transform:scale(.97); }
+.est-opt{ transition:transform .16s var(--ease-out),border-color .18s ease,background-color .18s ease,box-shadow .18s ease; }
+.est-opt:active{ transform:scale(.985); }
+.est-count-ctrl button,.head-call,.mb-call,.mb-quote,.qc-btn,.est-back{ transition:transform .16s var(--ease-out),background-color .2s ease,color .18s ease,box-shadow .2s ease; }
+.est-count-ctrl button:active,.head-call:active,.mb-call:active,.mb-quote:active,.qc-btn:active{ transform:scale(.96); }
+/* Premium two-layer depth on primary CTAs */
+.btn-primary,.btn-gold{ box-shadow:0 6px 20px rgba(201,169,110,.30),0 1px 2px rgba(25,24,22,.12); }
+/* Hover effects only for real (mouse) pointers */
+@media (hover:hover) and (pointer:fine){
+  .btn-primary:hover,.btn-gold:hover{ transform:translateY(-2px); box-shadow:0 12px 30px rgba(201,169,110,.42); }
+  .tcard{ transition:transform .22s var(--ease-out),box-shadow .22s var(--ease-out); }
+  .tcard:hover{ transform:translateY(-3px); box-shadow:0 18px 44px rgba(0,0,0,.16); }
+}
+/* Neutralize sticky :hover on touch devices */
+@media (hover:none){
+  .btn-primary:hover,.btn-gold:hover{ transform:none; }
+  .est-opt:hover{ border-color:var(--line,#ede9e3); background:#fff; }
+  .gal-grid a.gal-item:hover img{ transform:none; }
+}
+/* Visible keyboard focus (accessibility) */
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,.est-opt:focus-visible{
+  outline:2px solid var(--gold-d,#a8823f); outline-offset:2px; border-radius:6px;
+}
+/* Snappier first-load reveal */
+.reveal-load{ transition:opacity .55s var(--ease-out),transform .55s var(--ease-out); }
+.est-step{ animation-timing-function:var(--ease-out); }
+/* Respect reduced-motion: keep opacity, drop movement */
+@media (prefers-reduced-motion:reduce){
+  .reveal-load,.hero-right img{ opacity:1!important; transform:none!important; transition:none; }
+  *{ animation-duration:.001ms!important; animation-iteration-count:1!important; scroll-behavior:auto!important; }
+}
+</style>
 </head>
+
 <body class="pre-load">
 <div id="page-loader"><div class="loader-mark"><svg viewBox="0 0 100 100" fill="none"><path d="M50 9 L13 40 L13 88" stroke="#c9a96e" stroke-width="6" stroke-linecap="round"/><path d="M50 9 L87 40 L87 88" stroke="#c9a96e" stroke-width="6" stroke-linecap="round"/><path d="M50 20 L24 42 M50 20 L76 42" stroke="#c9a96e" stroke-width="6" stroke-linecap="round"/><path d="M63 54 L34 54 L34 87 L63 87" stroke="#c9a96e" stroke-width="6" stroke-linecap="square"/></svg></div></div>
 
@@ -476,7 +514,7 @@
 <section class="wrap hero">
   <div class="hero-left reveal-load">
     <span class="eyebrow">Interior &amp; Exterior Painting</span>
-    <h1>The <em>Smile</em> Starts Before You Park.</h1>
+    <h1>The <em>Smile</em> Starts Before You Park</h1>
     <p class="hero-sub">That first morning in a freshly painted home — the light hits different, the space feels calmer, and it still smells brand new. That's what we do for Middle Tennessee homeowners.</p>
     <ul class="hero-points">
       <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Fully insured &amp; W9 ready. No risk to you</li>
@@ -1134,14 +1172,14 @@ async function submitLead(e){
     var l=document.getElementById('page-loader');
     if(l)l.classList.add('done');
     document.body.classList.remove('pre-load');
-    document.querySelectorAll('.reveal-load').forEach(function(el,i){setTimeout(function(){el.classList.add('in');},120+i*120);});
+    document.querySelectorAll('.reveal-load').forEach(function(el,i){setTimeout(function(){el.classList.add('in');},70+i*70);});
     var hi=document.querySelector('.hero-right img');
     if(hi){ if(hi.complete){hi.classList.add('in');} else {hi.addEventListener('load',function(){hi.classList.add('in');});} }
   }
   // Reveal once window loaded (or after a short cap so it never hangs)
   if(document.readyState==='complete'){setTimeout(done,250);}
   else{window.addEventListener('load',function(){setTimeout(done,250);});}
-  setTimeout(done,2600); // safety cap
+  setTimeout(done,1100); // safety cap
 })();
 </script>
 </body>
