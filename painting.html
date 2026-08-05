@@ -435,6 +435,26 @@
     .phone{width:250px;height:512px}
   }
 
+  /* ── Quick contact (fast call-back) ── */
+  .quickcontact{padding:26px 0 4px}
+  .qc-card{background:linear-gradient(135deg,#ffffff,#faf6ef);border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:6px;padding:26px;display:grid;grid-template-columns:1fr 1fr;gap:34px;align-items:center;box-shadow:0 14px 44px rgba(25,24,22,.08)}
+  .qc-copy .eyebrow{margin-bottom:8px}
+  .qc-copy h2{font-size:clamp(1.5rem,3vw,2.1rem);margin:0 0 8px}
+  .qc-copy h2 em{font-style:normal;color:var(--gold-d)}
+  .qc-copy p{color:var(--muted);font-size:.95rem;max-width:40ch}
+  .qc-trust{display:flex;gap:16px;flex-wrap:wrap;margin-top:14px}
+  .qc-trust span{font-size:.74rem;color:var(--muted);display:flex;align-items:center;gap:6px}
+  .qc-trust svg{width:14px;height:14px;stroke:var(--moss);fill:none;stroke-width:2.4}
+  .qc-form input,.qc-form textarea{width:100%;padding:13px 14px;border:1.5px solid var(--line);background:#fff;font-family:inherit;font-size:16px;border-radius:8px;outline:none;margin-bottom:10px;color:var(--ink)}
+  .qc-form input:focus,.qc-form textarea:focus{border-color:var(--gold)}
+  .qc-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .qc-form textarea{min-height:60px;resize:vertical}
+  .qc-btn{width:100%;font-size:.98rem;padding:16px;margin-top:2px}
+  .qc-err{display:none;background:#fbeeee;border:1px solid #e2b4b4;color:#8a2b2b;padding:11px;border-radius:6px;font-size:.82rem;margin-bottom:10px}
+  .qc-ok{display:none;background:#eef6ec;border:1px solid #b6d8ac;color:#2f5424;padding:13px;border-radius:6px;font-size:.86rem;text-align:center;margin-top:8px}
+  .qc-fine{font-size:.74rem;color:var(--muted);text-align:center;margin-top:10px;line-height:1.6}
+  .qc-fine a{color:var(--gold-d);text-decoration:none;font-weight:600}
+  @media(max-width:760px){ .qc-card{grid-template-columns:1fr;gap:18px;padding:22px 18px} .qc-row{grid-template-columns:1fr} }
 </style>
 </head>
 <body class="pre-load">
@@ -456,11 +476,11 @@
 <section class="wrap hero">
   <div class="hero-left reveal-load">
     <span class="eyebrow">Interior &amp; Exterior Painting</span>
-    <h1>The <em>Smile</em> Starts Before You Park</h1>
+    <h1>Walk Into a Home That Feels <em>New</em> Again.</h1>
     <p class="hero-sub">That first morning in a freshly painted home — the light hits different, the space feels calmer, and it still smells brand new. That's what we do for Middle Tennessee homeowners.</p>
     <ul class="hero-points">
-      <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Fully insured &amp;. Zero risk to you</li>
-      <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Premium Benjamin Moore and Sherwin Williams paint</li>
+      <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Fully insured &amp; W9 ready. No risk to you</li>
+      <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Premium Benjamin Moore paint, exclusively</li>
       <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> 1-year workmanship warranty in writing</li>
       <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Free, detailed estimate within 24 hours</li>
     </ul>
@@ -476,12 +496,38 @@
     <img id="hero-cover" src="https://images.unsplash.com/photo-1562259929-b4e1fd3aef09?w=1000&q=80" alt="Professional painting work by Formo Renovation"/>
     <div class="hero-badge">
       <div class="stars">★★★★★</div>
-      <p>"We recently moved into a new home and hired Formo Renovation to help us with the updates. We’re very happy with how everything turned out. The crew worked hard, showed up on time, and paid attention to the small details. Everyone was respectful, friendly, and had a great attitude throughout the project. We would definitely recommend them. Thank you!."</p>
-      <span>- Rebecca, Thompson Station, TN</span>
+      <p>"Professional, clean, and detail-oriented from start to finish. Transformed our whole downstairs."</p>
+      <span>- Jessica R., Brentwood TN</span>
     </div>
   </div>
 </section>
 
+<section class="wrap quickcontact" id="quick">
+  <div class="qc-card">
+    <div class="qc-copy">
+      <span class="eyebrow">The 30-Second Option</span>
+      <h2>Prefer we just <em>call you back?</em></h2>
+      <p>Skip the questions. Leave your name and number and we'll reach out within minutes with your free estimate.</p>
+      <div class="qc-trust">
+        <span><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Answer in under 5 min</span>
+        <span><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> No obligation</span>
+        <span><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Bilingual team</span>
+      </div>
+    </div>
+    <form class="qc-form" id="qcForm" onsubmit="return false">
+      <input type="text" id="qc-name" placeholder="Full name *"/>
+      <div class="qc-row">
+        <input type="tel" id="qc-phone" placeholder="Phone *"/>
+        <input type="email" id="qc-email" placeholder="Email (optional)"/>
+      </div>
+      <textarea id="qc-msg" placeholder="What do you need painted? (optional)"></textarea>
+      <div class="qc-err" id="qc-err">Please enter your name and a valid phone number.</div>
+      <button type="button" class="btn btn-primary qc-btn" id="qc-btn" onclick="quickLead()">Get My Free Call Back →</button>
+      <div class="qc-ok" id="qc-ok">Got it! We'll reach out shortly. Prefer to talk now? Call <strong>(615) 608-1220</strong>.</div>
+      <p class="qc-fine">Or reach us now: <a href="tel:+16156081220" onclick="trackConversion('call_label')">(615) 608-1220</a> &middot; <a href="mailto:dan@formorenovation.com?subject=Painting%20Estimate%20Request" onclick="trackConversion('email_label')">Email us</a></p>
+    </form>
+  </div>
+</section>
 <section class="quote" id="quote">
   <div class="wrap quote-grid">
     <div>
@@ -965,6 +1011,40 @@ function sendLead(stage){
       _template:'table'
     })
   });
+}
+
+// Fast call-back capture: name + phone (email optional). Sends the lead to Dan
+// instantly and fires the conversion, so he can reach out right away.
+function quickLead(){
+  var g=function(id){var el=document.getElementById(id);return el?(el.value||'').trim():'';};
+  var name=g('qc-name'), phone=g('qc-phone'), email=g('qc-email'), msg=g('qc-msg');
+  var err=document.getElementById('qc-err'), ok=document.getElementById('qc-ok'), btn=document.getElementById('qc-btn');
+  var phoneOk=phone.replace(/[^0-9]/g,'').length>=10;
+  var emailOk=(email==='')||/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email);
+  if(name.length<2 || !phoneOk || !emailOk){
+    err.textContent = name.length<2 ? 'Please enter your name.' : (!phoneOk ? 'Please enter a valid phone number.' : 'Please enter a valid email, or leave it blank.');
+    err.style.display='block'; return;
+  }
+  err.style.display='none'; ok.style.display='none';
+  var orig=btn.textContent; btn.textContent='Sending...'; btn.disabled=true;
+  fetch('https://formsubmit.co/ajax/dan@formorenovation.com',{
+    method:'POST',
+    headers:{'Content-Type':'application/json','Accept':'application/json'},
+    body:JSON.stringify({
+      name:name, phone:phone, email:email||'Not provided',
+      details:msg||'Quick call-back request (no details given)',
+      _subject:'QUICK CALL-BACK LEAD - '+name,
+      _template:'table'
+    })
+  }).then(function(r){return r.json();}).then(function(d){
+    if(d && (d.success==='true'||d.success===true)){
+      ok.style.display='block';
+      try{ trackConversion('quick_lead_label'); }catch(e){}
+      var fm=document.getElementById('qcForm'); if(fm&&fm.reset)fm.reset();
+    } else { throw new Error('fail'); }
+  }).catch(function(){
+    err.textContent='Something went wrong — please call (615) 608-1220.'; err.style.display='block';
+  }).finally(function(){ btn.textContent=orig; btn.disabled=false; });
 }
 
 async function submitLead(e){
