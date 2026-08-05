@@ -579,7 +579,45 @@ footer{background:var(--dark);padding:60px 48px 24px}
 {"@type":"Question","name":"Can one contractor handle multiple trades in my renovation?","acceptedAnswer":{"@type":"Answer","text":"Yes. Formo Renovation coordinates drywall, painting, flooring, tile, finish carpentry, and remodeling under one company for a more efficient schedule and consistent quality."}}
 ]}
 </script>
+<style id="design-polish">
+/* ===== Design polish — interaction feedback, focus, motion (Emil Kowalski principles) ===== */
+:root{ --ease-out:cubic-bezier(.23,1,.32,1); --ease-in-out:cubic-bezier(.77,0,.175,1); }
+/* Specific, custom-eased transitions + tactile press feedback on all pressables */
+.btn{ transition:transform .16s var(--ease-out),background-color .2s ease,box-shadow .22s var(--ease-out),border-color .18s ease,color .18s ease; }
+.btn:active{ transform:scale(.97); }
+.est-opt{ transition:transform .16s var(--ease-out),border-color .18s ease,background-color .18s ease,box-shadow .18s ease; }
+.est-opt:active{ transform:scale(.985); }
+.est-count-ctrl button,.head-call,.mb-call,.mb-quote,.qc-btn,.est-back{ transition:transform .16s var(--ease-out),background-color .2s ease,color .18s ease,box-shadow .2s ease; }
+.est-count-ctrl button:active,.head-call:active,.mb-call:active,.mb-quote:active,.qc-btn:active{ transform:scale(.96); }
+/* Premium two-layer depth on primary CTAs */
+.btn-primary,.btn-gold{ box-shadow:0 6px 20px rgba(201,169,110,.30),0 1px 2px rgba(25,24,22,.12); }
+/* Hover effects only for real (mouse) pointers */
+@media (hover:hover) and (pointer:fine){
+  .btn-primary:hover,.btn-gold:hover{ transform:translateY(-2px); box-shadow:0 12px 30px rgba(201,169,110,.42); }
+  .tcard{ transition:transform .22s var(--ease-out),box-shadow .22s var(--ease-out); }
+  .tcard:hover{ transform:translateY(-3px); box-shadow:0 18px 44px rgba(0,0,0,.16); }
+}
+/* Neutralize sticky :hover on touch devices */
+@media (hover:none){
+  .btn-primary:hover,.btn-gold:hover{ transform:none; }
+  .est-opt:hover{ border-color:var(--line,#ede9e3); background:#fff; }
+  .gal-grid a.gal-item:hover img{ transform:none; }
+}
+/* Visible keyboard focus (accessibility) */
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,.est-opt:focus-visible{
+  outline:2px solid var(--gold-d,#a8823f); outline-offset:2px; border-radius:6px;
+}
+/* Snappier first-load reveal */
+.reveal-load{ transition:opacity .55s var(--ease-out),transform .55s var(--ease-out); }
+.est-step{ animation-timing-function:var(--ease-out); }
+/* Respect reduced-motion: keep opacity, drop movement */
+@media (prefers-reduced-motion:reduce){
+  .reveal-load,.hero-right img{ opacity:1!important; transform:none!important; transition:none; }
+  *{ animation-duration:.001ms!important; animation-iteration-count:1!important; scroll-behavior:auto!important; }
+}
+</style>
 </head>
+
 <body data-formo-v="v19jul-3">
 
 <!-- LOADING OVERLAY -->
