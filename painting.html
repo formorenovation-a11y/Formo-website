@@ -203,12 +203,12 @@
     .hero{display:block;position:relative;min-height:auto;gap:0;margin-top:0}
     /* Image becomes a full-bleed background layer */
     .hero-right{position:absolute;inset:0;order:0;height:100%;width:100%;border-radius:0;overflow:hidden;z-index:0}
-    .hero-right img{width:100%;height:100%;object-fit:cover;opacity:1}
+    .hero-right img{width:100%;height:100%;object-fit:cover;object-position:center 62%;opacity:1}
     /* Dark gradient so text is always readable over the photo */
-    .hero-right::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(22,19,15,.55) 0%,rgba(22,19,15,.35) 32%,rgba(22,19,15,.82) 72%,var(--ink) 100%);z-index:1}
+    .hero-right::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(22,19,15,.62) 0%,rgba(22,19,15,.48) 30%,rgba(22,19,15,.86) 68%,var(--ink) 100%);z-index:1}
     .hero-badge{display:none}
     /* Text content sits ON TOP of the image */
-    .hero-left{position:relative;z-index:2;padding:220px 20px 30px;color:#fff}
+    .hero-left{position:relative;z-index:2;padding:104px 20px 34px;color:#fff}
     .hero-left .eyebrow{color:var(--gold-lt);font-size:.64rem;letter-spacing:.22em;margin-bottom:14px}
     .hero-left .eyebrow::before{background:var(--gold)}
     .hero h1{font-size:clamp(2.6rem,11vw,3.4rem);margin-bottom:16px;line-height:1.06;color:#fff;text-shadow:0 2px 20px rgba(0,0,0,.4)}
@@ -518,7 +518,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
     <p class="hero-sub">That first morning in a freshly painted home — the light hits different, the space feels calmer, and it still smells brand new. That's what we do for Middle Tennessee homeowners.</p>
     <ul class="hero-points">
       <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Fully insured &amp; W9 ready. No risk to you</li>
-      <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Premium Benjamin Moore paint, exclusively</li>
+      <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Premium Sherwin-Williams &amp; Benjamin Moore paint</li>
       <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> 1-year workmanship warranty in writing</li>
       <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Free, detailed estimate within 24 hours</li>
     </ul>
