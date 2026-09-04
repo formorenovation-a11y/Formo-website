@@ -35,6 +35,18 @@
     // keep a console trace for debugging
     try{ console.log('Formo conversion:', label); }catch(e){}
   }
+
+  // Enhanced conversions: pass the customer's email/phone to Google (the tag hashes
+  // them automatically) so conversions are matched more accurately. Call this BEFORE
+  // trackConversion fires, whenever contact info is available.
+  function formoSetUser(email, phone){
+    try{
+      var ud={};
+      if(email){ ud.email=(''+email).trim().toLowerCase(); }
+      if(phone){ var d=(''+phone).replace(/[^0-9]/g,''); if(d.length===10)d='1'+d; if(d.length>=11) ud.phone_number='+'+d; }
+      if(ud.email||ud.phone_number){ gtag('set','user_data',ud); }
+    }catch(e){}
+  }
 </script>
 
 <style>
@@ -497,7 +509,9 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 /* ===== Hero v2 — image + lead form in the hero (low-friction capture) ===== */
 .hero2{position:relative;overflow:hidden;background:var(--ink)}
 .hero2-bg{position:absolute;inset:0;z-index:0}
-.hero2-bg img{width:100%;height:100%;object-fit:cover;object-position:center 60%}
+.hero2-bg .hero-slide{position:absolute;inset:0;background-size:cover;background-position:center 58%;opacity:0;transition:opacity 1.4s ease-in-out;z-index:0;will-change:opacity}
+.hero2-bg .hero-slide.active{opacity:1}
+@media (prefers-reduced-motion:reduce){.hero2-bg .hero-slide{transition:none}}
 .hero2-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(22,19,15,.9) 0%,rgba(22,19,15,.74) 46%,rgba(22,19,15,.5) 100%);z-index:1}
 .hero2-inner{position:relative;z-index:2;display:grid;grid-template-columns:1.02fr .98fr;gap:46px;align-items:center;padding:54px 22px 60px}
 .hero2-copy{color:#fff}
@@ -556,7 +570,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 
 <a id="top"></a>
 <section class="hero2">
-  <div class="hero2-bg"><img id="hero-cover" src="https://images.unsplash.com/photo-1562259929-b4e1fd3aef09?w=1400&q=80" alt="Freshly painted Middle Tennessee home by Formo Renovation"/></div>
+  <div class="hero2-bg" aria-hidden="true"><div class="hero-slide" id="hs-a"></div><div class="hero-slide" id="hs-b"></div></div>
   <div class="wrap hero2-inner">
     <div class="hero2-copy reveal-load">
       <span class="eyebrow">Interior &amp; Exterior Painting &middot; Middle TN</span>
@@ -910,6 +924,7 @@ function estUnlock(){
   var err=document.getElementById('gate-err');
   if(!estValidContact()){ if(err){err.style.display='block';err.scrollIntoView({behavior:'smooth',block:'center'});} return; }
   if(err)err.style.display='none';
+  try{ formoSetUser((document.getElementById('lf-email')||{}).value, (document.getElementById('lf-phone')||{}).value); }catch(e){}
   try{ estCalc(); }catch(ex){ console.error('estCalc error',ex); }
   estGo(5);           // reveal the estimate no matter what
   try{ trackConversion('lead_form_label'); }catch(ex){}
@@ -1116,6 +1131,7 @@ function quickLead(){
   }).then(function(r){return r.json();}).then(function(d){
     if(d && (d.success==='true'||d.success===true)){
       ok.style.display='block';
+      try{ formoSetUser(email, phone); }catch(e){}
       try{ trackConversion('quick_lead_label'); }catch(e){}
       var fm=document.getElementById('qcForm'); if(fm&&fm.reset)fm.reset();
     } else { throw new Error('fail'); }
@@ -1185,23 +1201,41 @@ async function submitLead(e){
 </script>
 
 <script>
-// Independent cover-photo loader (does not depend on the gallery)
+// Hero background slideshow — subtle crossfade every 5s, loops forever. Uses your real
+// Firebase project photos when available, with a curated fallback set of ~10 images.
 (function(){
+  var A=document.getElementById('hs-a'), B=document.getElementById('hs-b');
+  if(!A||!B) return;
   var RTDB='https://realtime-database-c6a10-default-rtdb.firebaseio.com';
-  function loadCover(){
-    // cache-bust so a freshly-saved photo shows without hard refresh
-    fetch(RTDB+'/site/paintingLanding.json?t='+Date.now(),{cache:'no-store'})
-      .then(function(r){return r.json();})
-      .then(function(pl){
-        if(pl&&pl.hero){
-          var hc=document.getElementById('hero-cover');
-          if(hc&&pl.hero.trim()){ hc.src=pl.hero; }
-        }
-      })
-      .catch(function(){});
+  var U='https://images.unsplash.com/photo-', W='?w=1400&q=80';
+  var FALLBACK=['1562259929-b4e1fd3aef09','1595428774223-ef52624120d2','1560448204-e02f11c3d0e2','1600585152220-90363fe7e115','1600585154340-be6161a56a0c','1556909114-f6e7ad7d3136','1600566753086-00f18fb6b3ea','1564013799919-ab600027ffc6','1604014237800-1c9102c219da','1552321554-5fefe8c9ef14'].map(function(id){return U+id+W;});
+  var imgs=[], idx=0, cur=0, timer=null;
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  function set(el,url){ el.style.backgroundImage='url("'+url+'")'; }
+  function start(list){
+    imgs=(list&&list.length>=3)?list.slice(0,10):FALLBACK;
+    imgs.forEach(function(u){ var i=new Image(); i.src=u; });
+    idx=0; cur=0;
+    set(A,imgs[0]); A.classList.add('active'); B.classList.remove('active');
+    clearInterval(timer);
+    if(!reduce && imgs.length>1){ timer=setInterval(next,5000); }
   }
-  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',loadCover);}
-  else{loadCover();}
+  function next(){
+    idx=(idx+1)%imgs.length;
+    var incoming=(cur===0)?B:A, outgoing=(cur===0)?A:B;
+    set(incoming,imgs[idx]);
+    incoming.classList.add('active'); outgoing.classList.remove('active');
+    cur=1-cur;
+  }
+  start(null); // show fallback immediately
+  // upgrade to your real project photos from Firebase when available
+  fetch(RTDB+'/site/projects.json').then(function(r){return r.json();}).then(function(p){
+    if(!p) return;
+    var arr=Array.isArray(p)?p:Object.keys(p).map(function(k){return p[k];});
+    var pics=[];
+    arr.forEach(function(it){ if(it&&it.photos&&it.photos.length){ it.photos.forEach(function(ph){ if(ph&&pics.indexOf(ph)<0)pics.push(ph); }); } });
+    if(pics.length>=3) start(pics);
+  }).catch(function(){});
 })();
 </script>
 
