@@ -493,6 +493,50 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
   *{ animation-duration:.001ms!important; animation-iteration-count:1!important; scroll-behavior:auto!important; }
 }
 </style>
+<style id="hero2-style">
+/* ===== Hero v2 — image + lead form in the hero (low-friction capture) ===== */
+.hero2{position:relative;overflow:hidden;background:var(--ink)}
+.hero2-bg{position:absolute;inset:0;z-index:0}
+.hero2-bg img{width:100%;height:100%;object-fit:cover;object-position:center 60%}
+.hero2-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(22,19,15,.9) 0%,rgba(22,19,15,.74) 46%,rgba(22,19,15,.5) 100%);z-index:1}
+.hero2-inner{position:relative;z-index:2;display:grid;grid-template-columns:1.02fr .98fr;gap:46px;align-items:center;padding:54px 22px 60px}
+.hero2-copy{color:#fff}
+.hero2-copy .eyebrow{color:var(--gold-lt);margin-bottom:16px}
+.hero2-copy .eyebrow::before{background:var(--gold)}
+.hero2-copy h1{font-size:clamp(2.4rem,4.6vw,3.7rem);line-height:1.08;margin-bottom:16px;color:#fff;letter-spacing:-.015em}
+.hero2-copy h1 em{font-style:normal;color:var(--gold-lt)}
+.hero2-sub{font-size:1.05rem;color:rgba(255,255,255,.85);max-width:40ch;margin-bottom:22px;line-height:1.6}
+.hero2-points{list-style:none;margin:0 0 18px;padding:0;display:grid;gap:11px}
+.hero2-points li{display:flex;align-items:flex-start;gap:11px;font-size:.96rem;color:#fff}
+.hero2-points svg{width:19px;height:19px;stroke:var(--gold-lt);fill:none;stroke-width:2.6;flex-shrink:0;margin-top:2px}
+.hero2-review{font-size:.86rem;color:rgba(255,255,255,.8);display:flex;align-items:center;gap:9px}
+.hero2-review .stars{color:var(--gold-lt);letter-spacing:2px;font-size:.95rem}
+/* Form card */
+.hero2-form{background:var(--paper);border-radius:14px;padding:26px 24px;box-shadow:0 30px 74px rgba(0,0,0,.46)}
+.hf-head h2{font-family:var(--fh);font-size:1.75rem;color:var(--ink);margin-bottom:4px;line-height:1.15}
+.hf-head p{font-size:.86rem;color:var(--muted);margin-bottom:16px;line-height:1.5}
+.hero2-form input{width:100%;padding:14px 14px;border:1.5px solid var(--line);background:#fff;font-family:inherit;font-size:16px;border-radius:9px;outline:none;margin-bottom:11px;color:var(--ink);transition:border-color .18s ease}
+.hero2-form input:focus{border-color:var(--gold)}
+.hf-btn{width:100%;font-size:1rem;padding:16px;margin-top:3px}
+.hf-consent{font-size:.68rem;color:var(--muted);line-height:1.55;margin-top:12px}
+.hf-consent a{color:var(--gold-d);font-weight:600;text-decoration:none}
+.hf-chips{display:flex;gap:15px;flex-wrap:wrap;justify-content:center;margin-top:13px}
+.hf-chips span{font-size:.72rem;color:var(--muted);font-weight:500}
+.hf-alt{font-size:.78rem;color:var(--muted);text-align:center;margin-top:14px;padding-top:13px;border-top:1px solid var(--line)}
+.hf-alt a{color:var(--gold-d);font-weight:600;text-decoration:none}
+.hero2 .qc-err{display:none;background:#fbeeee;border:1px solid #e2b4b4;color:#8a2b2b;padding:11px;border-radius:8px;font-size:.82rem;margin-bottom:10px}
+.hero2 .qc-ok{display:none;background:#eef6ec;border:1px solid #b6d8ac;color:#2f5424;padding:13px;border-radius:8px;font-size:.86rem;text-align:center;margin-top:8px}
+@media(max-width:860px){
+  .hero2-inner{grid-template-columns:1fr;gap:20px;padding:30px 18px 26px}
+  .hero2-bg::after{background:linear-gradient(180deg,rgba(22,19,15,.6) 0%,rgba(22,19,15,.5) 38%,rgba(22,19,15,.8) 100%)}
+  .hero2-copy h1{font-size:clamp(2.1rem,9vw,2.9rem)}
+  .hero2-sub{max-width:100%;font-size:1rem;margin-bottom:16px}
+  .hero2-points{display:none}
+  .hero2-review{margin-bottom:2px}
+  .hero2-form{padding:22px 18px}
+  .hf-head h2{font-size:1.55rem}
+}
+</style>
 </head>
 
 <body class="pre-load">
@@ -511,61 +555,42 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 </header>
 
 <a id="top"></a>
-<section class="wrap hero">
-  <div class="hero-left reveal-load">
-    <span class="eyebrow">Interior &amp; Exterior Painting</span>
-    <h1>The <em>Smile</em> Starts Before You Park</h1>
-    <p class="hero-sub">That first morning in a freshly painted home — the light hits different, the space feels calmer, and it still smells brand new. That's what we do for Middle Tennessee homeowners.</p>
-    <ul class="hero-points">
-      <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Fully insured &amp; W9 ready. No risk to you</li>
-      <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Premium Sherwin-Williams &amp; Benjamin Moore paint</li>
-      <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> 1-year workmanship warranty in writing</li>
-      <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Free, detailed estimate within 24 hours</li>
-    </ul>
-    <div class="hero-cta-row">
-      <a class="btn btn-primary" href="#quote">Get My Instant Estimate</a>
-      <a class="btn btn-ghost" href="tel:+16156081220" onclick="trackConversion('call_label')">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 013.93 2h3a2 2 0 012 1.72c.13.96.36 1.9.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0122 16.92z"/></svg>
-        Call Now
-      </a>
+<section class="hero2">
+  <div class="hero2-bg"><img id="hero-cover" src="https://images.unsplash.com/photo-1562259929-b4e1fd3aef09?w=1400&q=80" alt="Freshly painted Middle Tennessee home by Formo Renovation"/></div>
+  <div class="wrap hero2-inner">
+    <div class="hero2-copy reveal-load">
+      <span class="eyebrow">Interior &amp; Exterior Painting &middot; Middle TN</span>
+      <h1>The <em>Smile</em> Starts Before You Park</h1>
+      <p class="hero2-sub">Fresh paint, done right — the light hits different, the space feels calmer, and it still smells brand new. Trusted by Middle Tennessee homeowners.</p>
+      <ul class="hero2-points">
+        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Fully insured &amp; W9 ready</li>
+        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Sherwin-Williams &amp; Benjamin Moore paint</li>
+        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> 1-year written warranty</li>
+        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Free estimate within 24 hours</li>
+      </ul>
+      <div class="hero2-review"><span class="stars">★★★★★</span> Rated 5.0 by Middle TN homeowners</div>
     </div>
-  </div>
-  <div class="hero-right">
-    <img id="hero-cover" src="https://images.unsplash.com/photo-1562259929-b4e1fd3aef09?w=1000&q=80" alt="Professional painting work by Formo Renovation"/>
-    <div class="hero-badge">
-      <div class="stars">★★★★★</div>
-      <p>"Professional, clean, and detail-oriented from start to finish. Transformed our whole downstairs."</p>
-      <span>- Jessica R., Brentwood TN</span>
+    <div class="hero2-form reveal-load">
+      <div class="hf-head">
+        <h2>Get Your Free Estimate</h2>
+        <p>Tell us where to send it — we reply within 24 hours. No obligation.</p>
+      </div>
+      <form id="qcForm" onsubmit="return false">
+        <input type="text" id="qc-name" placeholder="Full name *" autocomplete="name"/>
+        <input type="tel" id="qc-phone" placeholder="Phone *" autocomplete="tel"/>
+        <input type="email" id="qc-email" placeholder="Email (recommended)" autocomplete="email"/>
+        <input type="text" id="qc-city" placeholder="City or ZIP (e.g. Franklin, TN)"/>
+        <div class="qc-err" id="qc-err">Please enter your name and a valid phone number.</div>
+        <button type="button" class="btn btn-primary hf-btn" id="qc-btn" onclick="quickLead()">Get My Free Estimate →</button>
+        <div class="qc-ok" id="qc-ok">Got it! We'll reach out shortly. Prefer to talk now? Call <strong>(615) 608-1220</strong>.</div>
+        <p class="hf-consent">By submitting, you agree we may contact you by phone, text or email about your estimate. See our <a href="/privacy.html">Privacy Policy</a> &amp; <a href="/terms.html">Terms</a>.</p>
+        <div class="hf-chips"><span>&#10003; No obligation</span><span>&#10003; Fully insured</span><span>&#10003; 1-yr warranty</span></div>
+      </form>
+      <p class="hf-alt">Prefer to see a price range first? <a href="#quote">Try our instant estimator &darr;</a></p>
     </div>
   </div>
 </section>
 
-<section class="wrap quickcontact" id="quick">
-  <div class="qc-card">
-    <div class="qc-copy">
-      <span class="eyebrow">The 30-Second Option</span>
-      <h2>Prefer we just <em>call you back?</em></h2>
-      <p>Skip the questions. Leave your name and number and we'll reach out within minutes with your free estimate.</p>
-      <div class="qc-trust">
-        <span><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Answer in under 5 min</span>
-        <span><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> No obligation</span>
-        <span><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Bilingual team</span>
-      </div>
-    </div>
-    <form class="qc-form" id="qcForm" onsubmit="return false">
-      <input type="text" id="qc-name" placeholder="Full name *"/>
-      <div class="qc-row">
-        <input type="tel" id="qc-phone" placeholder="Phone *"/>
-        <input type="email" id="qc-email" placeholder="Email (optional)"/>
-      </div>
-      <textarea id="qc-msg" placeholder="What do you need painted? (optional)"></textarea>
-      <div class="qc-err" id="qc-err">Please enter your name and a valid phone number.</div>
-      <button type="button" class="btn btn-primary qc-btn" id="qc-btn" onclick="quickLead()">Get My Free Call Back →</button>
-      <div class="qc-ok" id="qc-ok">Got it! We'll reach out shortly. Prefer to talk now? Call <strong>(615) 608-1220</strong>.</div>
-      <p class="qc-fine">Or reach us now: <a href="tel:+16156081220" onclick="trackConversion('call_label')">(615) 608-1220</a> &middot; <a href="mailto:dan@formorenovation.com?subject=Painting%20Estimate%20Request" onclick="trackConversion('email_label')">Email us</a></p>
-    </form>
-  </div>
-</section>
 <section class="quote" id="quote">
   <div class="wrap quote-grid">
     <div>
@@ -1033,9 +1058,20 @@ function updateLeadMsg(){
 
 // Sends the lead to FormSubmit. stage: 'instant' (captured the moment they see
 // the price) or 'completed' (they finished the qualify step). Returns the fetch promise.
+// Backup EVERY lead to your own Firebase so a lead is never lost, even if email fails.
+function saveLeadBackup(data){
+  try{
+    fetch('https://realtime-database-c6a10-default-rtdb.firebaseio.com/site/leads.json',{
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body:JSON.stringify(Object.assign({ ts:new Date().toISOString(), page:'painting' }, data))
+    }).catch(function(){});
+  }catch(e){}
+}
+
 function sendLead(stage){
   var g=function(id){var el=document.getElementById(id);return el?(el.value||''):'';};
   var name=g('lf-name').trim(), phone=g('lf-phone').trim(), email=g('lf-email').trim();
+  saveLeadBackup({source:'estimate', stage:stage, name:name, phone:phone, email:email, city:g('lf-city').trim(), project_type:g('lf-type'), details:g('lf-msg').trim()});
   return fetch('https://formsubmit.co/ajax/dan@formorenovation.com',{
     method:'POST',
     headers:{'Content-Type':'application/json','Accept':'application/json'},
@@ -1056,7 +1092,7 @@ function sendLead(stage){
 // instantly and fires the conversion, so he can reach out right away.
 function quickLead(){
   var g=function(id){var el=document.getElementById(id);return el?(el.value||'').trim():'';};
-  var name=g('qc-name'), phone=g('qc-phone'), email=g('qc-email'), msg=g('qc-msg');
+  var name=g('qc-name'), phone=g('qc-phone'), email=g('qc-email'), city=g('qc-city');
   var err=document.getElementById('qc-err'), ok=document.getElementById('qc-ok'), btn=document.getElementById('qc-btn');
   var phoneOk=phone.replace(/[^0-9]/g,'').length>=10;
   var emailOk=(email==='')||/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email);
@@ -1065,14 +1101,16 @@ function quickLead(){
     err.style.display='block'; return;
   }
   err.style.display='none'; ok.style.display='none';
+  saveLeadBackup({source:'hero-form', name:name, phone:phone, email:email||'', city:city||''});
   var orig=btn.textContent; btn.textContent='Sending...'; btn.disabled=true;
   fetch('https://formsubmit.co/ajax/dan@formorenovation.com',{
     method:'POST',
     headers:{'Content-Type':'application/json','Accept':'application/json'},
     body:JSON.stringify({
       name:name, phone:phone, email:email||'Not provided',
-      details:msg||'Quick call-back request (no details given)',
-      _subject:'QUICK CALL-BACK LEAD - '+name,
+      city:city||'Not provided',
+      details:'Free estimate request from hero form',
+      _subject:'NEW PAINTING LEAD (hero form) - '+name,
       _template:'table'
     })
   }).then(function(r){return r.json();}).then(function(d){
