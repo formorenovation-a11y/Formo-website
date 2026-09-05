@@ -575,7 +575,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
     <div class="hero2-copy reveal-load">
       <span class="eyebrow">Interior &amp; Exterior Painting &middot; Middle TN</span>
       <h1>The <em>Smile</em> Starts Before You Park</h1>
-      <p class="hero2-sub">You’ve changed over the years, and your home can reflect who you are today. New colors can transform the way it feels, creating a difference you’ll enjoy every day.</p>
+      <p class="hero2-sub">Fresh paint, done right — the light hits different, the space feels calmer, and it still smells brand new. Trusted by Middle Tennessee homeowners.</p>
       <ul class="hero2-points">
         <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Fully insured &amp; W9 ready</li>
         <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Sherwin-Williams &amp; Benjamin Moore paint</li>
@@ -1213,7 +1213,7 @@ async function submitLead(e){
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion:reduce)').matches;
   function set(el,url){ el.style.backgroundImage='url("'+url+'")'; }
   function start(list){
-    imgs=(list&&list.length>=3)?list.slice(0,10):FALLBACK;
+    imgs=(list&&list.length>=1)?list.slice(0,10):FALLBACK;
     imgs.forEach(function(u){ var i=new Image(); i.src=u; });
     idx=0; cur=0;
     set(A,imgs[0]); A.classList.add('active'); B.classList.remove('active');
@@ -1228,13 +1228,15 @@ async function submitLead(e){
     cur=1-cur;
   }
   start(null); // show fallback immediately
-  // upgrade to your real project photos from Firebase when available
-  fetch(RTDB+'/site/projects.json').then(function(r){return r.json();}).then(function(p){
-    if(!p) return;
-    var arr=Array.isArray(p)?p:Object.keys(p).map(function(k){return p[k];});
+  // Uses ONLY the images loaded in the Site Editor → "Hero Background Slideshow".
+  // You control the hero photos entirely from there (up to 10). If none are set,
+  // the built-in default set above is used.
+  fetch(RTDB+'/site/heroSlides.json').then(function(r){return r.json();}).then(function(d){
+    if(!d) return;
+    var arr=Array.isArray(d)?d:Object.keys(d).map(function(k){return d[k];});
     var pics=[];
-    arr.forEach(function(it){ if(it&&it.photos&&it.photos.length){ it.photos.forEach(function(ph){ if(ph&&pics.indexOf(ph)<0)pics.push(ph); }); } });
-    if(pics.length>=3) start(pics);
+    arr.forEach(function(u){ if(typeof u==='string' && u.length>10 && pics.indexOf(u)<0) pics.push(u); });
+    if(pics.length>=1) start(pics);   // your editor images win; else the built-in set stays
   }).catch(function(){});
 })();
 </script>

@@ -922,7 +922,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
                 <div class="afield full"><label>Full description (modal)</label><textarea id="pf-desc" rows="4" placeholder="Describe el trabajo realizado, materiales, resultado..."></textarea></div>
                 <div class="afield"><label>Area worked</label><input id="pf-area" placeholder="95 sq ft"/></div>
                 <div class="afield"><label>Year</label><input id="pf-year" placeholder="2024"/></div>
-                <div class="afield full"><div id="pf-featured-btn" onclick="toggleFeatured()" style="display:flex;align-items:center;gap:11px;cursor:pointer;padding:12px 14px;background:var(--cream);border:2px solid var(--cream2);border-radius:4px;transition:all .18s;-webkit-tap-highlight-color:transparent"><span id="pf-featured-box" style="width:24px;height:24px;flex-shrink:0;border:2px solid var(--gold);border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:15px;color:#fff;background:#fff;transition:all .15s"></span><span><strong style="font-size:.86rem">⭐ Feature on Painting landing page</strong><br><span style="font-size:.73rem;color:var(--muted)">Show this project in the ads landing gallery (painting.html)</span></span></div><input type="hidden" id="pf-featured" value="false"/></div>
+<input type="hidden" id="pf-featured" value="false"/>
                 <div class="afield full"><label>Tags / Materials (comma separated)</label><input id="pf-tags" placeholder="Porcelain Tile, Custom Cabinetry, LED Lighting"/></div>
                 <div class="afield full">
                   <label>Photos (URLs, up to 15) — upload free at <a href="https://imgbb.com" target="_blank" style="color:var(--gold)">imgbb.com</a></label>
@@ -1033,6 +1033,19 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
                   <div class="photo-size-hint">📐 Recommended: 1000×1200px (vertical/portrait works best for the hero)</div>
                 </div>
                 <div class="aform-btns"><button class="btn btn-gold btn-sm" onclick="savePaintingLanding()">💾 Save</button><span class="save-indicator" id="ind-pl">✅ Saved</span></div>
+
+                <div style="border-top:1px solid var(--cream2);margin-top:22px;padding-top:18px">
+                  <label style="font-weight:600;display:block;margin-bottom:4px">🖼️ Hero Background Slideshow (up to 10 images)</label>
+                  <p style="font-size:.78rem;color:var(--muted);margin-bottom:12px">These are the <strong>only</strong> images that rotate in the painting landing hero background — a smooth 5-second crossfade in a loop. Add up to 10. If you leave this empty, the landing uses its built-in default photos.</p>
+                  <div id="heroSlideInputs"></div>
+                  <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">
+                    <button type="button" class="btn btn-outline btn-sm" style="margin:0" onclick="addHeroSlideRow('')">+ Add image slot</button>
+                    <label class="btn btn-outline btn-sm" style="margin:0;cursor:pointer">📷 Upload multiple<input type="file" accept="image/*" multiple style="display:none" onchange="handleHeroSlideMulti(this)"/></label>
+                  </div>
+                  <div id="heroSlide-status" style="font-size:.76rem;color:var(--gold);margin-top:8px;display:none"></div>
+                  <div class="photo-size-hint">📐 Recommended: 1600×1000px (landscape). These fill the full hero background.</div>
+                  <div class="aform-btns" style="margin-top:10px"><button class="btn btn-gold btn-sm" onclick="saveHeroSlides()">💾 Save Slideshow</button><span class="save-indicator" id="ind-heroSlides">✅ Saved</span></div>
+                </div>
               </div>
             </div>
             <div class="section-card">
@@ -2142,6 +2155,7 @@ const DEF={
   logo:{url:'',size:38},
   svcDetails:{},
   paintingLanding:{hero:''},
+  heroSlides:[],
   portalHome:{eyebrow:'Built by Formo, For You',title:'Your Personal Client Portal',p:'We designed and built our own client portal to give you direct, immediate communication with our team — and complete visibility into your project from day one to final walkthrough.',f1t:'Progress Photos',f1p:'See daily photos from your job site — watch your project transform in real time.',f2t:'Live Timeline & Phases',f2p:"Track every phase of your renovation — know exactly what's complete and what's next.",f3t:'Invoices & Documents',f3p:'Access proposals, invoices, and project documents anytime — all in one secure place.',f4t:'Direct Communication',f4p:'Message our team directly — questions answered fast, decisions approved instantly.'},
   blogHero:{eyebrow:'Insights & Expertise',h1a:'Renovation Knowledge,',h1b:'From the Field.',p:'Practical lessons, techniques, and insights from real projects — written by the Formo Renovation team.',bg:'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1600&q=80'},
 
@@ -2728,7 +2742,7 @@ function loadAllAdminForms(){
   loadHeroForm();loadTrustForm();loadWhyUsForm();loadCtaForm();
   loadServicesForm();loadProjectsList();loadTestiList();
   loadTeamForm();loadStatsForm();loadTimelineForm();loadAboutHeroForm();
-  loadProcessForm();loadSettingsForm();loadLogoForm();loadVideoForm();loadSocialForm();loadPageHeroForms();loadBeforeAfterForm();loadCommitmentForm();loadMapSectionForm();loadArticlesAdminList();loadPortalHomeForm();loadBlogHeroForm();loadSvcDetailForm();loadPaintingLandingForm();
+  loadProcessForm();loadSettingsForm();loadLogoForm();loadVideoForm();loadSocialForm();loadPageHeroForms();loadBeforeAfterForm();loadCommitmentForm();loadMapSectionForm();loadArticlesAdminList();loadPortalHomeForm();loadBlogHeroForm();loadSvcDetailForm();loadPaintingLandingForm();loadHeroSlidesForm();
   if(document.getElementById('fbUrlChange'))document.getElementById('fbUrlChange').value=getFbUrl();
   const mb=document.getElementById('manual-bucket');if(mb)mb.value=localStorage.getItem('frm_manual_bucket')||'';
 }
@@ -3406,6 +3420,87 @@ async function savePaintingLanding(){
 function loadPaintingLandingForm(){
   const d=getData('paintingLanding')||{};
   const e=document.getElementById('pl-hero');if(e)e.value=d.hero||'';
+}
+
+/* ── Painting landing HERO SLIDESHOW (independent 10 images) ── */
+function heroSlideRowHTML(val){
+  var hasImg=val&&val.length>10;
+  return '<div class="photo-row hero-slide-row" style="margin-bottom:8px">'
+    +'<div class="photo-row-head"><span class="photo-row-label"><span class="hs-num">Image</span></span>'
+    +'<div class="photo-row-actions">'
+    +'<button type="button" class="photo-row-move" onclick="moveHeroSlide(this,-1)" title="Move up">▲</button>'
+    +'<button type="button" class="photo-row-move" onclick="moveHeroSlide(this,1)" title="Move down">▼</button>'
+    +'<button type="button" class="photo-row-del" onclick="removeHeroSlide(this)">✕ Remove</button></div></div>'
+    +'<input type="url" value="'+(val||'')+'" style="display:none"/>'
+    +'<label class="photo-pick'+(hasImg?' has-img':'')+'">'
+    +(hasImg?'<img loading="lazy" src="'+val+'" alt=""/><span class="change-badge">Tap to change</span>':'<div class="photo-pick-empty"><span class="icon">📷</span><span>Tap to pick from gallery or camera</span></div>')
+    +'<input type="file" accept="image/*" style="display:none" onchange="handleHeroSlidePick(this,this.closest(\'.hero-slide-row\'))"/></label>'
+    +'<div class="upload-status"></div></div>';
+}
+function addHeroSlideRow(val){
+  var c=document.getElementById('heroSlideInputs');if(!c||c.children.length>=10)return;
+  var d=document.createElement('div');d.innerHTML=heroSlideRowHTML(val||'');
+  var row=d.firstElementChild;c.appendChild(row);renumberHeroSlides();
+}
+function renumberHeroSlides(){
+  var c=document.getElementById('heroSlideInputs');if(!c)return;
+  Array.from(c.children).forEach(function(row,i){
+    var n=row.querySelector('.hs-num');if(n)n.textContent='Image '+(i+1);
+    var mv=row.querySelectorAll('.photo-row-move');
+    if(mv.length===2){mv[0].disabled=(i===0);mv[1].disabled=(i===c.children.length-1);}
+  });
+}
+function moveHeroSlide(btn,dir){
+  var row=btn.closest('.hero-slide-row');if(!row)return;var c=row.parentElement;
+  if(dir<0&&row.previousElementSibling)c.insertBefore(row,row.previousElementSibling);
+  else if(dir>0&&row.nextElementSibling)c.insertBefore(row.nextElementSibling,row);
+  renumberHeroSlides();
+}
+function removeHeroSlide(btn){var row=btn.closest('.hero-slide-row');if(row)row.remove();renumberHeroSlides();}
+async function handleHeroSlidePick(fileInput,rowEl){
+  var file=fileInput.files[0];if(!file)return;
+  var pickBtn=rowEl.querySelector('.photo-pick');
+  var urlInput=rowEl.querySelector('input[type=url]');
+  var status=rowEl.querySelector('.upload-status');
+  var preview=await previewFile(file);
+  if(pickBtn){pickBtn.classList.add('has-img');pickBtn.innerHTML='<img loading="lazy" src="'+preview+'" alt=""/><span class="change-badge">Tap to change</span>';}
+  if(status){status.textContent='⏳ Uploading to cloud...';status.className='upload-status show';}
+  var url=await uploadPhotoToStorage(file);
+  if(url){if(urlInput)urlInput.value=url;var img=pickBtn?pickBtn.querySelector('img'):null;if(img)img.src=url;
+    if(status){status.textContent='✅ Saved to cloud';setTimeout(function(){status.classList.remove('show');},2500);}}
+  else{if(urlInput&&preview)urlInput.value=preview;if(status){status.textContent='⚠️ Saved locally only';status.className='upload-status show err';}}
+}
+async function handleHeroSlideMulti(fileInput){
+  var files=Array.from(fileInput.files);if(!files.length)return;
+  var status=document.getElementById('heroSlide-status');
+  var c=document.getElementById('heroSlideInputs');
+  var avail=10-(c?c.children.length:0);
+  if(avail<=0){toast('Ya tienes 10 imágenes. Elimina alguna primero.','err');fileInput.value='';return;}
+  var toUp=files.slice(0,avail);
+  if(files.length>avail)toast('Solo '+avail+' espacios disponibles. Subiendo las primeras '+avail+' de '+files.length+'.','err');
+  if(status){status.style.display='block';status.textContent='⏳ Subiendo '+toUp.length+' imágenes...';}
+  for(var i=0;i<toUp.length;i++){
+    if(status)status.textContent='⏳ Subiendo imagen '+(i+1)+' de '+toUp.length+'...';
+    var preview=await previewFile(toUp[i]);addHeroSlideRow(preview);
+    var row=c.lastElementChild;var urlInput=row.querySelector('input[type=url]');var pickBtn=row.querySelector('.photo-pick');
+    var url=await uploadPhotoToStorage(toUp[i]);
+    if(url){if(urlInput)urlInput.value=url;var img=pickBtn?pickBtn.querySelector('img'):null;if(img)img.src=url;}
+    else{if(urlInput)urlInput.value=preview;}
+  }
+  if(status){status.textContent='✅ Listo — ahora haz clic en "Save Slideshow"';setTimeout(function(){status.style.display='none';},3000);}
+  fileInput.value='';
+}
+async function saveHeroSlides(){
+  var imgs=Array.from(document.querySelectorAll('#heroSlideInputs input[type=url]')).map(function(i){return i.value.trim();}).filter(function(v){return v&&v.length>10;}).slice(0,10);
+  var ok=await setData('heroSlides',imgs);
+  if(ok!==false){showInd('heroSlides');toast('✅ Hero slideshow guardado ('+imgs.length+' imágenes)'+(getFbUrl()?' en la nube':''),'ok');}
+}
+function loadHeroSlidesForm(){
+  var c=document.getElementById('heroSlideInputs');if(!c)return;
+  c.innerHTML='';
+  var imgs=getData('heroSlides');if(!Array.isArray(imgs))imgs=[];
+  imgs.slice(0,10).forEach(function(u){addHeroSlideRow(u);});
+  if(!c.children.length)addHeroSlideRow('');
 }
 
 async function savePortalHome(){
