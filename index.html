@@ -3745,5 +3745,64 @@ document.addEventListener('input', function(e){
   <input name="name"/><input name="email"/><input name="phone"/>
   <select name="project"></select><textarea name="message"></textarea>
 </form>
+
+<!-- Floating call button + "resolvemos cualquier duda" popup (mobile-friendly) -->
+<style id="float-call-style">
+.fc-wrap{position:fixed;right:18px;bottom:20px;z-index:950;display:flex;flex-direction:column;align-items:flex-end;gap:12px;font-family:'Jost','Helvetica Neue',sans-serif}
+.fc-fab{position:relative;width:60px;height:60px;border-radius:50%;background:#c9a96e;color:#191816;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 28px rgba(201,169,110,.5);text-decoration:none;transition:transform .2s cubic-bezier(.23,1,.32,1),box-shadow .2s ease}
+.fc-fab svg{width:26px;height:26px;position:relative;z-index:2}
+@media(hover:hover){.fc-fab:hover{transform:scale(1.06);box-shadow:0 14px 34px rgba(201,169,110,.62)}}
+.fc-fab:active{transform:scale(.95)}
+.fc-ring{position:absolute;inset:0;border-radius:50%;border:2px solid #c9a96e;animation:fcpulse 2.2s ease-out infinite;z-index:1}
+@keyframes fcpulse{0%{transform:scale(1);opacity:.7}100%{transform:scale(1.75);opacity:0}}
+.fc-bubble{position:relative;max-width:250px;background:#fff;border:1px solid #ede9e3;border-radius:14px;box-shadow:0 16px 40px rgba(25,24,22,.18);padding:14px 16px 15px;opacity:0;transform:translateY(10px) scale(.96);pointer-events:none;transition:opacity .28s ease,transform .28s cubic-bezier(.23,1,.32,1);transform-origin:bottom right}
+.fc-wrap.show .fc-bubble{opacity:1;transform:translateY(0) scale(1);pointer-events:auto}
+.fc-bubble::after{content:'';position:absolute;bottom:-7px;right:22px;width:14px;height:14px;background:#fff;border-right:1px solid #ede9e3;border-bottom:1px solid #ede9e3;transform:rotate(45deg)}
+.fc-bubble-link{display:block;text-decoration:none}
+.fc-bubble-link strong{display:block;font-size:.9rem;color:#191816;font-weight:700;margin-bottom:5px}
+.fc-bubble-link .fc-sub{display:block;font-size:.76rem;color:#7a7469;line-height:1.5}
+.fc-bubble-cta{display:inline-block;margin-top:10px;font-size:.84rem;font-weight:700;color:#a8823f}
+.fc-close{position:absolute;top:5px;right:7px;background:none;border:none;font-size:1.15rem;line-height:1;color:#c2bcb1;cursor:pointer;padding:3px 6px;border-radius:6px}
+.fc-close:hover{color:#191816}
+@media(prefers-reduced-motion:reduce){.fc-ring{display:none}.fc-bubble{transition:opacity .2s ease}}
+@media(max-width:600px){.fc-wrap{right:14px;bottom:16px}.fc-fab{width:56px;height:56px}.fc-bubble{max-width:216px}}
+</style>
+<div id="floatCall" class="fc-wrap">
+  <div class="fc-bubble" id="fcBubble" role="dialog" aria-label="Contáctanos">
+    <button class="fc-close" id="fcClose" type="button" aria-label="Cerrar">&times;</button>
+    <a class="fc-bubble-link" href="tel:+16156081220">
+      <strong>👋 Resolvemos cualquier duda</strong>
+      <span class="fc-sub">Llámanos — con gusto te ayudamos, sin compromiso.</span>
+      <span class="fc-bubble-cta">📞 (615) 608-1220</span>
+    </a>
+  </div>
+  <a class="fc-fab" id="fcFab" href="tel:+16156081220" aria-label="Llamar a Formo Renovation (615) 608-1220">
+    <span class="fc-ring"></span>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+  </a>
+</div>
+<script>
+(function(){
+  var wrap=document.getElementById('floatCall');
+  if(!wrap) return;
+  var closeBtn=document.getElementById('fcClose');
+  var fab=document.getElementById('fcFab');
+  var hideTimer=null;
+  function show(){ wrap.classList.add('show'); clearTimeout(hideTimer); hideTimer=setTimeout(hide,14000); }
+  function hide(){ wrap.classList.remove('show'); clearTimeout(hideTimer); }
+  // Auto-open once per browser session, after a short delay
+  var firstTime=true;
+  try{ firstTime=!sessionStorage.getItem('fc_shown'); }catch(e){}
+  if(firstTime){
+    setTimeout(function(){ show(); try{sessionStorage.setItem('fc_shown','1');}catch(e){} }, 2600);
+  }
+  if(closeBtn){ closeBtn.addEventListener('click', function(e){ e.preventDefault(); e.stopPropagation(); hide(); }); }
+  // On desktop (no tel: dialer) let a click on the FAB reveal the message instead of doing nothing
+  if(fab){ fab.addEventListener('click', function(e){
+    var noDialer = !/Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
+    if(noDialer){ e.preventDefault(); wrap.classList.contains('show')?hide():show(); }
+  }); }
+})();
+</script>
 </body>
 </html>
