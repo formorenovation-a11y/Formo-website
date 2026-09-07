@@ -220,7 +220,11 @@ footer{background:var(--dark);padding:60px 48px 24px}
 .brand-desc{font-size:.72rem;color:var(--muted);line-height:1.5}
 .products-section{padding:64px 48px;background:var(--cream)}
 .products-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1100px;margin:36px auto 0}
-.product-card{background:var(--white);padding:22px;border:1px solid var(--cream2)}
+.product-card{background:var(--white);padding:0;border:1px solid var(--cream2);overflow:hidden}
+.product-img{width:100%;aspect-ratio:16/10;overflow:hidden;background:var(--cream2)}
+.product-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease}
+@media(hover:hover){.product-card:hover .product-img img{transform:scale(1.05)}}
+.product-card-body{padding:20px 22px}
 .product-cat{font-size:.6rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:8px}
 .product-card h4{font-family:var(--fh);font-size:1rem;color:var(--text);margin-bottom:7px}
 .product-card p{font-size:.78rem;color:var(--muted);line-height:1.65}
@@ -894,6 +898,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
                 <div class="afield full"><label>Description (one paragraph per line)</label><textarea id="sd-desc" rows="4"></textarea></div>
                 <div class="afield full"><label>Highlights (one per line)</label><textarea id="sd-highlights" rows="4"></textarea></div>
                 <div class="afield full"><label>"What's Included" list (one per line)</label><textarea id="sd-scope" rows="5"></textarea></div>
+                <div class="afield full"><label>🖼️ Product &amp; Material Photos</label><p style="font-size:.74rem;color:var(--muted);margin:0 0 10px">One photo per card in the "Products &amp; Materials" section. Upload or paste a URL. Leave blank to use the default image.</p><div id="sd-prod-imgs"></div></div>
               </div>
               <div class="aform-btns"><button class="btn btn-gold btn-sm" onclick="saveSvcDetail()">💾 Save Service Page</button><button class="btn btn-outline btn-sm" onclick="resetSvcDetail()">Reset to default</button><span class="save-indicator" id="ind-sd">✅ Saved</span></div>
             </div></div>
@@ -1860,6 +1865,8 @@ service firebase.storage {
     </div>
   </section>
 
+  <section class="faq-section cream"><div class="container"><div class="faq-intro reveal"><span class="eyebrow">Common Questions</span><h2 id="svc-faq-title">Service FAQs</h2><div class="gold-rule"></div></div><div class="faq-cols" id="svc-faq-cols"></div></div></section>
+
   <div class="cta-split">
     <div class="cta-image"><img loading="lazy" src="https://images.unsplash.com/photo-1600121848594-d8644e57abab?w=800&q=80" alt=""/></div>
     <div class="cta-content">
@@ -2051,7 +2058,7 @@ const SVC_DATA = {
     products:[
       {cat:'Lumber',name:'Poplar & MDF Trim',desc:'Premium finger-jointed poplar and MDF profiles for paint-grade trim with clean, consistent lines.'},
       {cat:'Stain Grade',name:'Oak, Maple & Pine',desc:'Solid wood options for stain-grade applications — beams, shelving, and custom furniture-grade work.'},
-      {cat:'Sheet Goods',name:'PureBond Plywood',dest:'Formaldehyde-free hardwood plywood for cabinet boxes, shelving, and built-in construction.'},
+      {cat:'Sheet Goods',name:'PureBond Plywood',desc:'Formaldehyde-free hardwood plywood for cabinet boxes, shelving, and built-in construction.'},
       {cat:'Adhesives',name:'Loctite PL Premium',desc:'Professional construction adhesive for trim, panels, and structural bonding.'},
       {cat:'Fasteners',name:'Senco & Bostitch',desc:'Professional pneumatic nailers and finish nail systems for invisible fastening.'},
       {cat:'Caulk & Fill',name:'DAP Spackling & Caulk',desc:'Professional-grade fillers and paintable caulk for seamless trim finishing.'},
@@ -2097,6 +2104,57 @@ const SVC_DATA = {
     ],
     cat:'exterior'
   }
+};
+
+// Default photo per product card (index-matched to SVC_DATA[key].products). Editable in the Site Editor.
+const SVC_IMG='https://images.unsplash.com/photo-';
+const SVC_PRODUCT_IMG = {
+  bathroom:['1552321554-5fefe8c9ef14','1558618666-fcd25c85cd64','1600585154340-be6161a56a0c','1552321554-5fefe8c9ef14','1556909114-f6e7ad7d3136','1600121848594-d8644e57abab'].map(function(id){return SVC_IMG+id+'?w=600&q=80';}),
+  tile:['1558618666-fcd25c85cd64','1600585154340-be6161a56a0c','1604014237800-1c9102c219da','1552321554-5fefe8c9ef14','1584622650111-993a426fbf0a','1558618666-fcd25c85cd64'].map(function(id){return SVC_IMG+id+'?w=600&q=80';}),
+  painting:['1562259929-b4e1fd3aef09','1595428774223-ef52624120d2','1564013799919-ab600027ffc6','1584622650111-993a426fbf0a','1556909114-f6e7ad7d3136','1600121848594-d8644e57abab'].map(function(id){return SVC_IMG+id+'?w=600&q=80';}),
+  kitchen:['1556909114-f6e7ad7d3136','1604014237800-1c9102c219da','1584622650111-993a426fbf0a','1600585154340-be6161a56a0c','1558618666-fcd25c85cd64','1604014237800-1c9102c219da'].map(function(id){return SVC_IMG+id+'?w=600&q=80';}),
+  carpentry:['1604014237800-1c9102c219da','1611021061285-16c871740f21','1604014237800-1c9102c219da','1584622650111-993a426fbf0a','1600607687939-ce8a6c25118c','1600121848594-d8644e57abab'].map(function(id){return SVC_IMG+id+'?w=600&q=80';}),
+  exterior:['1564013799919-ab600027ffc6','1584622650111-993a426fbf0a','1564013799919-ab600027ffc6','1604014237800-1c9102c219da','1562259929-b4e1fd3aef09','1600121848594-d8644e57abab'].map(function(id){return SVC_IMG+id+'?w=600&q=80';})
+};
+
+// Per-service FAQs shown on each service detail page
+const SVC_FAQS = {
+  bathroom:[
+    {q:'How long does a bathroom renovation take?',a:'Most take 2–3 weeks depending on scope, tile complexity, and fixture lead times. Your proposal includes a firm timeline before we start.'},
+    {q:'Do you handle waterproofing?',a:'Yes — every wet area gets a full waterproofing system (Schluter KERDI or equivalent) before any tile goes up. It\'s the step that protects your investment for decades.'},
+    {q:'Can you work within my existing layout?',a:'Both. We can refresh within your current footprint or relocate plumbing for a new layout — we\'ll price each option clearly so you can choose.'},
+    {q:'Do you help choose tile, fixtures, and finishes?',a:'Absolutely. We guide your selections to fit your style and budget, and coordinate ordering so nothing stalls the project.'}
+  ],
+  tile:[
+    {q:'What flooring types do you install?',a:'Porcelain and ceramic tile, natural stone, and waterproof luxury vinyl plank (LVP) — plus electric heated-floor systems under tile.'},
+    {q:'Do you remove the old flooring?',a:'Yes — removal, disposal, and proper substrate prep are included so the new surface sits flat and lasts.'},
+    {q:'Can you install heated floors?',a:'Yes — radiant systems like Nuheat and Schluter DITRA-HEAT, installed under tile for comfort in bathrooms and kitchens.'},
+    {q:'How do you prevent cracked tile or grout later?',a:'Proper substrate leveling, the right setting materials, and correct movement joints — the prep no one sees is what keeps tile intact for years.'}
+  ],
+  painting:[
+    {q:'What paint brands do you use?',a:'Primarily Sherwin-Williams and Benjamin Moore, matched to the room and surface for durability and a flawless finish.'},
+    {q:'Do you prep before painting?',a:'Always. Sanding, patching, caulking, and priming come first — the prep is what makes the finish last.'},
+    {q:'Do you paint cabinets?',a:'Yes — a spray-applied urethane finish that looks factory-new and is far more durable than a brushed coat.'},
+    {q:'Interior and exterior?',a:'Both — walls, ceilings, trim, doors, and cabinets inside; siding, fascia, soffits, and front/garage doors outside.'}
+  ],
+  kitchen:[
+    {q:'Is refinishing really cheaper than new cabinets?',a:'Usually — often a fraction of replacement cost, with a factory-smooth spray finish, in days rather than weeks.'},
+    {q:'Can any cabinets be refinished?',a:'Most solid-wood and MDF doors refinish beautifully. We inspect yours and tell you honestly if refinishing is the right call.'},
+    {q:'Do you also update countertops and backsplash?',a:'Yes — we coordinate countertops, backsplash, hardware, and lighting for a fully refreshed kitchen under one team.'},
+    {q:'How long does a cabinet refinish take?',a:'Typically a few days to a week, depending on the number of doors and the finish you select.'}
+  ],
+  carpentry:[
+    {q:'What trim and carpentry work do you do?',a:'Crown molding, baseboards, door and window casing, wainscoting, shiplap, built-in shelving, and decorative ceiling beams.'},
+    {q:'Can you build custom built-ins?',a:'Yes — office storage, pantries, entertainment centers, and cabinetry custom-fit to your space.'},
+    {q:'Do you paint or stain the trim too?',a:'Yes — we prep, caulk, and finish (paint or stain) for a seamless, built-in look.'},
+    {q:'Will new trim match my existing profiles?',a:'We match existing profiles wherever possible, or help you upgrade to a new, consistent look throughout the home.'}
+  ],
+  exterior:[
+    {q:'What\'s included in a turnkey refresh?',a:'Coordinated interior and exterior work — paint, drywall, flooring, fixtures, and a final punch list — all managed by one team.'},
+    {q:'Is this good for a property I\'m selling or renting?',a:'Exactly — we focus on staging-ready, market-smart finishes that maximize appeal and return on every dollar.'},
+    {q:'Can you handle everything so I don\'t manage trades?',a:'Yes. One point of contact coordinates every trade and delivers on schedule, so you don\'t have to chase anyone.'},
+    {q:'Do you do exterior painting and curb-appeal work?',a:'Yes — siding, fascia, soffits, front doors, and trim with durable exterior-grade coatings built for Tennessee weather.'}
+  ]
 };
 
 const SVC_ID_MAP = {
@@ -2159,9 +2217,26 @@ function openServiceDetail(svcKey){
   const scopeList=document.getElementById('svc-scope-list');
   if(scopeList)scopeList.innerHTML=d.scope.map(s=>`<li>${s}</li>`).join('');
 
-  // Products
+  // Products (with photo — editable override, else default)
   const prodGrid=document.getElementById('svc-products-grid');
-  if(prodGrid)prodGrid.innerHTML=d.products.map(p=>`<div class="product-card reveal"><span class="product-cat">${p.cat}</span><h4>${p.name}</h4><p>${p.desc}</p></div>`).join('');
+  const defImgs=(SVC_PRODUCT_IMG[key]||[]);
+  const ovImgs=(ov.productImgs||[]);
+  if(prodGrid)prodGrid.innerHTML=d.products.map((p,i)=>{
+    const img=ovImgs[i]||defImgs[i]||'';
+    return `<div class="product-card reveal">${img?`<div class="product-img"><img loading="lazy" src="${img}" alt="${p.name}"/></div>`:''}<div class="product-card-body"><span class="product-cat">${p.cat}</span><h4>${p.name}</h4><p>${p.desc||''}</p></div></div>`;
+  }).join('');
+
+  // Service FAQs
+  const faqWrap=document.getElementById('svc-faq-cols');
+  const faqTitleEl=document.getElementById('svc-faq-title');if(faqTitleEl)faqTitleEl.textContent=d.title+' — FAQs';
+  if(faqWrap){
+    const faqs=SVC_FAQS[key]||[];
+    if(faqs.length){
+      const mid=Math.ceil(faqs.length/2);
+      const groups=[faqs.slice(0,mid),faqs.slice(mid)];
+      faqWrap.innerHTML=groups.map(g=>g.length?'<div class="faq-category">'+g.map(f=>`<div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span>${f.q}</span><div class="faq-icon"></div></button><div class="faq-a"><div class="faq-a-inner"><p>${f.a}</p></div></div></div>`).join('')+'</div>':'').join('');
+    }else{faqWrap.innerHTML='';}
+  }
 
   // Brands
   const brandGrid=document.getElementById('svc-brands-grid');
@@ -3458,15 +3533,30 @@ function loadSvcDetailForm(){
   sv('sd-desc',descTxt);
   sv('sd-highlights',(d.highlights||[]).join('\n'));
   sv('sd-scope',(d.scope||[]).join('\n'));
+  // Product & material photos (index-matched to this service's products)
+  const pc=document.getElementById('sd-prod-imgs');
+  if(pc){
+    const prods=base.products||[];
+    const ovImgs=(ov.productImgs||[]);
+    const defImgs=(SVC_PRODUCT_IMG[key]||[]);
+    pc.innerHTML=prods.map((p,i)=>{
+      const cur=ovImgs[i]||'';
+      const shown=cur||defImgs[i]||'';
+      return '<div class="afield full" style="margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid var(--cream2)"><label style="font-size:.76rem">'+(i+1)+'. '+p.name+' <span style="color:var(--muted);font-weight:400">('+p.cat+')</span></label><div style="display:flex;gap:8px;align-items:center"><input id="sd-prodimg-'+i+'" style="flex:1" placeholder="URL or upload" value="'+cur.replace(/"/g,'&quot;')+'"/><label class="upload-btn-inline">📷<input type="file" accept="image/*" style="display:none" onchange="handleHeroBgUpload(this,\'sd-prodimg-'+i+'\')"/></label></div><div class="upload-status"></div>'+(shown?'<img loading="lazy" src="'+shown+'" style="width:100%;max-height:96px;object-fit:cover;margin-top:6px;border:1px solid var(--cream2)"/>':'')+'</div>';
+    }).join('');
+  }
 }
 async function saveSvcDetail(){
   const key=(document.getElementById('sd-key')||{}).value;if(!key)return;
   const lines=id=>((document.getElementById(id)||{}).value||'').split('\n').map(s=>s.trim()).filter(Boolean);
   const descLines=lines('sd-desc');
+  const prods=(SVC_DATA[key]&&SVC_DATA[key].products)||[];
+  const productImgs=prods.map((p,i)=>{const e=document.getElementById('sd-prodimg-'+i);return e?e.value.trim():'';});
   const ov={
     eyebrow:gv('sd-eyebrow'),title:gv('sd-title'),heroP:gv('sd-heroP'),heroBg:gv('sd-heroBg'),
     desc:descLines.map(p=>'<p>'+p+'</p>').join(''),
-    highlights:lines('sd-highlights'),scope:lines('sd-scope')
+    highlights:lines('sd-highlights'),scope:lines('sd-scope'),
+    productImgs:productImgs
   };
   const all=getData('svcDetails')||{};
   all[key]=ov;
