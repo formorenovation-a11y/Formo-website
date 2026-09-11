@@ -3800,32 +3800,47 @@ async function handleLnSvcPhoto(fileInput){
   if(status){status.textContent='⏳ Uploading...';status.className='upload-status show';}
   var url=await uploadPhotoToStorage(file);
   if(url){if(hidden)hidden.value=url;var img=pick?pick.querySelector('img'):null;if(img)img.src=url;if(status){status.textContent='✅ Saved to cloud';setTimeout(function(){status.classList.remove('show');},2000);}}
-  else{if(hidden)hidden.value=preview;if(status){status.textContent='⚠️ Saved locally only';status.className='upload-status show err';}}
+  else{if(hidden)hidden.value=preview;if(status){status.textContent='⚠️ No subió a la nube — revisa Firebase Storage';status.className='upload-status show err';}}
 }
 async function saveLanding(){
-  var val=function(id){var e=document.getElementById(id);return e?e.value.trim():'';};
-  var rv=function(r,sel){var e=r.querySelector(sel);return e?(e.value||'').trim():'';};
-  var services=Array.from(document.querySelectorAll('#ln-svc-list .ln-svc-row')).map(function(r){
-    var im=r.querySelector('.ln-svc-img');
-    return {img:im?(im.value||''):'',title:rv(r,'.ln-svc-title'),sub:rv(r,'.ln-svc-sub')};
-  }).filter(function(s){return s.title||s.img;});
-  var steps=Array.from(document.querySelectorAll('#ln-steps .afield')).map(function(r){
-    return {title:rv(r,'.ln-step-title'),text:rv(r,'.ln-step-text')};
-  });
-  var proof=Array.from(document.querySelectorAll('#ln-proof .aform-grid')).map(function(r){
-    return {k:rv(r,'.ln-proof-k'),lbl:rv(r,'.ln-proof-lbl')};
-  });
-  var testimonials=Array.from(document.querySelectorAll('#ln-testi .ln-testi-row')).map(function(r){
-    return {quote:rv(r,'.ln-testi-quote'),name:rv(r,'.ln-testi-name'),location:rv(r,'.ln-testi-loc')};
-  });
-  var obj={
-    hero:{eyebrow:val('ln-e-eyebrow'),h1a:val('ln-e-h1a'),h1b:val('ln-e-h1b'),sub:val('ln-e-sub')},
-    servicesEyebrow:val('ln-e-svcEyebrow'),servicesTitle:val('ln-e-svcTitle'),
-    services:services,proof:proof,steps:steps,testimonials:testimonials,
-    final:{h2a:val('ln-e-fh2a'),h2b:val('ln-e-fh2b'),p:val('ln-e-fp')}
-  };
-  var ok=await setData('landing',obj);
-  if(ok!==false){showInd('landing');toast('✅ Landing guardada'+(getFbUrl()?' en la nube':''),'ok');}
+  var btn=document.querySelector('[onclick="saveLanding()"]');
+  var orig=btn?btn.textContent:'';
+  if(btn){btn.disabled=true;btn.textContent='Guardando...';}
+  try{
+    var val=function(id){var e=document.getElementById(id);return e?(e.value||'').trim():'';};
+    var rv=function(r,sel){var e=r.querySelector(sel);return e?(e.value||'').trim():'';};
+    var services=Array.from(document.querySelectorAll('#ln-svc-list .ln-svc-row')).map(function(r){
+      var im=r.querySelector('.ln-svc-img');
+      return {img:im?(im.value||''):'',title:rv(r,'.ln-svc-title'),sub:rv(r,'.ln-svc-sub')};
+    }).filter(function(s){return s.title||s.img;});
+    var steps=Array.from(document.querySelectorAll('#ln-steps .afield')).map(function(r){
+      return {title:rv(r,'.ln-step-title'),text:rv(r,'.ln-step-text')};
+    });
+    var proof=Array.from(document.querySelectorAll('#ln-proof .aform-grid')).map(function(r){
+      return {k:rv(r,'.ln-proof-k'),lbl:rv(r,'.ln-proof-lbl')};
+    });
+    var testimonials=Array.from(document.querySelectorAll('#ln-testi .ln-testi-row')).map(function(r){
+      return {quote:rv(r,'.ln-testi-quote'),name:rv(r,'.ln-testi-name'),location:rv(r,'.ln-testi-loc')};
+    });
+    var hasB64=services.some(function(s){return /^data:/.test(s.img||'');});
+    var obj={
+      hero:{eyebrow:val('ln-e-eyebrow'),h1a:val('ln-e-h1a'),h1b:val('ln-e-h1b'),sub:val('ln-e-sub')},
+      servicesEyebrow:val('ln-e-svcEyebrow'),servicesTitle:val('ln-e-svcTitle'),
+      services:services,proof:proof,steps:steps,testimonials:testimonials,
+      final:{h2a:val('ln-e-fh2a'),h2b:val('ln-e-fh2b'),p:val('ln-e-fp')}
+    };
+    var ok=await setData('landing',obj);
+    if(ok===false){ toast('⚠️ Guardado local, pero falló la sincronización con Firebase. Revisa las reglas de la base de datos.','err'); }
+    else if(hasB64){ showInd('landing'); toast('✅ Guardado — pero alguna foto no subió a la nube. Actívala en Firebase Storage para que se vea en el sitio.','err'); }
+    else { showInd('landing'); toast('✅ Landing guardada'+(getFbUrl()?' en la nube':''),'ok'); }
+  }catch(e){
+    try{console.error('saveLanding error',e);}catch(_){}
+    var msg=(e&&e.message)||'error';
+    if(/quota|exceeded/i.test(msg)) msg='las fotos pesan demasiado. Súbelas de nuevo (deben ir a Firebase Storage, no como archivo pesado).';
+    toast('❌ No se pudo guardar: '+msg,'err');
+  }finally{
+    if(btn){btn.disabled=false;btn.textContent=orig||'💾 Save Landing';}
+  }
 }
 async function resetLanding(){
   if(!confirm('¿Restaurar la landing a los valores por defecto?'))return;
