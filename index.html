@@ -185,8 +185,8 @@ footer{padding-block:2rem calc(2.5rem + env(safe-area-inset-bottom,0px));text-al
 .tot small{color:var(--muted);font-size:.8rem}
 .upsell{display:flex;justify-content:space-between;align-items:center;gap:.6rem;background:rgba(var(--glow-rgb),.08);border:1px dashed var(--line);border-radius:12px;padding:.6rem .9rem;font-size:.9rem}
 .upsell button{color:var(--glow);font-weight:800;text-decoration:underline}
-.toast{pointer-events:none;position:fixed;left:50%;top:calc(16px + env(safe-area-inset-top,0px));transform:translate(-50%,-140%);z-index:80;background:var(--glow);color:#0b0d05;font-weight:800;padding:.8rem 1.3rem;border-radius:999px;transition:transform 260ms var(--ease-out);max-width:calc(100% - 32px)}
-.toast.show{transform:translate(-50%,0)}
+.toast{pointer-events:none;position:fixed;left:50%;top:calc(16px + env(safe-area-inset-top,0px));transform:translate(-50%,calc(-100% - 60px));visibility:hidden;z-index:80;background:var(--glow);color:#0b0d05;font-weight:800;padding:.8rem 1.3rem;border-radius:999px;transition:transform 260ms var(--ease-out),visibility 0s 260ms;max-width:calc(100% - 32px)}
+.toast.show{transform:translate(-50%,0);visibility:visible;transition:transform 260ms var(--ease-out),visibility 0s}
 
 /* ===== Checkout ===== */
 .checkout{position:fixed;inset:0;z-index:75;background:var(--night);overflow:auto;transform:translateY(100%);transition:transform 320ms var(--ease-drawer);padding-bottom:calc(2rem + env(safe-area-inset-bottom,0px))}
